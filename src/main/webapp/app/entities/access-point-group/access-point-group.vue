@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="AccessPointGroupHeading">
-      <span id="access-point-group-heading">AP×é¹ÜÀí</span>
+      <span id="access-point-group-heading">APç»„åˆ—è¡¨</span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
@@ -29,19 +29,19 @@
         <thead>
           <tr>
             <th scope="row" v-on:click="changeOrder('id')">
-              <span>ID±àºÅ</span>
+              <span>IDï¿½ï¿½ï¿½</span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'id'"></jhi-sort-indicator>
             </th>
             <th scope="row" v-on:click="changeOrder('name')">
-              <span>AP×éÃû³Æ</span>
+              <span>APï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'name'"></jhi-sort-indicator>
             </th>
             <th scope="row" v-on:click="changeOrder('controller.id')">
-              <span>ACÃû³Æ</span>
+              <span>ACï¿½ï¿½ï¿½ï¿½</span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'controller.id'"></jhi-sort-indicator>
             </th>
             <th scope="row" v-on:click="changeOrder('powerPlant.id')">
-              <span>³¡Õ¾Ãû³Æ</span>
+              <span>ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½</span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'powerPlant.id'"></jhi-sort-indicator>
             </th>
             <th scope="row"></th>

@@ -15,13 +15,13 @@ export default defineComponent({
     const authenticated = inject<ComputedRef<boolean>>('authenticated');
     const username = inject<ComputedRef<string>>('currentUsername');
 
-    // »ñÈ¡EChartsÈÝÆ÷µÄÒýÓÃ
+    // ï¿½ï¿½È¡EChartsï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     const chartRef_station = ref(null);
     const chartRef_Ap = ref(null);
-    // ÔÚ×é¼þäÖÈ¾Íê³Éºó³õÊ¼»¯echartsÊµÀý²¢ÏÔÊ¾Êý¾Ý
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¾ï¿½ï¿½Éºï¿½ï¿½Ê¼ï¿½ï¿½echartsÊµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
     onMounted(() => {
       // prettier-ignore
-      let dataAxis = ['ÉÂÎ÷Ê¡', '°²»ÕÊ¡', '¹ã¶«Ê¡', '×Ó', '»ò', 'Õß', 'Á½', 'Ö¸', 'ÔÚ', '´¥', 'ÆÁ', 'ÉÏ', '»¬', '¶¯', 'ÄÜ', '¹»', '×Ô', '¶¯', 'Ëõ', '·Å'];
+      let dataAxis = ['ï¿½ï¿½ï¿½ï¿½Ê¡', 'ï¿½ï¿½ï¿½ï¿½Ê¡', 'ï¿½ã¶«Ê¡', 'ï¿½ï¿½', 'ï¿½ï¿½', 'ï¿½ï¿½', 'ï¿½ï¿½', 'Ö¸', 'ï¿½ï¿½', 'ï¿½ï¿½', 'ï¿½ï¿½', 'ï¿½ï¿½', 'ï¿½ï¿½', 'ï¿½ï¿½', 'ï¿½ï¿½', 'ï¿½ï¿½', 'ï¿½ï¿½', 'ï¿½ï¿½', 'ï¿½ï¿½', 'ï¿½ï¿½'];
 // prettier-ignore
       let data = [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149, 210, 122, 133, 334, 198, 123, 125, 220];
       let yMax = 500;
@@ -32,15 +32,13 @@ export default defineComponent({
 
       const chart1 = echarts.init(chartRef_station.value);
       const chart2 = echarts.init(chartRef_Ap.value);
-      // ¾²Ì¬Êý¾ÝÊ¾Àý
-      // ÉèÖÃEChartsÊµÀýµÄÅäÖÃÑ¡Ïî
       const option1 = {
         title: {
-          text: '¸÷Ê¡³¡Õ¾ÊýÁ¿',
+          text: 'ï¿½ï¿½Ê¡ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½',
         },
         xAxis: {
           data: dataAxis,
-          name:"Ê¡·Ý",
+          name:"Ê¡ï¿½ï¿½",
           nameGap:'50',
           nameLocation:'middle',
           axisLabel: {
@@ -97,7 +95,7 @@ export default defineComponent({
       };
       const option2 = {
         title: {
-          text: '¸÷Ê¡APÊýÁ¿',
+          text: 'ï¿½ï¿½Ê¡APï¿½ï¿½ï¿½ï¿½',
         },
         xAxis: {
           data: dataAxis,
@@ -175,7 +173,7 @@ dataAxis[Math.min(params.dataIndex + zoomSize1 / 2, data.length - 1)]
 });
 
 });
-      // Ê¹ÓÃÅäÖÃÑ¡ÏîÉèÖÃEChartsÊµÀý
+      // Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½EChartsÊµï¿½ï¿½
       chart1.setOption(option1);
       chart2.setOption(option2);
     });

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="AccessControllerHeading">
-      <span id="access-controller-heading">ACÅäÖÃ</span>
+      <span id="access-controller-heading">ACæŽ§åˆ¶å™¨åˆ—è¡¨</span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
@@ -29,23 +29,23 @@
         <thead>
           <tr>
             <th scope="row" v-on:click="changeOrder('id')">
-              <span>AC±àºÅ</span>
+              <span>ACç¼–å·</span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'id'"></jhi-sort-indicator>
             </th>
             
             <th scope="row" v-on:click="changeOrder('aliasname')">
-              <span>ACÃû³Æ</span>
+              <span>ACåç§°</span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'aliasname'"></jhi-sort-indicator>
             </th>
            
            
             <th scope="row" v-on:click="changeOrder('neip')">
-              <span>IPµØÖ·</span>
+              <span>IPåœ°å€Ö·</span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'neip'"></jhi-sort-indicator>
             </th>
           
             <th scope="row" v-on:click="changeOrder('nestate')">
-              <span>¹¤×÷×´Ì¬</span>
+              <span>çŠ¶æ€</span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'nestate'"></jhi-sort-indicator>
             </th>
            
