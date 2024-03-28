@@ -1,0 +1,27 @@
+{
+  "annotations": {
+    "changelogDate": "20240326005357"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "provinceCode",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "provinceName",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Province",
+  "relationships": [
+    {
+      "otherEntityName": "powerPlant",
+      "otherEntityRelationshipName": "province",
+      "relationshipName": "powerPlant",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

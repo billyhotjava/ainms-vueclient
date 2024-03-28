@@ -1,0 +1,39 @@
+{
+  "annotations": {
+    "changelogDate": "20240326005355"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "AccessPointGroup",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "accessPoint",
+      "otherEntityRelationshipName": "group",
+      "relationshipName": "accessPoint",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "accessController",
+      "otherEntityRelationshipName": "accessPointGroup",
+      "relationshipName": "controller",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "powerPlant",
+      "otherEntityRelationshipName": "accessPointGroup",
+      "relationshipName": "powerPlant",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

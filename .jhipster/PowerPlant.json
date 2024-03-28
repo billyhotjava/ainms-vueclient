@@ -1,0 +1,30 @@
+{
+  "annotations": {
+    "changelogDate": "20240326005356"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "powerPlantName",
+      "fieldType": "String"
+    }
+  ],
+  "name": "PowerPlant",
+  "relationships": [
+    {
+      "otherEntityName": "accessPointGroup",
+      "otherEntityRelationshipName": "powerPlant",
+      "relationshipName": "accessPointGroup",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "province",
+      "otherEntityRelationshipName": "powerPlant",
+      "relationshipName": "province",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

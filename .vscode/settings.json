@@ -1,0 +1,6 @@
+{
+    "i18n-ally.localesPaths": [
+        "src/main/webapp/i18n",
+        "src/main/webapp/app/locale"
+    ]
+}

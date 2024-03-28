@@ -1,0 +1,108 @@
+<template>
+  <div>
+    <h2 id="page-heading" data-cy="PowerPlantHeading">
+      <span id="power-plant-heading">场站配置</span>
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
+          <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
+          <span>刷新列表</span>
+        </button>
+        <router-link :to="{ name: 'PowerPlantCreate' }" custom v-slot="{ navigate }">
+          <button
+            @click="navigate"
+            id="jh-create-entity"
+            data-cy="entityCreateButton"
+            class="btn btn-primary jh-create-entity create-power-plant"
+          >
+            <font-awesome-icon icon="plus"></font-awesome-icon>
+            <span>新建场站</span>
+          </button>
+        </router-link>
+      </div>
+    </h2>
+    <br />
+    <div class="alert alert-warning" v-if="!isFetching && powerPlants && powerPlants.length === 0">
+      <span v-text="t$('ainmsVueclientApp.powerPlant.home.notFound')"></span>
+    </div>
+    <div class="table-responsive" v-if="powerPlants && powerPlants.length > 0">
+      <table class="table table-striped" aria-describedby="powerPlants">
+        <thead>
+          <tr>
+            <th scope="row"><span>场站编号</span></th>
+            <th scope="row"><span>场站名称</span></th>
+            <th scope="row"><span>所属省市</span></th>
+            <th scope="row"><span>所属AP组</span></th>
+            <th scope="row"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="powerPlant in powerPlants" :key="powerPlant.id" data-cy="entityTable">
+            <td>
+              {{ powerPlant.id}}
+            </td>
+            <td>{{ powerPlant.powerPlantName }}</td>
+            <td>
+              {{powerPlant}}
+            </td>
+            <td>
+             {{powerPlant.accessPointgrops}}
+            </td>
+            <td class="text-right">
+              <div class="btn-group">
+                <router-link :to="{ name: 'PowerPlantView', params: { powerPlantId: powerPlant.id } }" custom v-slot="{ navigate }">
+                  <button @click="navigate" class="btn btn-info btn-sm details" data-cy="entityDetailsButton">
+                    <font-awesome-icon icon="eye"></font-awesome-icon>
+                    <span class="d-none d-md-inline" v-text="t$('entity.action.view')"></span>
+                  </button>
+                </router-link>
+                <router-link :to="{ name: 'PowerPlantEdit', params: { powerPlantId: powerPlant.id } }" custom v-slot="{ navigate }">
+                  <button @click="navigate" class="btn btn-primary btn-sm edit" data-cy="entityEditButton">
+                    <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
+                    <span class="d-none d-md-inline" v-text="t$('entity.action.edit')"></span>
+                  </button>
+                </router-link>
+                <b-button
+                  v-on:click="prepareRemove(powerPlant)"
+                  variant="danger"
+                  class="btn btn-sm"
+                  data-cy="entityDeleteButton"
+                  v-b-modal.removeEntity
+                >
+                  <font-awesome-icon icon="times"></font-awesome-icon>
+                  <span class="d-none d-md-inline" v-text="t$('entity.action.delete')"></span>
+                </b-button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <b-modal ref="removeEntity" id="removeEntity">
+      <template #modal-title>
+        <span
+          id="ainmsVueclientApp.powerPlant.delete.question"
+          data-cy="powerPlantDeleteDialogHeading"
+          v-text="t$('entity.delete.title')"
+        ></span>
+      </template>
+      <div class="modal-body">
+        <p id="ainms-delete-powerPlant-heading" v-text="t$('ainmsVueclientApp.powerPlant.delete.question', { id: removeId })"></p>
+      </div>
+      <template #modal-footer>
+        <div>
+          <button type="button" class="btn btn-secondary" v-text="t$('entity.action.cancel')" v-on:click="closeDialog()"></button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            id="ainms-confirm-delete-powerPlant"
+            data-cy="entityConfirmDeleteButton"
+            v-text="t$('entity.action.delete')"
+            v-on:click="removePowerPlant()"
+          ></button>
+        </div>
+      </template>
+    </b-modal>
+  </div>
+</template>
+
+<script lang="ts" src="./power-plant.component.ts"></script>

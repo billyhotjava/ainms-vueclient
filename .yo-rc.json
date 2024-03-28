@@ -1,0 +1,25 @@
+{
+  "generator-jhipster": {
+    "baseName": "ainmsVueclient",
+    "clientFramework": "vue",
+    "clientTestFrameworks": [],
+    "clientTheme": "none",
+    "creationTimestamp": 1711412541194,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "devServerPort": 9060,
+    "enableTranslation": true,
+    "entities": ["AccessController", "AccessPoint", "AccessPointGroup", "PowerPlant", "Province"],
+    "jhiPrefix": "ainms",
+    "jhipsterVersion": "8.2.1",
+    "languages": ["en", "zh-cn"],
+    "lastLiquibaseTimestamp": 1711414437000,
+    "microfrontend": null,
+    "microfrontends": [],
+    "nativeLanguage": "en",
+    "prodDatabaseType": "mysql",
+    "skipServer": true,
+    "testFrameworks": [],
+    "withAdminUi": true
+  }
+}
