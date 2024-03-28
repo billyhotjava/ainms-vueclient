@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="AccessPointGroupHeading">
-      <span id="access-point-group-heading">AP组列表</span>
+      <span id="access-point-group-heading">AP组管理</span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
@@ -29,19 +29,19 @@
         <thead>
           <tr>
             <th scope="row" v-on:click="changeOrder('id')">
-              <span>ID���</span>
+              <span>ID编号</span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'id'"></jhi-sort-indicator>
             </th>
             <th scope="row" v-on:click="changeOrder('name')">
-              <span>AP������</span>
+              <span>AP组名称</span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'name'"></jhi-sort-indicator>
             </th>
             <th scope="row" v-on:click="changeOrder('controller.id')">
-              <span>AC����</span>
+              <span>AC名称</span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'controller.id'"></jhi-sort-indicator>
             </th>
             <th scope="row" v-on:click="changeOrder('powerPlant.id')">
-              <span>��վ����</span>
+              <span>场站名称</span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'powerPlant.id'"></jhi-sort-indicator>
             </th>
             <th scope="row"></th>
@@ -50,15 +50,13 @@
         <tbody>
           <tr v-for="accessPointGroup in accessPointGroups" :key="accessPointGroup.id" data-cy="entityTable">
             <td>
-              <router-link :to="{ name: 'AccessPointGroupView', params: { accessPointGroupId: accessPointGroup.id } }">{{
-                accessPointGroup.id
-              }}</router-link>
+            {{accessPointGroup.id}}
             </td>
             <td>{{ accessPointGroup.name }}</td>
             <td>
               <div v-if="accessPointGroup.controller">
                 <router-link :to="{ name: 'AccessControllerView', params: { accessControllerId: accessPointGroup.controller.id } }">{{
-                  accessPointGroup.controller.id
+                  accessPointGroup.controller
                 }}</router-link>
               </div>
             </td>

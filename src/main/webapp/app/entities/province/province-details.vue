@@ -3,17 +3,17 @@
     <div class="col-8">
       <div v-if="province">
         <h2 class="jh-entity-heading" data-cy="provinceDetailsHeading">
-          <span> 省份</span> {{ province.provinceName }}
+          <span> 鐪佷唤</span> {{ province.provinceName }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span>省份编码</span>
+            <span>鐪佷唤缂栫爜</span>
           </dt>
           <dd>
             <span>{{ province.provinceCode }}</span>
           </dd>
           <dt>
-            <span>省份名称</span>
+            <span>鐪佷唤鍚嶇О</span>
           </dt>
           <dd>
             <span>{{ province.provinceName }}</span>

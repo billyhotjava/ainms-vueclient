@@ -40,19 +40,18 @@ export default defineComponent({
         yAxis: {
           type: 'category',
           data: provinces,
-          name: "省份",
-          nameGap: 50,
           nameTextStyle: {
             fontWeight: "bolder",
             fontFamily: "sans-serif",
             fontSize: 20,
-            verticalAlign: "top"
+            verticalAlign: "top",
+            width: 100 // Increase the width of yAxis label
           },
           nameLocation: 'middle',
           axisLabel: {
             inside: false,
             color: 'black',
-            rotate: 45 // Rotate x-axis labels by 45 degrees
+            rotate: 60 // Rotate yAxis labels by 45 degrees
           },
           axisTick: {
             show: false
@@ -115,6 +114,11 @@ export default defineComponent({
           data: dummyData.map(value => ({ value }))
         }]
       };
+
+      // Adjust chart size based on the number of provinces
+      const chartWidth = provinces.length * 20; // Adjust width based on the number of provinces
+      chart1.resize({ width: chartWidth });
+      chart2.resize({ width: chartWidth });
 
       chart1.setOption({
         ...options,

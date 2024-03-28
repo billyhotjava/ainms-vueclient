@@ -3,17 +3,17 @@
     <div class="col-8">
       <div v-if="powerPlant">
         <h2 class="jh-entity-heading" data-cy="powerPlantDetailsHeading">
-          <span>²é¿´³¡Õ¾</span> {{ powerPlant.powerPlantName }}
+          <span>æŸ¥çœ‹åœºç«™</span> {{ powerPlant.powerPlantName }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span>³¡Õ¾Ãû³Æ</span>
+            <span>åœºç«™åç§°</span>
           </dt>
           <dd>
             <span>{{ powerPlant.powerPlantName }}</span>
           </dd>
           <dt>
-            <span>ËùÊôÊ¡·İ</span>
+            <span>æ‰€å±çœä»½</span>
           </dt>
           <dd>
             {{powerPlant.province.id}}

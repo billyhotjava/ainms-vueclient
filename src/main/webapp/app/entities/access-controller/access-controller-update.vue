@@ -5,10 +5,10 @@
         <h2
           id="ainmsVueclientApp.accessController.home.createOrEditLabel"
           data-cy="AccessControllerCreateUpdateHeading"
-        >创建或修改AC</h2>
+        >鍒涘缓鎴栦慨鏀笰C</h2>
         <div>
           <div class="form-group" v-if="accessController.id">
-            <label>AC编号</label>
+            <label>AC缂栧彿</label>
             <input type="text" class="form-control" id="id" name="id" v-model="accessController.id" readonly />
           </div>
           <div class="form-group">

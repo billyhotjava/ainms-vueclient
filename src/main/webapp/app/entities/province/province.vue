@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="ProvinceHeading">
-      <span id="province-heading">省份列表</span>
+      <span id="province-heading">省份配置</span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-            <span>刷新</span>
+          <span>刷新列表</span>
         </button>
         <router-link :to="{ name: 'ProvinceCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,7 +15,7 @@
             class="btn btn-primary jh-create-entity create-province"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span>省份配置</span>
+            <span>新建省份</span>
           </button>
         </router-link>
       </div>
@@ -28,8 +28,8 @@
       <table class="table table-striped" aria-describedby="provinces">
         <thead>
           <tr>
-            <th scope="row"><span>省份编号</span></th>
-            <th scope="row"><span>省份代码</span></th>
+            <th scope="row"><span>省份id</span></th>
+            <th scope="row"><span>省份编码</span></th>
             <th scope="row"><span>省份名称</span></th>
             <th scope="row"></th>
           </tr>

@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="PowerPlantHeading">
-      <span id="power-plant-heading">≥°’æ≈‰÷√</span>
+      <span id="power-plant-heading">Âú∫Á´ôÈÖçÁΩÆ</span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span>À¢–¬¡–±Ì</span>
+          <span>Âà∑Êñ∞ÂàóË°®</span>
         </button>
         <router-link :to="{ name: 'PowerPlantCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,7 +15,7 @@
             class="btn btn-primary jh-create-entity create-power-plant"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span>–¬Ω®≥°’æ</span>
+            <span>Êñ∞Âª∫Âú∫Á´ô</span>
           </button>
         </router-link>
       </div>
@@ -28,41 +28,37 @@
       <table class="table table-striped" aria-describedby="powerPlants">
         <thead>
           <tr>
-            <th scope="row"><span>≥°’æ±‡∫≈</span></th>
-            <th scope="row"><span>≥°’æ√˚≥∆</span></th>
-            <th scope="row"><span>À˘ Ù ° –</span></th>
-            <th scope="row"><span>À˘ ÙAP◊È</span></th>
+            <th scope="row"><span>Âú∫Á´ôÁºñÂè∑</span></th>
+            <th scope="row"><span>Âú∫Á´ôÂêçÁß∞</span></th>
+            <th scope="row"><span>ÊâÄÂ±ûÁúÅÂ∏Ç</span></th>
             <th scope="row"></th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="powerPlant in powerPlants" :key="powerPlant.id" data-cy="entityTable">
+          <tr v-for="powerPlant in powerPlants" :key="powerPlant.powerPlant.id" data-cy="entityTable">
             <td>
-              {{ powerPlant.id}}
+              {{ powerPlant.powerPlant.id}}
             </td>
-            <td>{{ powerPlant.powerPlantName }}</td>
+            <td>{{ powerPlant.powerPlant.powerPlantName }}</td>
             <td>
-              {{powerPlant}}
-            </td>
-            <td>
-             {{powerPlant.accessPointgrops}}
+              {{powerPlant.provinceName}}
             </td>
             <td class="text-right">
               <div class="btn-group">
-                <router-link :to="{ name: 'PowerPlantView', params: { powerPlantId: powerPlant.id } }" custom v-slot="{ navigate }">
+                <router-link :to="{ name: 'PowerPlantView', params: { powerPlantId: powerPlant.powerPlant.id } }" custom v-slot="{ navigate }">
                   <button @click="navigate" class="btn btn-info btn-sm details" data-cy="entityDetailsButton">
                     <font-awesome-icon icon="eye"></font-awesome-icon>
                     <span class="d-none d-md-inline" v-text="t$('entity.action.view')"></span>
                   </button>
                 </router-link>
-                <router-link :to="{ name: 'PowerPlantEdit', params: { powerPlantId: powerPlant.id } }" custom v-slot="{ navigate }">
+                <router-link :to="{ name: 'PowerPlantEdit', params: { powerPlantId: powerPlant.powerPlant.id } }" custom v-slot="{ navigate }">
                   <button @click="navigate" class="btn btn-primary btn-sm edit" data-cy="entityEditButton">
                     <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
                     <span class="d-none d-md-inline" v-text="t$('entity.action.edit')"></span>
                   </button>
                 </router-link>
                 <b-button
-                  v-on:click="prepareRemove(powerPlant)"
+                  v-on:click="prepareRemove(powerPlant.powerPlant)"
                   variant="danger"
                   class="btn btn-sm"
                   data-cy="entityDeleteButton"

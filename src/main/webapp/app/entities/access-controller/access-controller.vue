@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="AccessControllerHeading">
-      <span id="access-controller-heading">AC控制器列表</span>
+      <span id="access-controller-heading">AC配置</span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
@@ -40,12 +40,12 @@
            
            
             <th scope="row" v-on:click="changeOrder('neip')">
-              <span>IP地址ַ</span>
+              <span>IP地址</span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'neip'"></jhi-sort-indicator>
             </th>
           
             <th scope="row" v-on:click="changeOrder('nestate')">
-              <span>状态</span>
+              <span>工作状态</span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'nestate'"></jhi-sort-indicator>
             </th>
            

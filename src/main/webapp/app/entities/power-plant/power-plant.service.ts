@@ -3,6 +3,7 @@ import axios from 'axios';
 import { type IPowerPlant } from '@/shared/model/power-plant.model';
 
 const baseApiUrl = 'api/power-plants';
+const baseApiUrl_name = 'api/power-plants/with-province-name';
 
 export default class PowerPlantService {
   public find(id: number): Promise<IPowerPlant> {
@@ -10,7 +11,6 @@ export default class PowerPlantService {
       axios
         .get(`${baseApiUrl}/${id}`)
         .then(res => {
-          console.log(res)
           resolve(res.data);
         })
         .catch(err => {
@@ -19,10 +19,10 @@ export default class PowerPlantService {
     });
   }
 
-  public retrieve(entity: IPowerPlant): Promise<IPowerPlant> {
-    return new Promise<IPowerPlant>((resolve, reject) => {
+  public retrieve(): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
       axios
-      .get(`${baseApiUrl}`, entity)
+      .get(`${baseApiUrl_name}`)
         .then(res => {
           console.log(res)
           resolve(res);

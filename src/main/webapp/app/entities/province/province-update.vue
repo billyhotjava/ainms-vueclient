@@ -5,14 +5,14 @@
         <h2
           id="ainmsVueclientApp.province.home.createOrEditLabel"
           data-cy="ProvinceCreateUpdateHeading"
-        >������༭ʡ��</h2>
+        >创建或编辑省份</h2>
         <div>
           <div class="form-group" v-if="province.id">
-            <label >ʡ��id</label>
+            <label >省份id</label>
             <input type="text" class="form-control" id="id" name="id" v-model="province.id" readonly />
           </div>
           <div class="form-group">
-            <label class="form-control-label"  for="province-provinceCode">ʡ�ݱ���</label>
+            <label class="form-control-label"  for="province-provinceCode">省份编码</label>
             <input
               type="number"
               class="form-control"
@@ -24,7 +24,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label"  for="province-provinceName">ʡ������</label>
+            <label class="form-control-label"  for="province-provinceName">省份名称</label>
             <input
               type="text"
               class="form-control"

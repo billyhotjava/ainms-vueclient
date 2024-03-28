@@ -15,12 +15,12 @@
         "question": "你确定要删除 Power Plant { id } 吗？"
       },
       "detail": {
-        "title": "Power Plant"
+        "title": "场站信息"
       },
       "id": "ID",
-      "powerPlantName": "Power Plant Name",
-      "accessPointGroup": "Access Point Group",
-      "province": "Province"
+      "powerPlantName": "场站名称",
+      "accessPointGroup": "AP组名称",
+      "province": "省份"
     }
   }
 }

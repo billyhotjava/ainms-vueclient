@@ -5,7 +5,7 @@
         <h2
           id="ainmsVueclientApp.powerPlant.home.createOrEditLabel"
           data-cy="PowerPlantCreateUpdateHeading"
-        >������༭��վ</h2>
+        >创建或编辑场站</h2>
         <div>
           <div class="form-group" v-if="powerPlant.id">
             <label for="id" v-text="t$('global.field.id')"></label>
@@ -15,7 +15,7 @@
             <label
               class="form-control-label"
               for="power-plant-powerPlantName"
-            >��վ����</label>
+            >场站名称</label>
             <input
               type="text"
               class="form-control"
@@ -27,7 +27,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" for="power-plant-province">��ѡ��ʡ��</label>
+            <label class="form-control-label" for="power-plant-province">请选择省份</label>
             <select class="form-control" id="power-plant-province" data-cy="province" name="province" v-model="powerPlant.province">
               <option v-bind:value="null"></option>
               <option
