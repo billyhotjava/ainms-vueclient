@@ -2,8 +2,8 @@
   "ainmsVueclientApp": {
     "accessPointGroup": {
       "home": {
-        "title": "Access Point Groups",
-        "refreshListLabel": "Refresh list",
+        "title": "AP组",
+        "refreshListLabel": "刷新",
         "createLabel": "创建新 Access Point Group",
         "createOrEditLabel": "创建或编辑 Access Point Group",
         "notFound": "No Access Point Groups found"
