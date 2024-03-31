@@ -47,13 +47,6 @@ export default defineComponent({
     };
 
     const logout = async () => {
-      // localStorage.removeItem('ainms-authenticationToken');
-      // sessionStorage.removeItem('ainms-authenticationToken');
-    //   store.logout();
-    //   if (router.currentRoute.value.path !== '/') {
-    //     router.push('/');
-    //   }
-    // };
       const response = await loginService.logout();
       store.logout();
       window.location.href = response.data.logoutUrl;

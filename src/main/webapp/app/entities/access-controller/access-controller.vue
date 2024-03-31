@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="AccessControllerHeading">
-      <span id="access-controller-heading">AC配置</span>
+      <span v-text="t$('ainmsVueclientApp.accessController.home.title')" id="access-controller-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span>刷新列表</span>
+          <span v-text="t$('ainmsVueclientApp.accessController.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'AccessControllerCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,7 +15,7 @@
             class="btn btn-primary jh-create-entity create-access-controller"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span>新建AC</span>
+            <span v-text="t$('ainmsVueclientApp.accessController.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
@@ -29,37 +29,99 @@
         <thead>
           <tr>
             <th scope="row" v-on:click="changeOrder('id')">
-              <span>AC编号</span>
+              <span v-text="t$('global.field.id')"></span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'id'"></jhi-sort-indicator>
             </th>
-            
+            <th scope="row" v-on:click="changeOrder('nedn')">
+              <span v-text="t$('ainmsVueclientApp.accessController.nedn')"></span>
+              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'nedn'"></jhi-sort-indicator>
+            </th>
+            <th scope="row" v-on:click="changeOrder('neid')">
+              <span v-text="t$('ainmsVueclientApp.accessController.neid')"></span>
+              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'neid'"></jhi-sort-indicator>
+            </th>
             <th scope="row" v-on:click="changeOrder('aliasname')">
-              <span>AC名称</span>
+              <span v-text="t$('ainmsVueclientApp.accessController.aliasname')"></span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'aliasname'"></jhi-sort-indicator>
             </th>
-           
-           
+            <th scope="row" v-on:click="changeOrder('nename')">
+              <span v-text="t$('ainmsVueclientApp.accessController.nename')"></span>
+              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'nename'"></jhi-sort-indicator>
+            </th>
+            <th scope="row" v-on:click="changeOrder('necategory')">
+              <span v-text="t$('ainmsVueclientApp.accessController.necategory')"></span>
+              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'necategory'"></jhi-sort-indicator>
+            </th>
+            <th scope="row" v-on:click="changeOrder('netype')">
+              <span v-text="t$('ainmsVueclientApp.accessController.netype')"></span>
+              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'netype'"></jhi-sort-indicator>
+            </th>
+            <th scope="row" v-on:click="changeOrder('nevendorname')">
+              <span v-text="t$('ainmsVueclientApp.accessController.nevendorname')"></span>
+              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'nevendorname'"></jhi-sort-indicator>
+            </th>
+            <th scope="row" v-on:click="changeOrder('neesn')">
+              <span v-text="t$('ainmsVueclientApp.accessController.neesn')"></span>
+              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'neesn'"></jhi-sort-indicator>
+            </th>
             <th scope="row" v-on:click="changeOrder('neip')">
-              <span>IP地址</span>
+              <span v-text="t$('ainmsVueclientApp.accessController.neip')"></span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'neip'"></jhi-sort-indicator>
             </th>
-          
+            <th scope="row" v-on:click="changeOrder('nemac')">
+              <span v-text="t$('ainmsVueclientApp.accessController.nemac')"></span>
+              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'nemac'"></jhi-sort-indicator>
+            </th>
+            <th scope="row" v-on:click="changeOrder('version')">
+              <span v-text="t$('ainmsVueclientApp.accessController.version')"></span>
+              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'version'"></jhi-sort-indicator>
+            </th>
             <th scope="row" v-on:click="changeOrder('nestate')">
-              <span>工作状态</span>
+              <span v-text="t$('ainmsVueclientApp.accessController.nestate')"></span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'nestate'"></jhi-sort-indicator>
             </th>
-           
+            <th scope="row" v-on:click="changeOrder('createtime')">
+              <span v-text="t$('ainmsVueclientApp.accessController.createtime')"></span>
+              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'createtime'"></jhi-sort-indicator>
+            </th>
+            <th scope="row" v-on:click="changeOrder('neiptype')">
+              <span v-text="t$('ainmsVueclientApp.accessController.neiptype')"></span>
+              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'neiptype'"></jhi-sort-indicator>
+            </th>
+            <th scope="row" v-on:click="changeOrder('subnet')">
+              <span v-text="t$('ainmsVueclientApp.accessController.subnet')"></span>
+              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'subnet'"></jhi-sort-indicator>
+            </th>
+            <th scope="row" v-on:click="changeOrder('neosversion')">
+              <span v-text="t$('ainmsVueclientApp.accessController.neosversion')"></span>
+              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'neosversion'"></jhi-sort-indicator>
+            </th>
             <th scope="row"></th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="accessController in accessControllers" :key="accessController.id" data-cy="entityTable">
             <td>
-              {{accessController.id}}
+              <router-link :to="{ name: 'AccessControllerView', params: { accessControllerId: accessController.id } }">{{
+                accessController.id
+              }}</router-link>
             </td>
+            <td>{{ accessController.nedn }}</td>
+            <td>{{ accessController.neid }}</td>
             <td>{{ accessController.aliasname }}</td>
+            <td>{{ accessController.nename }}</td>
+            <td>{{ accessController.necategory }}</td>
+            <td>{{ accessController.netype }}</td>
+            <td>{{ accessController.nevendorname }}</td>
+            <td>{{ accessController.neesn }}</td>
             <td>{{ accessController.neip }}</td>
+            <td>{{ accessController.nemac }}</td>
+            <td>{{ accessController.version }}</td>
             <td>{{ accessController.nestate }}</td>
+            <td>{{ accessController.createtime }}</td>
+            <td>{{ accessController.neiptype }}</td>
+            <td>{{ accessController.subnet }}</td>
+            <td>{{ accessController.neosversion }}</td>
             <td class="text-right">
               <div class="btn-group">
                 <router-link

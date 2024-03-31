@@ -1,21 +1,25 @@
 <template>
- <div style="width: 100%;text-align: center;" v-if='authenticated'>
-    <div style="width: 50%; display: inline-block; padding-left:160px">
-        <div ref="chartRef_station" style="width: 700px; height: 600px;"></div>
+  <div class="home row">
+    <div class="col-md-3">
+      <span class="hipster img-fluid rounded"></span>
     </div>
-    <div style="width: 50%; display: inline-block;padding-left:160px">
-        <div ref="chartRef_Ap" style="width: 600px; height: 600px;"></div>
+    <div class="col-md-9">
+      <h1 class="display-4" v-text="t$('home.title')"></h1>
+      <p class="lead" v-text="t$('home.subtitle')"></p>
+
+      <div>
+        <div class="alert alert-success" v-if="authenticated">
+          <span v-if="username" v-text="t$('home.logged.message', { username: username })"></span>
+        </div>
+
+        <div class="alert alert-warning" v-if="!authenticated">
+          <span v-text="t$('global.messages.info.authenticated.prefix')"></span>
+          <a class="alert-link" v-on:click="openLogin()" v-text="t$('global.messages.info.authenticated.link')"></a
+          ><span v-html="t$('global.messages.info.authenticated.suffix')"></span>
+        </div>
+      </div>
     </div>
-</div>
-   <acc v-if='authenticated'></acc>
-   <div v-if='!authenticated' class='ale'>请您点击右上角进行登录</div>
+  </div>
 </template>
 
 <script lang="ts" src="./home.component.ts"></script>
-<style scop>
-	.ale{
-
-		margin:0 auto;
-		font-size:20px
-	}
-</style>

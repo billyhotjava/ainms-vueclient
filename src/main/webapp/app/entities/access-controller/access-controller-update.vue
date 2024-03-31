@@ -1,140 +1,250 @@
 <template>
-  <div>
-    <h2 id="page-heading" data-cy="AccessControllerHeading">
-      <span id="access-controller-heading">AC配置</span>
-      <div class="d-flex justify-content-end">
-        <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
-          <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span>刷新列表</span>
-        </button>
-        <router-link :to="{ name: 'AccessControllerCreate' }" custom v-slot="{ navigate }">
-          <button
-            @click="navigate"
-            id="jh-create-entity"
-            data-cy="entityCreateButton"
-            class="btn btn-primary jh-create-entity create-access-controller"
-          >
-            <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span>新建AC</span>
-          </button>
-        </router-link>
-      </div>
-    </h2>
-    <br />
-    <div class="alert alert-warning" v-if="!isFetching && accessControllers && accessControllers.length === 0">
-      <span v-text="t$('ainmsVueclientApp.accessController.home.notFound')"></span>
-    </div>
-    <div class="table-responsive" v-if="accessControllers && accessControllers.length > 0">
-      <table class="table table-striped" aria-describedby="accessControllers">
-        <thead>
-          <tr>
-            <th scope="row" v-on:click="changeOrder('id')">
-              <span>AC编号</span>
-              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'id'"></jhi-sort-indicator>
-            </th>
-            
-            <th scope="row" v-on:click="changeOrder('aliasname')">
-              <span>AC名称</span>
-              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'aliasname'"></jhi-sort-indicator>
-            </th>
-           
-           
-            <th scope="row" v-on:click="changeOrder('neip')">
-              <span>IP地址</span>
-              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'neip'"></jhi-sort-indicator>
-            </th>
-          
-            <th scope="row" v-on:click="changeOrder('nestate')">
-              <span>工作状态</span>
-              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'nestate'"></jhi-sort-indicator>
-            </th>
-           
-            <th scope="row"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="accessController in accessControllers" :key="accessController.id" data-cy="entityTable">
-            <td>
-              {{accessController.id}}
-            </td>
-            <td>{{ accessController.aliasname }}</td>
-            <td>{{ accessController.neip }}</td>
-            <td>{{ accessController.nestate }}</td>
-            <td class="text-right">
-              <div class="btn-group">
-                <router-link
-                  :to="{ name: 'AccessControllerView', params: { accessControllerId: accessController.id } }"
-                  custom
-                  v-slot="{ navigate }"
-                >
-                  <button @click="navigate" class="btn btn-info btn-sm details" data-cy="entityDetailsButton">
-                    <font-awesome-icon icon="eye"></font-awesome-icon>
-                    <span class="d-none d-md-inline" v-text="t$('entity.action.view')"></span>
-                  </button>
-                </router-link>
-                <router-link
-                  :to="{ name: 'AccessControllerEdit', params: { accessControllerId: accessController.id } }"
-                  custom
-                  v-slot="{ navigate }"
-                >
-                  <button @click="navigate" class="btn btn-primary btn-sm edit" data-cy="entityEditButton">
-                    <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
-                    <span class="d-none d-md-inline" v-text="t$('entity.action.edit')"></span>
-                  </button>
-                </router-link>
-                <b-button
-                  v-on:click="prepareRemove(accessController)"
-                  variant="danger"
-                  class="btn btn-sm"
-                  data-cy="entityDeleteButton"
-                  v-b-modal.removeEntity
-                >
-                  <font-awesome-icon icon="times"></font-awesome-icon>
-                  <span class="d-none d-md-inline" v-text="t$('entity.action.delete')"></span>
-                </b-button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <b-modal ref="removeEntity" id="removeEntity">
-      <template #modal-title>
-        <span
-          id="ainmsVueclientApp.accessController.delete.question"
-          data-cy="accessControllerDeleteDialogHeading"
-          v-text="t$('entity.delete.title')"
-        ></span>
-      </template>
-      <div class="modal-body">
-        <p
-          id="ainms-delete-accessController-heading"
-          v-text="t$('ainmsVueclientApp.accessController.delete.question', { id: removeId })"
-        ></p>
-      </div>
-      <template #modal-footer>
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <form name="editForm" role="form" novalidate v-on:submit.prevent="save()">
+        <h2
+          id="ainmsVueclientApp.accessController.home.createOrEditLabel"
+          data-cy="AccessControllerCreateUpdateHeading"
+          v-text="t$('ainmsVueclientApp.accessController.home.createOrEditLabel')"
+        ></h2>
         <div>
-          <button type="button" class="btn btn-secondary" v-text="t$('entity.action.cancel')" v-on:click="closeDialog()"></button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            id="ainms-confirm-delete-accessController"
-            data-cy="entityConfirmDeleteButton"
-            v-text="t$('entity.action.delete')"
-            v-on:click="removeAccessController()"
-          ></button>
+          <div class="form-group" v-if="accessController.id">
+            <label for="id" v-text="t$('global.field.id')"></label>
+            <input type="text" class="form-control" id="id" name="id" v-model="accessController.id" readonly />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('ainmsVueclientApp.accessController.nedn')" for="access-controller-nedn"></label>
+            <input
+              type="text"
+              class="form-control"
+              name="nedn"
+              id="access-controller-nedn"
+              data-cy="nedn"
+              :class="{ valid: !v$.nedn.$invalid, invalid: v$.nedn.$invalid }"
+              v-model="v$.nedn.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('ainmsVueclientApp.accessController.neid')" for="access-controller-neid"></label>
+            <input
+              type="number"
+              class="form-control"
+              name="neid"
+              id="access-controller-neid"
+              data-cy="neid"
+              :class="{ valid: !v$.neid.$invalid, invalid: v$.neid.$invalid }"
+              v-model.number="v$.neid.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label
+              class="form-control-label"
+              v-text="t$('ainmsVueclientApp.accessController.aliasname')"
+              for="access-controller-aliasname"
+            ></label>
+            <input
+              type="text"
+              class="form-control"
+              name="aliasname"
+              id="access-controller-aliasname"
+              data-cy="aliasname"
+              :class="{ valid: !v$.aliasname.$invalid, invalid: v$.aliasname.$invalid }"
+              v-model="v$.aliasname.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('ainmsVueclientApp.accessController.nename')" for="access-controller-nename"></label>
+            <input
+              type="text"
+              class="form-control"
+              name="nename"
+              id="access-controller-nename"
+              data-cy="nename"
+              :class="{ valid: !v$.nename.$invalid, invalid: v$.nename.$invalid }"
+              v-model="v$.nename.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label
+              class="form-control-label"
+              v-text="t$('ainmsVueclientApp.accessController.necategory')"
+              for="access-controller-necategory"
+            ></label>
+            <input
+              type="text"
+              class="form-control"
+              name="necategory"
+              id="access-controller-necategory"
+              data-cy="necategory"
+              :class="{ valid: !v$.necategory.$invalid, invalid: v$.necategory.$invalid }"
+              v-model="v$.necategory.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('ainmsVueclientApp.accessController.netype')" for="access-controller-netype"></label>
+            <input
+              type="text"
+              class="form-control"
+              name="netype"
+              id="access-controller-netype"
+              data-cy="netype"
+              :class="{ valid: !v$.netype.$invalid, invalid: v$.netype.$invalid }"
+              v-model="v$.netype.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label
+              class="form-control-label"
+              v-text="t$('ainmsVueclientApp.accessController.nevendorname')"
+              for="access-controller-nevendorname"
+            ></label>
+            <input
+              type="text"
+              class="form-control"
+              name="nevendorname"
+              id="access-controller-nevendorname"
+              data-cy="nevendorname"
+              :class="{ valid: !v$.nevendorname.$invalid, invalid: v$.nevendorname.$invalid }"
+              v-model="v$.nevendorname.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('ainmsVueclientApp.accessController.neesn')" for="access-controller-neesn"></label>
+            <input
+              type="text"
+              class="form-control"
+              name="neesn"
+              id="access-controller-neesn"
+              data-cy="neesn"
+              :class="{ valid: !v$.neesn.$invalid, invalid: v$.neesn.$invalid }"
+              v-model="v$.neesn.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('ainmsVueclientApp.accessController.neip')" for="access-controller-neip"></label>
+            <input
+              type="text"
+              class="form-control"
+              name="neip"
+              id="access-controller-neip"
+              data-cy="neip"
+              :class="{ valid: !v$.neip.$invalid, invalid: v$.neip.$invalid }"
+              v-model="v$.neip.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('ainmsVueclientApp.accessController.nemac')" for="access-controller-nemac"></label>
+            <input
+              type="text"
+              class="form-control"
+              name="nemac"
+              id="access-controller-nemac"
+              data-cy="nemac"
+              :class="{ valid: !v$.nemac.$invalid, invalid: v$.nemac.$invalid }"
+              v-model="v$.nemac.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('ainmsVueclientApp.accessController.version')" for="access-controller-version"></label>
+            <input
+              type="text"
+              class="form-control"
+              name="version"
+              id="access-controller-version"
+              data-cy="version"
+              :class="{ valid: !v$.version.$invalid, invalid: v$.version.$invalid }"
+              v-model="v$.version.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('ainmsVueclientApp.accessController.nestate')" for="access-controller-nestate"></label>
+            <input
+              type="number"
+              class="form-control"
+              name="nestate"
+              id="access-controller-nestate"
+              data-cy="nestate"
+              :class="{ valid: !v$.nestate.$invalid, invalid: v$.nestate.$invalid }"
+              v-model.number="v$.nestate.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label
+              class="form-control-label"
+              v-text="t$('ainmsVueclientApp.accessController.createtime')"
+              for="access-controller-createtime"
+            ></label>
+            <input
+              type="text"
+              class="form-control"
+              name="createtime"
+              id="access-controller-createtime"
+              data-cy="createtime"
+              :class="{ valid: !v$.createtime.$invalid, invalid: v$.createtime.$invalid }"
+              v-model="v$.createtime.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label
+              class="form-control-label"
+              v-text="t$('ainmsVueclientApp.accessController.neiptype')"
+              for="access-controller-neiptype"
+            ></label>
+            <input
+              type="number"
+              class="form-control"
+              name="neiptype"
+              id="access-controller-neiptype"
+              data-cy="neiptype"
+              :class="{ valid: !v$.neiptype.$invalid, invalid: v$.neiptype.$invalid }"
+              v-model.number="v$.neiptype.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('ainmsVueclientApp.accessController.subnet')" for="access-controller-subnet"></label>
+            <input
+              type="text"
+              class="form-control"
+              name="subnet"
+              id="access-controller-subnet"
+              data-cy="subnet"
+              :class="{ valid: !v$.subnet.$invalid, invalid: v$.subnet.$invalid }"
+              v-model="v$.subnet.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label
+              class="form-control-label"
+              v-text="t$('ainmsVueclientApp.accessController.neosversion')"
+              for="access-controller-neosversion"
+            ></label>
+            <input
+              type="text"
+              class="form-control"
+              name="neosversion"
+              id="access-controller-neosversion"
+              data-cy="neosversion"
+              :class="{ valid: !v$.neosversion.$invalid, invalid: v$.neosversion.$invalid }"
+              v-model="v$.neosversion.$model"
+            />
+          </div>
         </div>
-      </template>
-    </b-modal>
-    <div v-show="accessControllers && accessControllers.length > 0">
-      <div class="row justify-content-center">
-        <jhi-item-count :page="page" :total="queryCount" :itemsPerPage="itemsPerPage"></jhi-item-count>
-      </div>
-      <div class="row justify-content-center">
-        <b-pagination size="md" :total-rows="totalItems" v-model="page" :per-page="itemsPerPage"></b-pagination>
-      </div>
+        <div>
+          <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" v-on:click="previousState()">
+            <font-awesome-icon icon="ban"></font-awesome-icon>&nbsp;<span v-text="t$('entity.action.cancel')"></span>
+          </button>
+          <button
+            type="submit"
+            id="save-entity"
+            data-cy="entityCreateSaveButton"
+            :disabled="v$.$invalid || isSaving"
+            class="btn btn-primary"
+          >
+            <font-awesome-icon icon="save"></font-awesome-icon>&nbsp;<span v-text="t$('entity.action.save')"></span>
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </template>
-
-<script lang="ts" src="./access-controller.component.ts"></script>
+<script lang="ts" src="./access-controller-update.component.ts"></script>

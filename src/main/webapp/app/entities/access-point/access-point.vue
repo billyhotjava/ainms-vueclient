@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="AccessPointHeading">
-      <span id="access-point-heading">AP配置</span>
+      <span v-text="t$('ainmsVueclientApp.accessPoint.home.title')" id="access-point-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span>刷新列表</span>
+          <span v-text="t$('ainmsVueclientApp.accessPoint.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'AccessPointCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,7 +15,7 @@
             class="btn btn-primary jh-create-entity create-access-point"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span>新建AP</span>
+            <span v-text="t$('ainmsVueclientApp.accessPoint.home.createLabel')"></span>
           </button>
         </router-link>
       </div>

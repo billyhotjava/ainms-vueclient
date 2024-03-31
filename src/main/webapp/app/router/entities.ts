@@ -6,7 +6,6 @@ const Entities = () => import('@/entities/entities.vue');
 const AccessController = () => import('@/entities/access-controller/access-controller.vue');
 const AccessControllerUpdate = () => import('@/entities/access-controller/access-controller-update.vue');
 const AccessControllerDetails = () => import('@/entities/access-controller/access-controller-details.vue');
-const AccessControllerForHome =() =>import('@/entities/access-controller/accforhome.vue')
 
 const AccessPoint = () => import('@/entities/access-point/access-point.vue');
 const AccessPointUpdate = () => import('@/entities/access-point/access-point-update.vue');

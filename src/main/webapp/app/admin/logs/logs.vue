@@ -10,16 +10,16 @@
       <table class="table table-sm table-striped table-bordered" aria-describedby="Logs">
         <thead>
           <tr title="click to order">
-            <th v-on:click="changeOrder('name')" scope="col" style="text-align:center"><span v-text="t$('logs.table.name')"></span></th>
-            <th v-on:click="changeOrder('level')" scope="col" style="text-align:center"><span v-text="t$('logs.table.level')"></span></th>
+            <th v-on:click="changeOrder('name')" scope="col"><span v-text="t$('logs.table.name')"></span></th>
+            <th v-on:click="changeOrder('level')" scope="col"><span v-text="t$('logs.table.level')"></span></th>
           </tr>
         </thead>
 
-        <tr v-for="logger in pagedLoggers" :key="logger.name">
+        <tr v-for="logger in filteredLoggers" :key="logger.name">
           <td>
             <small>{{ logger.name }}</small>
           </td>
-          <td style="text-align:center"> 
+          <td>
             <button
               v-on:click="updateLevel(logger.name, 'TRACE')"
               :class="logger.level === 'TRACE' ? 'btn-primary' : 'btn-light'"
@@ -65,34 +65,8 @@
           </td>
         </tr>
       </table>
-
-      <!-- 简化的分页控件 -->
-      <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-          <li class="page-item" :class="{ disabled: currentPage === 1 }">
-            <a class="page-link" href="#" @click.prevent="prevPage">Previous</a>
-          </li>
-          <li class="page-item" v-if="showFirstDots">
-            <span class="page-link">...</span>
-          </li>
-          <li class="page-item" v-for="page in visiblePages" :key="page" :class="{ active: page === currentPage }">
-            <a class="page-link" href="#" @click.prevent="changePage(page)">{{ page }}</a>
-          </li>
-          <li class="page-item" v-if="showLastDots">
-            <span class="page-link">...</span>
-          </li>
-          <li class="page-item" :class="{ disabled: currentPage === totalPages }">
-            <a class="page-link" href="#" @click.prevent="nextPage">Next</a>
-          </li>
-        </ul>
-      </nav>
     </div>
   </div>
 </template>
-<style scoped>
-.level-buttons {
-  display: flex;
-  justify-content: flex-end;
-}
-</style>
+
 <script lang="ts" src="./logs.component.ts"></script>

@@ -4,9 +4,9 @@
       "home": {
         "title": "AC控制器",
         "refreshListLabel": "刷新",
-        "createLabel": "创建新的控制器",
+        "createLabel": "创建控制器",
         "createOrEditLabel": "创建或编辑控制器",
-        "notFound": "No Access Controllers found"
+        "notFound": "找不到控制器"
       },
       "created": "控制器 { param } 创建成功",
       "updated": "控制器 { param } 更新成功",

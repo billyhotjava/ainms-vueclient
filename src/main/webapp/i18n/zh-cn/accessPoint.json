@@ -2,20 +2,20 @@
   "ainmsVueclientApp": {
     "accessPoint": {
       "home": {
-        "title": "Access Points",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "创建新 Access Point",
+        "title": "无线AP",
+        "refreshListLabel": "刷新",
+        "createLabel": "创建新AP",
         "createOrEditLabel": "创建或编辑 Access Point",
-        "notFound": "No Access Points found"
+        "notFound": "AP找不到"
       },
-      "created": "Access Point { param } 创建成功",
-      "updated": "Access Point { param } 更新成功",
-      "deleted": "Access Point { param } 删除成功",
+      "created": "AP { param } 创建成功",
+      "updated": "AP { param } 更新成功",
+      "deleted": "AP { param } 删除成功",
       "delete": {
-        "question": "你确定要删除 Access Point { id } 吗？"
+        "question": "你确定要删除 AP { id } 吗？"
       },
       "detail": {
-        "title": "Access Point"
+        "title": "无线AP"
       },
       "id": "ID",
       "group": "AP组",

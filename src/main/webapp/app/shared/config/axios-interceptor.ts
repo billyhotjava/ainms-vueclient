@@ -2,13 +2,6 @@ import axios from 'axios';
 
 const TIMEOUT = 1000000;
 const onRequestSuccess = config => {
-  // const token = localStorage.getItem('ainms-authenticationToken') || sessionStorage.getItem('ainms-authenticationToken');
-  // if (token) {
-  //   if (!config.headers) {
-  //     config.headers = {};
-  //   }
-  //   config.headers.Authorization = `Bearer ${token}`;
-  // }
   config.timeout = TIMEOUT;
   config.url = `${SERVER_API_URL}${config.url}`;
   return config;
