@@ -5,15 +5,14 @@
         <h2
           id="ainmsVueclientApp.accessPointGroup.home.createOrEditLabel"
           data-cy="AccessPointGroupCreateUpdateHeading"
-          v-text="t$('ainmsVueclientApp.accessPointGroup.home.createOrEditLabel')"
-        ></h2>
+        >创建或编辑AP组</h2>
         <div>
           <div class="form-group" v-if="accessPointGroup.id">
-            <label for="id" v-text="t$('global.field.id')"></label>
+            <label for="id" >ID编号</label>
             <input type="text" class="form-control" id="id" name="id" v-model="accessPointGroup.id" readonly />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('ainmsVueclientApp.accessPointGroup.name')" for="access-point-group-name"></label>
+            <label class="form-control-label" for="access-point-group-name">AP组名称</label>
             <input
               type="text"
               class="form-control"
@@ -31,9 +30,8 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('ainmsVueclientApp.accessPointGroup.controller')"
               for="access-point-group-controller"
-            ></label>
+            >所属AC</label>
             <select
               class="form-control"
               id="access-point-group-controller"
@@ -51,16 +49,15 @@
                 v-for="accessControllerOption in accessControllers"
                 :key="accessControllerOption.id"
               >
-                {{ accessControllerOption.id }}
+                {{ accessControllerOption.aliasname }}
               </option>
             </select>
           </div>
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('ainmsVueclientApp.accessPointGroup.powerPlant')"
               for="access-point-group-powerPlant"
-            ></label>
+            >所属场站</label>
             <select
               class="form-control"
               id="access-point-group-powerPlant"
@@ -78,7 +75,7 @@
                 v-for="powerPlantOption in powerPlants"
                 :key="powerPlantOption.id"
               >
-                {{ powerPlantOption.id }}
+                {{ powerPlantOption.powerPlant.powerPlantName}}
               </option>
             </select>
           </div>

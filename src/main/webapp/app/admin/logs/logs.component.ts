@@ -15,8 +15,8 @@ export default defineComponent({
     const orderProp = ref('name');
     const reverse = ref(false);
     const currentPage = ref(1);
-    const pageSize = 10; // Ã¿Ò³ÏÔÊ¾µÄÈÕÖ¾ÊıÁ¿
-    const maxVisiblePages = 5; // ×î´óÏÔÊ¾µÄÒ³ÂëÊıÁ¿
+    const pageSize = 10; // æ¯é¡µæ˜¾ç¤ºçš„æ—¥å¿—æ•°é‡
+    const maxVisiblePages = 5; // æœ€å¤§æ˜¾ç¤ºçš„é¡µç æ•°é‡
 
     const filteredLoggers = computed(() =>
       orderAndFilterBy(loggers.value, {
@@ -88,7 +88,7 @@ export default defineComponent({
       currentPage.value = 1;
     });
 
-    init(); // ³õÊ¼»¯Ê±»ñÈ¡ÈÕÖ¾Êı¾İ
+    init(); // åˆå§‹åŒ–æ—¶è·å–æ—¥å¿—æ•°æ®
 
     return {
       loggers,

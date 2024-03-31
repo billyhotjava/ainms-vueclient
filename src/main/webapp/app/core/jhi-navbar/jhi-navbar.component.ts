@@ -17,6 +17,7 @@ export default defineComponent({
   setup() {
     const loginService = inject<LoginService>('loginService');
     const accountService = inject<AccountService>('accountService');
+    console.log("==== mavbar.accountService" + accountService.toString());
     const currentLanguage = inject('currentLanguage', () => computed(() => navigator.language ?? 'en'), true);
     const changeLanguage = inject<(string) => Promise<void>>('changeLanguage');
 
@@ -46,11 +47,19 @@ export default defineComponent({
     };
 
     const logout = async () => {
-      localStorage.removeItem('ainms-authenticationToken');
-      sessionStorage.removeItem('ainms-authenticationToken');
+      // localStorage.removeItem('ainms-authenticationToken');
+      // sessionStorage.removeItem('ainms-authenticationToken');
+    //   store.logout();
+    //   if (router.currentRoute.value.path !== '/') {
+    //     router.push('/');
+    //   }
+    // };
+      const response = await loginService.logout();
       store.logout();
-      if (router.currentRoute.value.path !== '/') {
-        router.push('/');
+      window.location.href = response.data.logoutUrl;
+      const next = response.data?.logoutUrl ?? '/';
+      if (router.currentRoute.value.path !== next) {
+        await router.push(next);
       }
     };
 

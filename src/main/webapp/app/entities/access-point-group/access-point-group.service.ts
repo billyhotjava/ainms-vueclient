@@ -25,6 +25,7 @@ export default class AccessPointGroupService {
       axios
         .get(baseApiUrl + `?${buildPaginationQueryOpts(paginationQuery)}`)
         .then(res => {
+          console.log('service是,', res)
           resolve(res);
         })
         .catch(err => {

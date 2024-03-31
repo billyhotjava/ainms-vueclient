@@ -1,7 +1,7 @@
 <template>
   <div class="row justify-content-center">
     <div class="col-8">
-      <div v-if="powerPlant">
+      <div v-if="powerPlant&&matchedpowerPlant">
         <h2 class="jh-entity-heading" data-cy="powerPlantDetailsHeading">
           <span>查看场站</span> {{ powerPlant.powerPlantName }}
         </h2>
@@ -16,7 +16,7 @@
             <span>所属省份</span>
           </dt>
           <dd>
-            {{powerPlant.province.id}}
+            {{matchedpowerPlant.province.provinceName}}
           </dd>
         </dl>
         <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

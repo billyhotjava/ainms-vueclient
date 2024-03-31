@@ -1,77 +1,140 @@
 <template>
-  <div class="row justify-content-center">
-    <div class="col-8">
-      <form name="editForm" role="form" novalidate v-on:submit.prevent="save()">
-        <h2
-          id="ainmsVueclientApp.accessController.home.createOrEditLabel"
-          data-cy="AccessControllerCreateUpdateHeading"
-        >创建或修改AC</h2>
-        <div>
-          <div class="form-group" v-if="accessController.id">
-            <label>AC编号</label>
-            <input type="text" class="form-control" id="id" name="id" v-model="accessController.id" readonly />
-          </div>
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('ainmsVueclientApp.accessController.aliasname')"
-              for="access-controller-aliasname"
-            ></label>
-            <input
-              type="text"
-              class="form-control"
-              name="aliasname"
-              id="access-controller-aliasname"
-              data-cy="aliasname"
-              :class="{ valid: !v$.aliasname.$invalid, invalid: v$.aliasname.$invalid }"
-              v-model="v$.aliasname.$model"
-            />
-          </div>
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('ainmsVueclientApp.accessController.neip')" for="access-controller-neip"></label>
-            <input
-              type="text"
-              class="form-control"
-              name="neip"
-              id="access-controller-neip"
-              data-cy="neip"
-              :class="{ valid: !v$.neip.$invalid, invalid: v$.neip.$invalid }"
-              v-model="v$.neip.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('ainmsVueclientApp.accessController.nestate')"
-              for="access-controller-nestate"
-            ></label>
-            <input
-              type="number"
-              class="form-control"
-              name="nestate"
-              id="access-controller-nestate"
-              data-cy="nestate"
-              :class="{ valid: !v$.nestate.$invalid, invalid: v$.nestate.$invalid }"
-              v-model.number="v$.nestate.$model"
-            />
-          </div>
-        <div>
-          <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" v-on:click="previousState()">
-            <font-awesome-icon icon="ban"></font-awesome-icon>&nbsp;<span v-text="t$('entity.action.cancel')"></span>
-          </button>
+  <div>
+    <h2 id="page-heading" data-cy="AccessControllerHeading">
+      <span id="access-controller-heading">AC配置</span>
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
+          <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
+          <span>刷新列表</span>
+        </button>
+        <router-link :to="{ name: 'AccessControllerCreate' }" custom v-slot="{ navigate }">
           <button
-            type="submit"
-            id="save-entity"
-            data-cy="entityCreateSaveButton"
-            :disabled="v$.$invalid || isSaving"
-            class="btn btn-primary"
+            @click="navigate"
+            id="jh-create-entity"
+            data-cy="entityCreateButton"
+            class="btn btn-primary jh-create-entity create-access-controller"
           >
-            <font-awesome-icon icon="save"></font-awesome-icon>&nbsp;<span v-text="t$('entity.action.save')"></span>
+            <font-awesome-icon icon="plus"></font-awesome-icon>
+            <span>新建AC</span>
           </button>
+        </router-link>
+      </div>
+    </h2>
+    <br />
+    <div class="alert alert-warning" v-if="!isFetching && accessControllers && accessControllers.length === 0">
+      <span v-text="t$('ainmsVueclientApp.accessController.home.notFound')"></span>
+    </div>
+    <div class="table-responsive" v-if="accessControllers && accessControllers.length > 0">
+      <table class="table table-striped" aria-describedby="accessControllers">
+        <thead>
+          <tr>
+            <th scope="row" v-on:click="changeOrder('id')">
+              <span>AC编号</span>
+              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'id'"></jhi-sort-indicator>
+            </th>
+            
+            <th scope="row" v-on:click="changeOrder('aliasname')">
+              <span>AC名称</span>
+              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'aliasname'"></jhi-sort-indicator>
+            </th>
+           
+           
+            <th scope="row" v-on:click="changeOrder('neip')">
+              <span>IP地址</span>
+              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'neip'"></jhi-sort-indicator>
+            </th>
+          
+            <th scope="row" v-on:click="changeOrder('nestate')">
+              <span>工作状态</span>
+              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'nestate'"></jhi-sort-indicator>
+            </th>
+           
+            <th scope="row"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="accessController in accessControllers" :key="accessController.id" data-cy="entityTable">
+            <td>
+              {{accessController.id}}
+            </td>
+            <td>{{ accessController.aliasname }}</td>
+            <td>{{ accessController.neip }}</td>
+            <td>{{ accessController.nestate }}</td>
+            <td class="text-right">
+              <div class="btn-group">
+                <router-link
+                  :to="{ name: 'AccessControllerView', params: { accessControllerId: accessController.id } }"
+                  custom
+                  v-slot="{ navigate }"
+                >
+                  <button @click="navigate" class="btn btn-info btn-sm details" data-cy="entityDetailsButton">
+                    <font-awesome-icon icon="eye"></font-awesome-icon>
+                    <span class="d-none d-md-inline" v-text="t$('entity.action.view')"></span>
+                  </button>
+                </router-link>
+                <router-link
+                  :to="{ name: 'AccessControllerEdit', params: { accessControllerId: accessController.id } }"
+                  custom
+                  v-slot="{ navigate }"
+                >
+                  <button @click="navigate" class="btn btn-primary btn-sm edit" data-cy="entityEditButton">
+                    <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
+                    <span class="d-none d-md-inline" v-text="t$('entity.action.edit')"></span>
+                  </button>
+                </router-link>
+                <b-button
+                  v-on:click="prepareRemove(accessController)"
+                  variant="danger"
+                  class="btn btn-sm"
+                  data-cy="entityDeleteButton"
+                  v-b-modal.removeEntity
+                >
+                  <font-awesome-icon icon="times"></font-awesome-icon>
+                  <span class="d-none d-md-inline" v-text="t$('entity.action.delete')"></span>
+                </b-button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <b-modal ref="removeEntity" id="removeEntity">
+      <template #modal-title>
+        <span
+          id="ainmsVueclientApp.accessController.delete.question"
+          data-cy="accessControllerDeleteDialogHeading"
+          v-text="t$('entity.delete.title')"
+        ></span>
+      </template>
+      <div class="modal-body">
+        <p
+          id="ainms-delete-accessController-heading"
+          v-text="t$('ainmsVueclientApp.accessController.delete.question', { id: removeId })"
+        ></p>
+      </div>
+      <template #modal-footer>
+        <div>
+          <button type="button" class="btn btn-secondary" v-text="t$('entity.action.cancel')" v-on:click="closeDialog()"></button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            id="ainms-confirm-delete-accessController"
+            data-cy="entityConfirmDeleteButton"
+            v-text="t$('entity.action.delete')"
+            v-on:click="removeAccessController()"
+          ></button>
         </div>
-      </form>
+      </template>
+    </b-modal>
+    <div v-show="accessControllers && accessControllers.length > 0">
+      <div class="row justify-content-center">
+        <jhi-item-count :page="page" :total="queryCount" :itemsPerPage="itemsPerPage"></jhi-item-count>
+      </div>
+      <div class="row justify-content-center">
+        <b-pagination size="md" :total-rows="totalItems" v-model="page" :per-page="itemsPerPage"></b-pagination>
+      </div>
     </div>
   </div>
 </template>
-<script lang="ts" src="./access-controller-update.component.ts"></script>
+
+<script lang="ts" src="./access-controller.component.ts"></script>

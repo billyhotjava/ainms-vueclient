@@ -35,7 +35,7 @@
                 v-for="provinceOption in provinces"
                 :key="provinceOption.id"
               >
-                {{ provinceOption.id }}
+                {{ provinceOption.provinceName }}
               </option>
             </select>
           </div>

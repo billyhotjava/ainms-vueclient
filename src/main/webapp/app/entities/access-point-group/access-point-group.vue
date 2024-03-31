@@ -5,7 +5,7 @@
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('ainmsVueclientApp.accessPointGroup.home.refreshListLabel')"></span>
+          <span>刷新列表</span>
         </button>
         <router-link :to="{ name: 'AccessPointGroupCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,7 +15,7 @@
             class="btn btn-primary jh-create-entity create-access-point-group"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('ainmsVueclientApp.accessPointGroup.home.createLabel')"></span>
+            <span>创建AP组</span>
           </button>
         </router-link>
       </div>
@@ -54,19 +54,12 @@
             </td>
             <td>{{ accessPointGroup.name }}</td>
             <td>
-              <div v-if="accessPointGroup.controller">
-                <router-link :to="{ name: 'AccessControllerView', params: { accessControllerId: accessPointGroup.controller.id } }">{{
-                  accessPointGroup.controller
-                }}</router-link>
-              </div>
+                 {{ accessPointGroup.controller}}
             </td>
-            <td>
-              <div v-if="accessPointGroup.powerPlant">
-                <router-link :to="{ name: 'PowerPlantView', params: { powerPlantId: accessPointGroup.powerPlant.id } }">{{
-                  accessPointGroup.powerPlant.id
-                }}</router-link>
-              </div>
+             <td>
+                 {{ accessPointGroup.powerPlant.powerPlantName}}
             </td>
+            
             <td class="text-right">
               <div class="btn-group">
                 <router-link

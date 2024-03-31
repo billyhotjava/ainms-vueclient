@@ -5,15 +5,14 @@
         <h2
           id="ainmsVueclientApp.accessPoint.home.createOrEditLabel"
           data-cy="AccessPointCreateUpdateHeading"
-          v-text="t$('ainmsVueclientApp.accessPoint.home.createOrEditLabel')"
-        ></h2>
+        >编辑或新建AP</h2>
         <div>
           <div class="form-group" v-if="accessPoint.id">
             <label for="id" v-text="t$('global.field.id')"></label>
             <input type="text" class="form-control" id="id" name="id" v-model="accessPoint.id" readonly />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('ainmsVueclientApp.accessPoint.nedn')" for="access-point-nedn"></label>
+            <label class="form-control-label" for="access-point-nedn">设备DN</label>
             <input
               type="text"
               class="form-control"
@@ -25,7 +24,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('ainmsVueclientApp.accessPoint.neid')" for="access-point-neid"></label>
+            <label class="form-control-label" for="access-point-neid">原厂设备序列号</label>
             <input
               type="number"
               class="form-control"
@@ -37,7 +36,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('ainmsVueclientApp.accessPoint.aliasname')" for="access-point-aliasname"></label>
+            <label class="form-control-label"  for="access-point-aliasname">设备所属网管名称</label>
             <input
               type="text"
               class="form-control"
@@ -49,7 +48,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('ainmsVueclientApp.accessPoint.nename')" for="access-point-nename"></label>
+            <label class="form-control-label"  for="access-point-nename">设备名称</label>
             <input
               type="text"
               class="form-control"
@@ -61,7 +60,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('ainmsVueclientApp.accessPoint.necategory')" for="access-point-necategory"></label>
+            <label class="form-control-label"  for="access-point-necategory">设备分类</label>
             <input
               type="text"
               class="form-control"
@@ -73,7 +72,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('ainmsVueclientApp.accessPoint.netype')" for="access-point-netype"></label>
+            <label class="form-control-label"  for="access-point-netype">设备类型</label>
             <input
               type="text"
               class="form-control"
@@ -87,9 +86,9 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('ainmsVueclientApp.accessPoint.nevendorname')"
+             
               for="access-point-nevendorname"
-            ></label>
+            >设备厂商ID</label>
             <input
               type="text"
               class="form-control"
@@ -101,7 +100,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('ainmsVueclientApp.accessPoint.neesn')" for="access-point-neesn"></label>
+            <label class="form-control-label"  for="access-point-neesn">设备序列号</label>
             <input
               type="text"
               class="form-control"
@@ -113,7 +112,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('ainmsVueclientApp.accessPoint.neip')" for="access-point-neip"></label>
+            <label class="form-control-label"  for="access-point-neip">IP地址</label>
             <input
               type="text"
               class="form-control"
@@ -125,7 +124,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('ainmsVueclientApp.accessPoint.nemac')" for="access-point-nemac"></label>
+            <label class="form-control-label"  for="access-point-nemac">设备MAC</label>
             <input
               type="text"
               class="form-control"
@@ -137,7 +136,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('ainmsVueclientApp.accessPoint.version')" for="access-point-version"></label>
+            <label class="form-control-label"  for="access-point-version">设备版本</label>
             <input
               type="text"
               class="form-control"
@@ -149,7 +148,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('ainmsVueclientApp.accessPoint.nestate')" for="access-point-nestate"></label>
+            <label class="form-control-label"  for="access-point-nestate">设备状态</label>
             <input
               type="number"
               class="form-control"
@@ -161,7 +160,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('ainmsVueclientApp.accessPoint.createtime')" for="access-point-createtime"></label>
+            <label class="form-control-label"  for="access-point-createtime">创建时间</label>
             <input
               type="text"
               class="form-control"
@@ -173,7 +172,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('ainmsVueclientApp.accessPoint.neiptype')" for="access-point-neiptype"></label>
+            <label class="form-control-label"  for="access-point-neiptype">IP地址类型</label>
             <input
               type="number"
               class="form-control"
@@ -185,7 +184,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('ainmsVueclientApp.accessPoint.subnet')" for="access-point-subnet"></label>
+            <label class="form-control-label"  for="access-point-subnet">所属子网</label>
             <input
               type="text"
               class="form-control"
@@ -199,9 +198,9 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('ainmsVueclientApp.accessPoint.neosversion')"
+             
               for="access-point-neosversion"
-            ></label>
+            >软件版本</label>
             <input
               type="text"
               class="form-control"
@@ -213,7 +212,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('ainmsVueclientApp.accessPoint.group')" for="access-point-group"></label>
+            <label class="form-control-label"  for="access-point-group">所属AP组</label>
             <select class="form-control" id="access-point-group" data-cy="group" name="group" v-model="accessPoint.group">
               <option v-bind:value="null"></option>
               <option
@@ -223,7 +222,7 @@
                 v-for="accessPointGroupOption in accessPointGroups"
                 :key="accessPointGroupOption.id"
               >
-                {{ accessPointGroupOption.id }}
+                {{ accessPointGroupOption.name }}
               </option>
             </select>
           </div>

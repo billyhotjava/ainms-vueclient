@@ -49,10 +49,11 @@ export default defineComponent({
         .retrieve()
         .then(res => {
           accessPointGroups.value = res.data;
+          console.log('accessPointGroups.value', accessPointGroups.value)
         });
     };
 
-    initRelationships();
+    initRelationships()
 
     const { t: t$ } = useI18n();
     const validations = useValidation();

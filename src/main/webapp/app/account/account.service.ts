@@ -32,6 +32,8 @@ export default class AccountService {
     try {
       const response = await axios.get<any>('api/account');
       console.log("==== response" + response.toString());
+      console.log('Response status:', response.status);
+      console.log('Response data login:', response.data?.login);
       if (response.status === 200 && response.data?.login) {
         const account = response.data;
         console.log("==== account" + account.toString());
@@ -56,10 +58,6 @@ export default class AccountService {
     if (this.store.logon) {
       return this.store.logon;
     }
-    // const token = localStorage.getItem('ainms-authenticationToken') || sessionStorage.getItem('ainms-authenticationToken');
-    // if (this.authenticated && this.userAuthorities && token) {
-    //   return;
-    // }
     if (this.authenticated && this.userAuthorities) {
       return;
     }

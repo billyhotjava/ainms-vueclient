@@ -5,7 +5,7 @@
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('ainmsVueclientApp.accessController.home.refreshListLabel')"></span>
+          <span>刷新列表</span>
         </button>
         <router-link :to="{ name: 'AccessControllerCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,7 +15,7 @@
             class="btn btn-primary jh-create-entity create-access-controller"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('ainmsVueclientApp.accessController.home.createLabel')"></span>
+            <span>新建AC</span>
           </button>
         </router-link>
       </div>

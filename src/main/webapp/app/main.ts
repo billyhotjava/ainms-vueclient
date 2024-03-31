@@ -106,6 +106,7 @@ const app = createApp({
       if (!store.authenticated) {
         console.log("beforeResolve: update account");
         await accountService.update();
+        console.log("afterResolve: update account");
       }
       if (to.meta?.authorities && to.meta.authorities.length > 0) {
         const value = await accountService.hasAnyAuthorityAndCheckAuth(to.meta.authorities);

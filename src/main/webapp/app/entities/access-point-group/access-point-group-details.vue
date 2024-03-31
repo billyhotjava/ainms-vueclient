@@ -3,34 +3,26 @@
     <div class="col-8">
       <div v-if="accessPointGroup">
         <h2 class="jh-entity-heading" data-cy="accessPointGroupDetailsHeading">
-          <span v-text="t$('ainmsVueclientApp.accessPointGroup.detail.title')"></span> {{ accessPointGroup.id }}
+          <span>AP组</span> {{ accessPointGroup.name }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('ainmsVueclientApp.accessPointGroup.name')"></span>
+            <span>名称</span>
           </dt>
           <dd>
             <span>{{ accessPointGroup.name }}</span>
           </dd>
           <dt>
-            <span v-text="t$('ainmsVueclientApp.accessPointGroup.controller')"></span>
+            <span>所属AC</span>
           </dt>
           <dd>
-            <div v-if="accessPointGroup.controller">
-              <router-link :to="{ name: 'AccessControllerView', params: { accessControllerId: accessPointGroup.controller.id } }">{{
-                accessPointGroup.controller.id
-              }}</router-link>
-            </div>
+            {{ accessPointGroup.controller.aliasname}}
           </dd>
           <dt>
-            <span v-text="t$('ainmsVueclientApp.accessPointGroup.powerPlant')"></span>
+            <span >所属场站</span>
           </dt>
           <dd>
-            <div v-if="accessPointGroup.powerPlant">
-              <router-link :to="{ name: 'PowerPlantView', params: { powerPlantId: accessPointGroup.powerPlant.id } }">{{
-                accessPointGroup.powerPlant.id
-              }}</router-link>
-            </div>
+           {{accessPointGroup.powerPlant.powerPlantName}}
           </dd>
         </dl>
         <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

@@ -19,7 +19,8 @@
           <dd>{{ user.lastName }}</dd>
           <dt><span v-text="t$('userManagement.email')"></span></dt>
           <dd>{{ user.email }}</dd>
-         
+          <dt><span v-text="t$('userManagement.langKey')"></span></dt>
+          <dd>{{ user.langKey }}</dd>
           <dt><span v-text="t$('userManagement.profiles')"></span></dt>
           <dd>
             <ul class="list-unstyled">

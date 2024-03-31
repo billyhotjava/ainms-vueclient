@@ -49,6 +49,7 @@ export default defineComponent({
         .retrieve()
         .then(res => {
           provinces.value = res.data;
+          console.log(provinces.value)
         });
     };
 

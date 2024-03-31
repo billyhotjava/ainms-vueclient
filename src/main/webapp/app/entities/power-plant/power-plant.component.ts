@@ -22,7 +22,7 @@ export default defineComponent({
       isFetching.value = true;
       try {
         const res = await powerPlantService().retrieve();
-        console.log('res.dataÊÇ', res.data)
+        console.log('res.dataæ˜¯', res.data)
         powerPlants.value = res.data;
       } catch (err) {
         alertService.showHttpError(err.response);

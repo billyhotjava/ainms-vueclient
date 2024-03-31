@@ -27,11 +27,10 @@
               <span v-text="t$('userManagement.login')"></span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'login'"></jhi-sort-indicator>
             </th>
-            <th scope="col" v-on:click="changeOrder('email')">
-              <span v-text="t$('userManagement.email')"></span>
-              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'email'"></jhi-sort-indicator>
-            </th>
-          
+            <th scope="col" v-on:click="changeOrder('province')">
+              <span v-text="t$('userManagement.province')"></span>
+              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'province'"></jhi-sort-indicator>
+            </th>         
             <th scope="col"><span v-text="t$('userManagement.profiles')"></span></th>
             <th scope="col"></th>
           </tr>

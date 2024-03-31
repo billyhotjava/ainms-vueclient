@@ -1,24 +1,7 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="AccessPointHeading">
-      <span id="access-point-heading">AP配置</span>
-      <div class="d-flex justify-content-end">
-        <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
-          <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span>刷新列表</span>
-        </button>
-        <router-link :to="{ name: 'AccessPointCreate' }" custom v-slot="{ navigate }">
-          <button
-            @click="navigate"
-            id="jh-create-entity"
-            data-cy="entityCreateButton"
-            class="btn btn-primary jh-create-entity create-access-point"
-          >
-            <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span>新建AP</span>
-          </button>
-        </router-link>
-      </div>
+      <span id="access-point-heading">AP列表</span>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && accessPoints && accessPoints.length === 0">
@@ -28,27 +11,26 @@
       <table class="table table-striped" aria-describedby="accessPoints">
         <thead>
           <tr>
-            <th scope="row" v-on:click="changeOrder('id')">
+            <th scope="row" >
               <span>AP编号</span>
-              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'id'"></jhi-sort-indicator>
             </th>
-            <th scope="row" v-on:click="changeOrder('aliasname')">
+            <th scope="row">
               <span>AP名称</span>
-              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'aliasname'"></jhi-sort-indicator>
             </th>
-            
-            <th scope="row" v-on:click="changeOrder('neip')">
+            <th scope="row" >
               <span>IP地址</span>
-              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'neip'"></jhi-sort-indicator>
             </th>
-           
-            <th scope="row" v-on:click="changeOrder('nestate')">
-              <span>工作状态</span>
-              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'nestate'"></jhi-sort-indicator>
+            <th scope="row" >
+              <span>所属AP组</span>
             </th>
-           
-            
-            <th scope="row"></th>
+            <th scope="row" >
+              <span>所属省份</span>
+            </th>
+             <th scope="row" >
+              <span>所属AC</span>
+            </th>
+            <th scope="row" >
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -58,8 +40,11 @@
             </td>
             <td>{{ accessPoint.aliasname }}</td>
             <td>{{ accessPoint.neip }}</td>
-           
-            <td>{{ accessPoint.nestate }}</td>
+            <td 
+                >{{accessPoint.group.name}}</td>
+            <td>{{accessPoint.group.powerPlant.province.provinceName}}</td>
+            <td>{{ accessPoint.group.controller.aliasname}}</td>
+            
             <td class="text-right">
               <div class="btn-group">
                 <router-link :to="{ name: 'AccessPointView', params: { accessPointId: accessPoint.id } }" custom v-slot="{ navigate }">
@@ -68,22 +53,6 @@
                     <span class="d-none d-md-inline" v-text="t$('entity.action.view')"></span>
                   </button>
                 </router-link>
-                <router-link :to="{ name: 'AccessPointEdit', params: { accessPointId: accessPoint.id } }" custom v-slot="{ navigate }">
-                  <button @click="navigate" class="btn btn-primary btn-sm edit" data-cy="entityEditButton">
-                    <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
-                    <span class="d-none d-md-inline" v-text="t$('entity.action.edit')"></span>
-                  </button>
-                </router-link>
-                <b-button
-                  v-on:click="prepareRemove(accessPoint)"
-                  variant="danger"
-                  class="btn btn-sm"
-                  data-cy="entityDeleteButton"
-                  v-b-modal.removeEntity
-                >
-                  <font-awesome-icon icon="times"></font-awesome-icon>
-                  <span class="d-none d-md-inline" v-text="t$('entity.action.delete')"></span>
-                </b-button>
               </div>
             </td>
           </tr>
@@ -126,4 +95,4 @@
   </div>
 </template>
 
-<script lang="ts" src="./access-point.component.ts"></script>
+<script lang="ts" src="./apforhome.compoent.ts"></script>

@@ -66,7 +66,7 @@
         </tr>
       </table>
 
-      <!-- 简化的分页控件 -->
+      <!-- 绠�鍖栫殑鍒嗛〉鎺т欢 -->
       <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
           <li class="page-item" :class="{ disabled: currentPage === 1 }">
