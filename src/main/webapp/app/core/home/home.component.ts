@@ -1,6 +1,6 @@
-import { type ComputedRef, defineComponent, inject } from 'vue';
+import { type ComputedRef, defineComponent, inject,onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-
+import * as echarts from 'echarts';
 import type LoginService from '@/account/login.service';
 
 export default defineComponent({
@@ -15,11 +15,40 @@ export default defineComponent({
       loginService.login();
     };
 
+    const option = ref({
+      title:{
+        text:'AP Statistics'
+      },
+      xAxis: {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      },
+      yAxis: {
+        type: 'value',
+      },
+      series: [
+        {
+          data: [120, 200, 150, 80, 70, 110, 130],
+          type: 'bar',
+        },
+      ],
+    });
+
+    // insert charts
+    const chartRef = ref(null);
+    onMounted(()=> {
+      if(!chartRef.value) return;
+      const homeChart = echarts.init(chartRef.value);
+      homeChart.setOption(option.value);
+    });
+
     return {
       authenticated,
       username,
       openLogin,
       t$: useI18n().t,
+      chartRef,
+      option
     };
   },
 });
