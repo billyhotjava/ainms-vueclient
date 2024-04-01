@@ -7,7 +7,7 @@
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
           <span v-text="t$('ainmsVueclientApp.accessPoint.home.refreshListLabel')"></span>
         </button>
-        <!-- <router-link :to="{ name: 'AccessPointCreate' }" custom v-slot="{ navigate }">
+        <router-link :to="{ name: 'AccessPointCreate' }" custom v-slot="{ navigate }">
           <button
             @click="navigate"
             id="jh-create-entity"
@@ -17,7 +17,7 @@
             <font-awesome-icon icon="plus"></font-awesome-icon>
             <span v-text="t$('ainmsVueclientApp.accessPoint.home.createLabel')"></span>
           </button>
-        </router-link> -->
+        </router-link>
       </div>
     </h2>
     <br />
@@ -32,7 +32,7 @@
               <span v-text="t$('global.field.id')"></span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'id'"></jhi-sort-indicator>
             </th>
-            <th scope="row" v-on:click="changeOrder('nedn')">
+            <!-- <th scope="row" v-on:click="changeOrder('nedn')">
               <span v-text="t$('ainmsVueclientApp.accessPoint.nedn')"></span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'nedn'"></jhi-sort-indicator>
             </th>
@@ -43,19 +43,21 @@
             <th scope="row" v-on:click="changeOrder('aliasname')">
               <span v-text="t$('ainmsVueclientApp.accessPoint.aliasname')"></span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'aliasname'"></jhi-sort-indicator>
-            </th>
+            </th> -->
             <th scope="row" v-on:click="changeOrder('nename')">
               <span v-text="t$('ainmsVueclientApp.accessPoint.nename')"></span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'nename'"></jhi-sort-indicator>
             </th>
-            <th scope="row" v-on:click="changeOrder('necategory')">
+            <!-- <th scope="row" v-on:click="changeOrder('necategory')">
               <span v-text="t$('ainmsVueclientApp.accessPoint.necategory')"></span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'necategory'"></jhi-sort-indicator>
             </th>
+          -->
             <th scope="row" v-on:click="changeOrder('netype')">
               <span v-text="t$('ainmsVueclientApp.accessPoint.netype')"></span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'netype'"></jhi-sort-indicator>
-            </th>
+            </th> 
+            <!--
             <th scope="row" v-on:click="changeOrder('nevendorname')">
               <span v-text="t$('ainmsVueclientApp.accessPoint.nevendorname')"></span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'nevendorname'"></jhi-sort-indicator>
@@ -63,7 +65,7 @@
             <th scope="row" v-on:click="changeOrder('neesn')">
               <span v-text="t$('ainmsVueclientApp.accessPoint.neesn')"></span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'neesn'"></jhi-sort-indicator>
-            </th>
+            </th> 
             <th scope="row" v-on:click="changeOrder('neip')">
               <span v-text="t$('ainmsVueclientApp.accessPoint.neip')"></span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'neip'"></jhi-sort-indicator>
@@ -75,19 +77,19 @@
             <th scope="row" v-on:click="changeOrder('version')">
               <span v-text="t$('ainmsVueclientApp.accessPoint.version')"></span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'version'"></jhi-sort-indicator>
-            </th>
+            </th> -->
             <th scope="row" v-on:click="changeOrder('nestate')">
               <span v-text="t$('ainmsVueclientApp.accessPoint.nestate')"></span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'nestate'"></jhi-sort-indicator>
             </th>
-            <th scope="row" v-on:click="changeOrder('createtime')">
+            <!-- <th scope="row" v-on:click="changeOrder('createtime')">
               <span v-text="t$('ainmsVueclientApp.accessPoint.createtime')"></span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'createtime'"></jhi-sort-indicator>
             </th>
             <th scope="row" v-on:click="changeOrder('neiptype')">
               <span v-text="t$('ainmsVueclientApp.accessPoint.neiptype')"></span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'neiptype'"></jhi-sort-indicator>
-            </th>
+            </th> 
             <th scope="row" v-on:click="changeOrder('subnet')">
               <span v-text="t$('ainmsVueclientApp.accessPoint.subnet')"></span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'subnet'"></jhi-sort-indicator>
@@ -95,7 +97,7 @@
             <th scope="row" v-on:click="changeOrder('neosversion')">
               <span v-text="t$('ainmsVueclientApp.accessPoint.neosversion')"></span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'neosversion'"></jhi-sort-indicator>
-            </th>
+            </th> -->
             <th scope="row" v-on:click="changeOrder('group.id')">
               <span v-text="t$('ainmsVueclientApp.accessPoint.group')"></span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'group.id'"></jhi-sort-indicator>
@@ -104,31 +106,32 @@
           </tr>
         </thead>
         <tbody>
+          <!-- AccessPoint表 -->
           <tr v-for="accessPoint in accessPoints" :key="accessPoint.id" data-cy="entityTable">
             <td>
               <router-link :to="{ name: 'AccessPointView', params: { accessPointId: accessPoint.id } }">{{ accessPoint.id }}</router-link>
             </td>
-            <td>{{ accessPoint.nedn }}</td>
+            <!-- <td>{{ accessPoint.nedn }}</td>
             <td>{{ accessPoint.neid }}</td>
-            <td>{{ accessPoint.aliasname }}</td>
+            <td>{{ accessPoint.aliasname }}</td> -->
             <td>{{ accessPoint.nename }}</td>
-            <td>{{ accessPoint.necategory }}</td>
+            <!-- <td>{{ accessPoint.necategory }}</td> -->
             <td>{{ accessPoint.netype }}</td>
-            <td>{{ accessPoint.nevendorname }}</td>
+            <!-- <td>{{ accessPoint.nevendorname }}</td>
             <td>{{ accessPoint.neesn }}</td>
             <td>{{ accessPoint.neip }}</td>
             <td>{{ accessPoint.nemac }}</td>
-            <td>{{ accessPoint.version }}</td>
+            <td>{{ accessPoint.version }}</td> -->
             <td>{{ accessPoint.nestate }}</td>
-            <td>{{ accessPoint.createtime }}</td>
+            <!-- <td>{{ accessPoint.createtime }}</td>
             <td>{{ accessPoint.neiptype }}</td>
             <td>{{ accessPoint.subnet }}</td>
-            <td>{{ accessPoint.neosversion }}</td>
+            <td>{{ accessPoint.neosversion }}</td> -->
             <td>
               <div v-if="accessPoint.group">
-                <router-link :to="{ name: 'AccessPointGroupView', params: { accessPointGroupId: accessPoint.group.id } }">{{
-                  accessPoint.group.id
-                }}</router-link>
+                <router-link :to="{ name: 'AccessPointGroupView', params: { accessPointGroupId: accessPoint.group.id } }">
+                  {{ getAccessPointGroupName(accessPoint.group.id)}}
+                </router-link>
               </div>
             </td>
             <td class="text-right">

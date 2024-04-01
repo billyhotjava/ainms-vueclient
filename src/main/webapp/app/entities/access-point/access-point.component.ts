@@ -4,6 +4,12 @@ import { useI18n } from 'vue-i18n';
 import AccessPointService from './access-point.service';
 import { type IAccessPoint } from '@/shared/model/access-point.model';
 import { useAlertService } from '@/shared/alert/alert.service';
+import AccessPointGroupService from '@/entities/access-point-group/access-point-group.service';
+import type { IAccessController } from '@/shared/model/access-controller.model';
+import AccessControllerService from '@/entities/access-controller/access-controller.service';
+import PowerPlantService from '@/entities/power-plant/power-plant.service';
+import type { IAccessPointGroup } from '@/shared/model/access-point-group.model';
+import type { IPowerPlant } from '@/shared/model/power-plant.model';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -13,6 +19,14 @@ export default defineComponent({
     const accessPointService = inject('accessPointService', () => new AccessPointService());
     const alertService = inject('alertService', () => useAlertService(), true);
 
+    // join view
+    const accessControllerService = inject('accessControllerService', () => new AccessControllerService());
+    const accessPointGroupService = inject('accessPointGroupService', () => new AccessPointGroupService());
+    const powerPlantService = inject('powerPlantService', () => new PowerPlantService());
+    const accessControllers: Ref<IAccessController[]> = ref([]);
+    const accessPointGroups: Ref<IAccessPointGroup[]> = ref([]);
+    const powerPlants: Ref<IPowerPlant[]> = ref([]);
+    // end join view
     const itemsPerPage = ref(20);
     const queryCount: Ref<number> = ref(null);
     const page: Ref<number> = ref(1);
@@ -54,6 +68,25 @@ export default defineComponent({
         isFetching.value = false;
       }
     };
+
+    const initRelationships = () => {
+      accessPointGroupService()
+        .retrieve()
+        .then(res => {
+          accessPointGroups.value = res.data;
+      });
+      accessControllerService()
+        .retrieve()
+        .then(res => {
+          accessControllers.value = res.data;
+        });
+      powerPlantService()
+        .retrieve()
+        .then(res => {
+          powerPlants.value = res.data;
+        });
+    };
+    initRelationships();
 
     const handleSyncList = () => {
       retrieveAccessPoints();
@@ -112,6 +145,12 @@ export default defineComponent({
 
     return {
       accessPoints,
+      powerPlants,
+      accessControllers,
+      accessPointGroups,
+      accessControllerService,
+      accessPointGroupService,
+      powerPlantService,
       handleSyncList,
       isFetching,
       retrieveAccessPoints,
@@ -130,5 +169,19 @@ export default defineComponent({
       changeOrder,
       t$,
     };
+  },
+  methods: {
+    getPowerPlantName(id) {
+      const powerPlantOption = this.powerPlants.find(option => option.id === id);
+      return powerPlantOption ? powerPlantOption.powerPlantName : '';
+    },
+    getAccessControllerName(id) {
+      const accessControllerOption = this.accessControllers.find(option => option.id === id);
+      return accessControllerOption ? accessControllerOption.nename: '';
+    },
+    getAccessPointGroupName(id) {
+      const accessPointGroupOption = this.accessPointGroups.find(option => option.id === id);
+      return accessPointGroupOption ? accessPointGroupOption.name: '';
+    },
   },
 });

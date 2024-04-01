@@ -17,9 +17,9 @@
           </dt>
           <dd>
             <div v-if="accessPointGroup.controller">
-              <router-link :to="{ name: 'AccessControllerView', params: { accessControllerId: accessPointGroup.controller.id } }">{{
-                accessPointGroup.controller.id
-              }}</router-link>
+              <router-link :to="{ name: 'AccessControllerView', params: { accessControllerId: accessPointGroup.controller.id } }">
+                {{ getAccessControllerName(accessPointGroup.controller.id) }}
+              </router-link>
             </div>
           </dd>
           <dt>
@@ -28,7 +28,7 @@
           <dd>
             <div v-if="accessPointGroup.powerPlant">
               <router-link :to="{ name: 'PowerPlantView', params: { powerPlantId: accessPointGroup.powerPlant.id } }">{{
-                accessPointGroup.powerPlant.id
+                getPowerPlantName(accessPointGroup.powerPlant.id)
               }}</router-link>
             </div>
           </dd>

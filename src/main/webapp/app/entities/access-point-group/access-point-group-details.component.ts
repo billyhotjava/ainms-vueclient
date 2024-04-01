@@ -13,6 +13,13 @@ export default defineComponent({
     const accessPointGroupService = inject('accessPointGroupService', () => new AccessPointGroupService());
     const alertService = inject('alertService', () => useAlertService(), true);
 
+    // add for join view
+    const accessControllerService = inject('accessControllerService', () => new AccessControllerService());
+    const powerPlantService = inject('powerPlantService', () => new PowerPlantService());
+    const accessControllers: Ref<IAccessController[]> = ref([]);
+    const powerPlants: Ref<IPowerPlant[]> = ref([]);
+    // end for join view
+
     const route = useRoute();
     const router = useRouter();
 
@@ -32,12 +39,38 @@ export default defineComponent({
       retrieveAccessPointGroup(route.params.accessPointGroupId);
     }
 
+    const initRelationships = () => {
+      accessControllerService()
+        .retrieve()
+        .then(res => {
+          accessControllers.value = res.data;
+        });
+      powerPlantService()
+        .retrieve()
+        .then(res => {
+          powerPlants.value = res.data;
+        });
+    };
+    initRelationships();
+
     return {
       alertService,
       accessPointGroup,
+      accessControllers,
+      powerPlants,
 
       previousState,
       t$: useI18n().t,
     };
+  },
+  methods: {
+    getPowerPlantName(id) {
+      const powerPlantOption = this.powerPlants.find(option => option.id === id);
+      return powerPlantOption ? powerPlantOption.powerPlantName : '';
+    },
+    getAccessControllerName(id) {
+      const accessControllerOption = this.accessControllers.find(option => option.id === id);
+      return accessControllerOption ? accessControllerOption.nename: '';
+    }
   },
 });

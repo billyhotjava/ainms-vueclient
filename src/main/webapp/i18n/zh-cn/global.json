@@ -24,7 +24,7 @@
         "register": "注册"
       },
       "admin": {
-        "main": "管理",
+        "main": "系统管理",
         "userManagement": "用户管理",
         "tracker": "追踪使用者",
         "metrics": "资源监控",
@@ -33,7 +33,7 @@
         "logs": "日志",
         "apidocs": "API",
         "database": "数据库",
-        "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
+        "jhipster-needle-menu-add-admin-element": "待定!"
       },
       "language": "语言"
     },
