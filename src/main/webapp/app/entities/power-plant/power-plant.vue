@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="PowerPlantHeading">
-      <span id="power-plant-heading">场站配置</span>
+      <span v-text="t$('ainmsVueclientApp.powerPlant.home.title')" id="power-plant-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span>刷新列表</span>
+          <span v-text="t$('ainmsVueclientApp.powerPlant.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'PowerPlantCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,7 +15,7 @@
             class="btn btn-primary jh-create-entity create-power-plant"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span>新建场站</span>
+            <span v-text="t$('ainmsVueclientApp.powerPlant.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
@@ -28,9 +28,9 @@
       <table class="table table-striped" aria-describedby="powerPlants">
         <thead>
           <tr>
-            <th scope="row"><span>场站编号</span></th>
-            <th scope="row"><span>场站名称</span></th>
-            <th scope="row"><span>所属省市</span></th>
+            <th scope="row"><span v-text="t$('global.field.id')"></span></th>
+            <th scope="row"><span v-text="t$('ainmsVueclientApp.powerPlant.powerPlantName')"></span></th>
+            <th scope="row"><span v-text="t$('ainmsVueclientApp.powerPlant.province')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>

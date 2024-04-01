@@ -83,7 +83,7 @@ export default defineComponent({
           sort: sort(),
         };
         const res_apg = await retrieveAllAccessPointGroups()
-        const res_station = await powerPlantService().retrieve()
+        const res_station = await powerPlantService().retrieve_name()
         const res_ac = await accessControllerService().retrieve(1);
         console.log('res_ac', res_ac)
         const res_pro = await provinceService().retrieve();

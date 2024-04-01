@@ -21,7 +21,7 @@ export default defineComponent({
     const retrievePowerPlants = async () => {
       isFetching.value = true;
       try {
-        const res = await powerPlantService().retrieve();
+        const res = await powerPlantService().retrieve_name();
         console.log('res.data是', res.data)
         powerPlants.value = res.data;
       } catch (err) {

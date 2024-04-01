@@ -2,23 +2,23 @@
   "ainmsVueclientApp": {
     "powerPlant": {
       "home": {
-        "title": "Power Plants",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "创建新 Power Plant",
+        "title": "风电场",
+        "refreshListLabel": "刷新",
+        "createLabel": "创建风电场",
         "createOrEditLabel": "创建或编辑 Power Plant",
         "notFound": "No Power Plants found"
       },
-      "created": "Power Plant { param } 创建成功",
-      "updated": "Power Plant { param } 更新成功",
-      "deleted": "Power Plant { param } 删除成功",
+      "created": "风电场{ param } 创建成功",
+      "updated": "风电场{ param } 更新成功",
+      "deleted": "风电场{ param } 删除成功",
       "delete": {
-        "question": "你确定要删除 Power Plant { id } 吗？"
+        "question": "你确定要删除风电场{ id } 吗？"
       },
       "detail": {
         "title": "场站信息"
       },
       "id": "ID",
-      "powerPlantName": "场站名称",
+      "powerPlantName": "风电场站名称",
       "accessPointGroup": "AP组名称",
       "province": "省份"
     }

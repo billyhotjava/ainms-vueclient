@@ -4,6 +4,8 @@ import { useI18n } from 'vue-i18n';
 import AccessPointGroupService from './access-point-group.service';
 import { type IAccessPointGroup } from '@/shared/model/access-point-group.model';
 import { useAlertService } from '@/shared/alert/alert.service';
+import AccessControllerService from '@/entities/access-controller/access-controller.service';
+import PowerPlantService from '@/entities/power-plant/power-plant.service';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -12,6 +14,13 @@ export default defineComponent({
     const { t: t$ } = useI18n();
     const accessPointGroupService = inject('accessPointGroupService', () => new AccessPointGroupService());
     const alertService = inject('alertService', () => useAlertService(), true);
+
+    // add for join view
+    const accessControllerService = inject('accessControllerService', () => new AccessControllerService());
+    const powerPlantService = inject('powerPlantService', () => new PowerPlantService());
+    const accessControllers: Ref<IAccessController[]> = ref([]);
+    const powerPlants: Ref<IPowerPlant[]> = ref([]);
+    // end for join view
 
     const itemsPerPage = ref(20);
     const queryCount: Ref<number> = ref(null);
@@ -54,6 +63,22 @@ export default defineComponent({
         isFetching.value = false;
       }
     };
+
+
+    const initRelationships = () => {
+      accessControllerService()
+        .retrieve()
+        .then(res => {
+          accessControllers.value = res.data;
+        });
+      powerPlantService()
+        .retrieve()
+        .then(res => {
+          powerPlants.value = res.data;
+        });
+    };
+    initRelationships();
+
 
     const handleSyncList = () => {
       retrieveAccessPointGroups();
@@ -112,6 +137,8 @@ export default defineComponent({
 
     return {
       accessPointGroups,
+      accessControllers,
+      powerPlants,
       handleSyncList,
       isFetching,
       retrieveAccessPointGroups,
@@ -130,5 +157,15 @@ export default defineComponent({
       changeOrder,
       t$,
     };
+  },
+  methods: {
+    getPowerPlantName(id) {
+      const powerPlantOption = this.powerPlants.find(option => option.id === id);
+      return powerPlantOption ? powerPlantOption.powerPlantName : '';
+    },
+    getAccessControllerName(id) {
+      const accessControllerOption = this.accessControllers.find(option => option.id === id);
+      return accessControllerOption ? accessControllerOption.nename: '';
+    }
   },
 });

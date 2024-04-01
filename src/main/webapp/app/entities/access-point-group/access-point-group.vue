@@ -7,7 +7,7 @@
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
           <span v-text="t$('ainmsVueclientApp.accessPointGroup.home.refreshListLabel')"></span>
         </button>
-        <!-- <router-link :to="{ name: 'AccessPointGroupCreate' }" custom v-slot="{ navigate }">
+        <router-link :to="{ name: 'AccessPointGroupCreate' }" custom v-slot="{ navigate }">
           <button
             @click="navigate"
             id="jh-create-entity"
@@ -17,7 +17,7 @@
             <font-awesome-icon icon="plus"></font-awesome-icon>
             <span v-text="t$('ainmsVueclientApp.accessPointGroup.home.createLabel')"></span>
           </button>
-        </router-link> -->
+        </router-link>
       </div>
     </h2>
     <br />
@@ -57,16 +57,16 @@
             <td>{{ accessPointGroup.name }}</td>
             <td>
               <div v-if="accessPointGroup.controller">
-                <router-link :to="{ name: 'AccessControllerView', params: { accessControllerId: accessPointGroup.controller.id } }">{{
-                  accessPointGroup.controller.id
-                }}</router-link>
+                <router-link :to="{ name: 'AccessControllerView', params: { accessControllerId: accessPointGroup.controller.id } }">
+                  {{ getAccessControllerName(accessPointGroup.controller.id) }}
+                </router-link>
               </div>
             </td>
             <td>
               <div v-if="accessPointGroup.powerPlant">
-                <router-link :to="{ name: 'PowerPlantView', params: { powerPlantId: accessPointGroup.powerPlant.id } }">{{
-                  accessPointGroup.powerPlant.id
-                }}</router-link>
+                <router-link :to="{ name: 'PowerPlantView', params: { powerPlantId: accessPointGroup.powerPlant.id } }">
+                  {{ getPowerPlantName(accessPointGroup.powerPlant.id) }}
+                </router-link>
               </div>
             </td>
             <td class="text-right">
@@ -81,7 +81,7 @@
                     <span class="d-none d-md-inline" v-text="t$('entity.action.view')"></span>
                   </button>
                 </router-link>
-                <!-- <router-link
+                <router-link
                   :to="{ name: 'AccessPointGroupEdit', params: { accessPointGroupId: accessPointGroup.id } }"
                   custom
                   v-slot="{ navigate }"
@@ -100,7 +100,7 @@
                 >
                   <font-awesome-icon icon="times"></font-awesome-icon>
                   <span class="d-none d-md-inline" v-text="t$('entity.action.delete')"></span>
-                </b-button> -->
+                </b-button>
               </div>
             </td>
           </tr>

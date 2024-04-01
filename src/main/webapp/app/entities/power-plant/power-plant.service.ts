@@ -22,6 +22,18 @@ export default class PowerPlantService {
   public retrieve(): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
+        .get(baseApiUrl)
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+  public retrieve_name(): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      axios
       .get(`${baseApiUrl_name}`)
         .then(res => {
           console.log(res)

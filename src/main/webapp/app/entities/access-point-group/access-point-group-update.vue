@@ -51,7 +51,7 @@
                 v-for="accessControllerOption in accessControllers"
                 :key="accessControllerOption.id"
               >
-                {{ accessControllerOption.id }}
+                {{ accessControllerOption.nename }}
               </option>
             </select>
           </div>
@@ -78,7 +78,7 @@
                 v-for="powerPlantOption in powerPlants"
                 :key="powerPlantOption.id"
               >
-                {{ powerPlantOption.id }}
+                {{ powerPlantOption.powerPlantName }}
               </option>
             </select>
           </div>
