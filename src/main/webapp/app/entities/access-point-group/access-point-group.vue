@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="AccessPointGroupHeading">
-      <span id="access-point-group-heading">AP组管理</span>
+      <span v-text="t$('ainmsVueclientApp.accessPointGroup.home.title')" id="access-point-group-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span>刷新列表</span>
+          <span v-text="t$('ainmsVueclientApp.accessPointGroup.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'AccessPointGroupCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,7 +15,7 @@
             class="btn btn-primary jh-create-entity create-access-point-group"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span>创建AP组</span>
+            <span v-text="t$('ainmsVueclientApp.accessPointGroup.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
@@ -29,19 +29,19 @@
         <thead>
           <tr>
             <th scope="row" v-on:click="changeOrder('id')">
-              <span>ID编号</span>
+              <span v-text="t$('global.field.id')"></span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'id'"></jhi-sort-indicator>
             </th>
             <th scope="row" v-on:click="changeOrder('name')">
-              <span>AP组名称</span>
+              <span v-text="t$('ainmsVueclientApp.accessPointGroup.name')"></span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'name'"></jhi-sort-indicator>
             </th>
             <th scope="row" v-on:click="changeOrder('controller.id')">
-              <span>AC名称</span>
+              <span v-text="t$('ainmsVueclientApp.accessPointGroup.controller')"></span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'controller.id'"></jhi-sort-indicator>
             </th>
             <th scope="row" v-on:click="changeOrder('powerPlant.id')">
-              <span>场站名称</span>
+              <span v-text="t$('ainmsVueclientApp.accessPointGroup.powerPlant')"></span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'powerPlant.id'"></jhi-sort-indicator>
             </th>
             <th scope="row"></th>
@@ -50,16 +50,25 @@
         <tbody>
           <tr v-for="accessPointGroup in accessPointGroups" :key="accessPointGroup.id" data-cy="entityTable">
             <td>
-            {{accessPointGroup.id}}
+              <router-link :to="{ name: 'AccessPointGroupView', params: { accessPointGroupId: accessPointGroup.id } }">{{
+                accessPointGroup.id
+              }}</router-link>
             </td>
             <td>{{ accessPointGroup.name }}</td>
             <td>
-                 {{ accessPointGroup.controller}}
+              <div v-if="accessPointGroup.controller">
+                <router-link :to="{ name: 'AccessControllerView', params: { accessControllerId: accessPointGroup.controller.id } }">{{
+                  accessPointGroup.controller.id
+                }}</router-link>
+              </div>
             </td>
-             <td>
-                 {{ accessPointGroup.powerPlant.powerPlantName}}
+            <td>
+              <div v-if="accessPointGroup.powerPlant">
+                <router-link :to="{ name: 'PowerPlantView', params: { powerPlantId: accessPointGroup.powerPlant.id } }">{{
+                  accessPointGroup.powerPlant.id
+                }}</router-link>
+              </div>
             </td>
-            
             <td class="text-right">
               <div class="btn-group">
                 <router-link
