@@ -28,7 +28,7 @@ export default defineComponent({
     const router = useRouter();
     const store = useStore();
 
-    const version = 'v' + APP_VERSION;
+    // const version = 'v' + APP_VERSION;
     const hasAnyAuthorityValues: Ref<any> = ref({});
 
     const openAPIEnabled = computed(() => store.activeProfiles.indexOf('api-docs') > -1);
@@ -64,7 +64,7 @@ export default defineComponent({
       changeLanguage,
       languages: languages(),
       isActiveLanguage,
-      version,
+      // version,
       currentLanguage,
       hasAnyAuthorityValues,
       openAPIEnabled,

@@ -148,5 +148,5 @@
       "not.image": "File was expected to be an image but was found to be \"{ fileType }\""
     }
   },
-  "footer": "WLAN Network Management System"
+  "footer": "WLAN Network Management System-V1.0"
 }

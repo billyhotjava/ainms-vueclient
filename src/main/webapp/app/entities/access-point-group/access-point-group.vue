@@ -7,7 +7,7 @@
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
           <span v-text="t$('ainmsVueclientApp.accessPointGroup.home.refreshListLabel')"></span>
         </button>
-        <router-link :to="{ name: 'AccessPointGroupCreate' }" custom v-slot="{ navigate }">
+        <!-- <router-link :to="{ name: 'AccessPointGroupCreate' }" custom v-slot="{ navigate }">
           <button
             @click="navigate"
             id="jh-create-entity"
@@ -17,7 +17,7 @@
             <font-awesome-icon icon="plus"></font-awesome-icon>
             <span v-text="t$('ainmsVueclientApp.accessPointGroup.home.createLabel')"></span>
           </button>
-        </router-link>
+        </router-link> -->
       </div>
     </h2>
     <br />
@@ -81,7 +81,7 @@
                     <span class="d-none d-md-inline" v-text="t$('entity.action.view')"></span>
                   </button>
                 </router-link>
-                <router-link
+                <!-- <router-link
                   :to="{ name: 'AccessPointGroupEdit', params: { accessPointGroupId: accessPointGroup.id } }"
                   custom
                   v-slot="{ navigate }"
@@ -100,7 +100,7 @@
                 >
                   <font-awesome-icon icon="times"></font-awesome-icon>
                   <span class="d-none d-md-inline" v-text="t$('entity.action.delete')"></span>
-                </b-button>
+                </b-button> -->
               </div>
             </td>
           </tr>
@@ -116,10 +116,7 @@
         ></span>
       </template>
       <div class="modal-body">
-        <p
-          id="ainms-delete-accessPointGroup-heading"
-          v-text="t$('ainmsVueclientApp.accessPointGroup.delete.question', { id: removeId })"
-        ></p>
+        <p id="ainms-delete-accessPointGroup-heading" v-text="t$('ainmsVueclientApp.accessPointGroup.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>
