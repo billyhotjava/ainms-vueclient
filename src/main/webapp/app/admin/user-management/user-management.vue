@@ -27,9 +27,9 @@
               <span v-text="t$('userManagement.login')"></span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'login'"></jhi-sort-indicator>
             </th>
-            <th scope="col" v-on:click="changeOrder('province')">
+            <th scope="col" v-on:click="changeOrder('provinceId')">
               <span v-text="t$('userManagement.province')"></span>
-              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'province'"></jhi-sort-indicator>
+              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'provinceId'"></jhi-sort-indicator>
             </th>         
             <th scope="col"><span v-text="t$('userManagement.profiles')"></span></th>
             <th scope="col"></th>
@@ -41,7 +41,9 @@
               <router-link :to="{ name: 'AinmsUserView', params: { userId: user.login } }">{{ user.id }}</router-link>
             </td>
             <td>{{ user.login }}</td>
-            <td class="jhi-user-email">{{ user.email }}</td>
+            <td>
+              {{ getProvinceName(user.provinceId) }}
+            </td>
             <td>
               <div v-for="authority of user.authorities" :key="authority">
                 <span class="badge badge-info">{{ authority }}</span>

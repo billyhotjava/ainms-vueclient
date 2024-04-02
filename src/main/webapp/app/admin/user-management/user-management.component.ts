@@ -4,6 +4,8 @@ import UserManagementService from './user-management.service';
 import { useAlertService } from '@/shared/alert/alert.service';
 
 import { useDateFormat } from '@/shared/composables';
+import ProvinceService from '@/entities/province/province.service';
+import type { IProvince } from '@/shared/model/province.model';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -16,6 +18,10 @@ export default defineComponent({
     const { formatDateShort: formatDate } = useDateFormat();
     const userManagementService = inject('userManagementService', () => new UserManagementService(), true);
     const username = inject<ComputedRef<string>>('currentUsername');
+    // add for join view
+    const provinceService = inject('provinceService', () => new ProvinceService() );
+    const provinces: Ref<IProvince[]> = ref([]);
+    // end for join view
 
     const error = ref('');
     const success = ref('');
@@ -30,10 +36,21 @@ export default defineComponent({
     const totalItems = ref(0);
     const queryCount: Ref<number> = ref(null);
 
+    const initRelationships = () => {
+      provinceService()
+        .retrieve()
+        .then(res => {
+          provinces.value = res.data;
+        });
+    };
+    initRelationships();
+
     return {
       formatDate,
       userManagementService,
       alertService,
+      provinceService,
+      provinces,
       error,
       success,
       itemsPerPage,
@@ -138,5 +155,15 @@ export default defineComponent({
         (<any>this.$refs.removeUser).hide();
       }
     },
+
+    // getPowerPlantName(id) {
+    //   const powerPlantOption = this.powerPlants.find(option => option.id === id);
+    //   return powerPlantOption ? powerPlantOption.powerPlantName : '';
+    // },
+
+    getProvinceName(provinceId: number): string {
+      const provinceOption = this.provinces.find(option => option.id === provinceId);
+      return provinceOption ? provinceOption.provinceName : '';
+    }  
   },
 });
