@@ -7,6 +7,8 @@ import UserManagementService from './user-management.service';
 import { type IUser, User } from '@/shared/model/user.model';
 import { useAlertService } from '@/shared/alert/alert.service';
 import languages from '@/shared/config/languages';
+import ProvinceService from '@/entities/province/province.service';
+import type { IProvince } from '@/shared/model/province.model';
 
 const loginValidator = (value: string) => {
   if (!value) {
@@ -29,7 +31,6 @@ const validations: any = {
       maxLength: maxLength(50),
     },
     email: {
-      required,
       email,
       minLength: minLength(5),
       maxLength: maxLength(50),
@@ -49,6 +50,11 @@ export default defineComponent({
     const userManagementService = inject('userManagementService', () => new UserManagementService(), true);
     const previousState = () => router.go(-1);
 
+    // add for join view
+    const provinceService = inject('provinceService', () => new ProvinceService() );
+    const provinces: Ref<IProvince[]> = ref([]);
+    // end for join view
+
     const userAccount: Ref<IUser> = ref({ ...new User(), authorities: [] });
     const isSaving: Ref<boolean> = ref(false);
     const authorities: Ref<string[]> = ref([]);
@@ -63,6 +69,15 @@ export default defineComponent({
       userAccount.value = response.data;
     };
 
+    const initRelationships = () => {
+      provinceService()
+        .retrieve()
+        .then(res => {
+          provinces.value = res.data;
+        });
+    };
+    initRelationships();
+
     initAuthorities();
     const userId = route.params?.userId;
     if (userId) {
@@ -72,6 +87,8 @@ export default defineComponent({
     return {
       alertService,
       userAccount,
+      provinceService,
+      provinces,
       isSaving,
       authorities,
       userManagementService,
@@ -84,6 +101,8 @@ export default defineComponent({
   methods: {
     save(): void {
       this.isSaving = true;
+      this.userAccount.isActive = true;//always true
+      console.log("==edit&create:userAccount", this.userAccount);
       if (this.userAccount.id) {
         this.userManagementService
           .update(this.userAccount)
@@ -119,5 +138,10 @@ export default defineComponent({
         param: decodeURIComponent(res.headers['x-ainmsvueclientapp-params'].replace(/\+/g, ' ')),
       }).toString();
     },
+
+    getProvinceName(provinceId: number): string {
+      const provinceOption = this.provinces.find(option => option.id === provinceId);
+      return provinceOption ? provinceOption.provinceName : '';
+    }, 
   },
 });

@@ -156,11 +156,6 @@ export default defineComponent({
       }
     },
 
-    // getPowerPlantName(id) {
-    //   const powerPlantOption = this.powerPlants.find(option => option.id === id);
-    //   return powerPlantOption ? powerPlantOption.powerPlantName : '';
-    // },
-
     getProvinceName(provinceId: number): string {
       const provinceOption = this.provinces.find(option => option.id === provinceId);
       return provinceOption ? provinceOption.provinceName : '';

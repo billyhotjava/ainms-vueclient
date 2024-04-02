@@ -1,3 +1,5 @@
+import type { IProvince } from "@/shared/model/province.model";
+
 export interface IUser {
   id?: any;
   login?: string;
