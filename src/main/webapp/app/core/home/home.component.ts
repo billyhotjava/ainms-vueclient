@@ -17,11 +17,11 @@ export default defineComponent({
 
     const option = ref({
       title:{
-        text:'AP Statistics'
+        text:'AP 分布图',
       },
       xAxis: {
         type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        data: ['北京', '天津', '新疆', '内蒙古', '广西', '福建', '陕西'],
       },
       yAxis: {
         type: 'value',
