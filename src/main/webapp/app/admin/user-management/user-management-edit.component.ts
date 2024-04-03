@@ -112,6 +112,7 @@ export default defineComponent({
           })
           .catch(error => {
             this.isSaving = true;
+            console.log("==edit&create:error", error);
             this.alertService.showHttpError(error.response);
           });
       } else {
@@ -134,9 +135,12 @@ export default defineComponent({
     },
 
     getToastMessageFromHeader(res: any): string {
-      return this.t$(res.headers['x-ainmsvueclientapp-alert'], {
-        param: decodeURIComponent(res.headers['x-ainmsvueclientapp-params'].replace(/\+/g, ' ')),
-      }).toString();
+      if( res && res.header){
+        console.log("==getToastMessageFromHeader:res.headers", res.headers);
+        return this.t$(res.headers['x-ainmsvueclientapp-alert'], {
+          param: decodeURIComponent(res.headers['x-ainmsvueclientapp-params'].replace(/\+/g, ' ')),
+        }).toString();
+      }
     },
 
     getProvinceName(provinceId: number): string {

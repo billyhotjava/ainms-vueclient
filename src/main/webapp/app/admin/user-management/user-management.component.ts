@@ -141,6 +141,9 @@ export default defineComponent({
           this.closeDialog();
         })
         .catch(error => {
+          this.loadAll();
+          this.closeDialog();
+          console.log("==deleteUser:error", error);
           this.alertService.showHttpError(error.response);
         });
     },
