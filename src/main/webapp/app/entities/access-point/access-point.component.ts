@@ -71,7 +71,7 @@ export default defineComponent({
 
     const initRelationships = () => {
       accessPointGroupService()
-        .retrieve()
+        .retrieveAll()
         .then(res => {
           accessPointGroups.value = res.data;
       });
