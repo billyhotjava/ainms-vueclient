@@ -31,6 +31,21 @@ export default class PowerPlantService {
         });
     });
   }
+
+  // 通过省份名称获取电厂信息
+  public retrieveByProvinceId(provinceId: number): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      axios
+        .get(`${baseApiUrl}?provinceId=${provinceId}`)
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+
   public retrieve_name(): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios

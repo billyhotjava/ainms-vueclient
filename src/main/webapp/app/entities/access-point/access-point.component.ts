@@ -10,12 +10,15 @@ import AccessControllerService from '@/entities/access-controller/access-control
 import PowerPlantService from '@/entities/power-plant/power-plant.service';
 import type { IAccessPointGroup } from '@/shared/model/access-point-group.model';
 import type { IPowerPlant } from '@/shared/model/power-plant.model';
+import { useAccountStore } from '@/shared/config/store/account-store';
+import { HEADQUARTERS_PROVINCE_ID} from '../../constants';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'AccessPoint',
   setup() {
     const { t: t$ } = useI18n();
+    const accountStore = useAccountStore(); // 使用Pinia store
     const accessPointService = inject('accessPointService', () => new AccessPointService());
     const alertService = inject('alertService', () => useAlertService(), true);
 
@@ -51,6 +54,15 @@ export default defineComponent({
     };
 
     const retrieveAccessPoints = async () => {
+      // fetch all access points by provinceId
+      if (!accountStore.account) {
+        console.error('Account information is not available');
+        return;
+      }
+      // const provinceId = accountStore.account.provinceId;
+      const provinceId = 1503;
+      console.log('Province ID:', provinceId);
+
       isFetching.value = true;
       try {
         const paginationQuery = {
@@ -58,23 +70,34 @@ export default defineComponent({
           size: itemsPerPage.value,
           sort: sort(),
         };
-        const res = await accessPointService().retrieve(paginationQuery);
-        totalItems.value = Number(res.headers['x-total-count']);
-        queryCount.value = totalItems.value;
-        accessPoints.value = res.data;
-      } catch (err) {
-        alertService.showHttpError(err.response);
-      } finally {
+        if(provinceId === HEADQUARTERS_PROVINCE_ID) {
+          // 公司总部，查询所有
+          const res = await accessPointService().retrieve(paginationQuery);
+          totalItems.value = Number(res.headers['x-total-count']);
+          queryCount.value = totalItems.value;
+          accessPoints.value = res.data;
+
+        }else{
+          // 根据provinceId 来获取AP数据
+          console.log("Not headquarter,provinceId: ", provinceId)
+          const res = await accessPointService().retrieveByProvinceId(provinceId, paginationQuery);
+          totalItems.value = Number(res.headers['x-total-count']);
+          queryCount.value = totalItems.value;
+          accessPoints.value = res.data;
+        }
+      }catch (err) {
+          alertService.showHttpError(err.response);
+        } finally {
         isFetching.value = false;
       }
     };
 
-    const initRelationships = () => {
+    const initRelationships= async () => {
       accessPointGroupService()
         .retrieveAll()
         .then(res => {
           accessPointGroups.value = res.data;
-      });
+        });
       accessControllerService()
         .retrieve()
         .then(res => {
@@ -86,13 +109,13 @@ export default defineComponent({
           powerPlants.value = res.data;
         });
     };
-    initRelationships();
 
     const handleSyncList = () => {
       retrieveAccessPoints();
     };
 
     onMounted(async () => {
+      await initRelationships();
       await retrieveAccessPoints();
     });
 
