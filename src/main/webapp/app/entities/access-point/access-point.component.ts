@@ -59,8 +59,7 @@ export default defineComponent({
         console.error('Account information is not available');
         return;
       }
-      // const provinceId = accountStore.account.provinceId;
-      const provinceId = 1503;
+      const provinceId = accountStore.account.provinceId;
       console.log('Province ID:', provinceId);
 
       isFetching.value = true;

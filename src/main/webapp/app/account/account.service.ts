@@ -37,6 +37,8 @@ export default class AccountService {
       if (response.status === 200 && response.data?.login) {
         const account = response.data;
         console.log("==== account" + account.toString());
+        console.log("==== account login:" + account.login);
+        console.log("==== account provinceId:" + account.provinceId);
         this.store.setAuthentication(account);
 
         if (account.authorities.includes('ROLE_ADMIN')) {
