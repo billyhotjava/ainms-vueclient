@@ -6,7 +6,7 @@ import { type IAccessPoint } from '@/shared/model/access-point.model';
 
 const baseApiUrl = 'api/access-points';
 export default class AccessPointService {
-    public find(id: number): Promise<IAccessPoint> {
+  public find(id: number): Promise<IAccessPoint> {
     return new Promise<IAccessPoint>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -34,19 +34,19 @@ export default class AccessPointService {
 
   public retrieveByProvinceId(provinceId: any, paginationQuery?: any): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-    const queryParams = buildPaginationQueryOpts(paginationQuery);
-    // 确保第一个查询参数前使用 '?'，之后的参数使用 '&'
-    const queryString = queryParams ? `?${queryParams}` : '';
-    // 修改此处，以正确地构造URL
-    const fullUrl = `${baseApiUrl}/provinceId/${provinceId}${queryString}`;
-    console.log("Sending request to URL: ", fullUrl);
-    axios
+      const queryParams = buildPaginationQueryOpts(paginationQuery);
+      // 确保第一个查询参数前使用 '?'，之后的参数使用 '&'
+      const queryString = queryParams ? `?${queryParams}` : '';
+      // 修改此处，以正确地构造URL
+      const fullUrl = `${baseApiUrl}/provinceId/${provinceId}${queryString}`;
+      console.log('Sending request to URL: ', fullUrl);
+      axios
         .get(`${baseApiUrl}/provinceId/${provinceId}${queryString}`)
         .then(res => {
-            resolve(res);
+          resolve(res);
         })
         .catch(err => {
-            reject(err);
+          reject(err);
         });
     });
   }
@@ -102,4 +102,5 @@ export default class AccessPointService {
         });
     });
   }
+
 }

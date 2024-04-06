@@ -18,6 +18,7 @@ import { useStore, useTranslationStore } from '@/store';
 import '../content/scss/global.scss';
 import '../content/scss/vendor.scss';
 import TranslationService from '@/locale/translation.service';
+import HomeService from '@/core/home/home.service';
 
 const pinia = createPinia();
 
@@ -67,6 +68,8 @@ const app = createApp({
     const i18n = useI18n();
     const translationStore = useTranslationStore();
     const translationService = new TranslationService(i18n);
+    
+    const homeService = new HomeService();
 
     const changeLanguage = async (newLanguage: string) => {
       if (i18n.locale.value !== newLanguage) {
@@ -153,6 +156,7 @@ const app = createApp({
 
     provide('translationService', translationService);
     provide('accountService', accountService);
+    provide('homeService', homeService);
     console.log("end to setup axios interceptors");
     // jhipster-needle-add-entity-service-to-main - JHipster will import entities services here
   },
