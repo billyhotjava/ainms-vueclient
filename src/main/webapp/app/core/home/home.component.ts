@@ -58,8 +58,12 @@ export default defineComponent({
         const responseData = await homeService.retrieveCountsByProvince();
         const categories = responseData.map(item => item.provinceName);
         const values = responseData.map(item => item.count);
-        console.log('----categories:', categories);
-        console.log('----values:', values);
+
+        // 计算总和
+        const total = values.reduce((sum, value) => sum + value, 0);
+        // 更新图表选项，包括动态设置的标题
+        option.value.title.text = `AP 分布图 - 总数: ${total}`;
+
         option.value.xAxis.data = categories; // 更新省份名称
         option.value.series[0].data = values; // 更新对应的AccessPoint数量
         chartInstance.value?.setOption(option.value);
