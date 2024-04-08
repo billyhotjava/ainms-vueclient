@@ -8,6 +8,19 @@
     "question": "如果您有任何有关 的问题, 可以查阅下列资源:",
     "link": {
       "homepage": "首頁"
+    },
+    "apStistics": {
+      "online": "在线统计",
+      "byProvince": "在线统计-按省份",
+      "byPowerPlant": "在线统计-按场站",
+      "province": "省份",
+      "powerplant": "场站",
+      "total": "总数",
+      "standby": "在线",
+      "offline": "离线",
+      "other": "其他异常状态",
+      "rate": "在线率",
+      "downloadAsCSV": "下载为CSV文件"
     }
   }
 }

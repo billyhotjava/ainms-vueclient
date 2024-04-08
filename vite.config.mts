@@ -61,7 +61,7 @@ let config = defineConfig({
       ['/api', '/management', '/v3/api-docs', '/oauth2', '/login'].map(res => [
         res,
         {
-          target: 'http://192.168.1.230:8080',
+          target: 'http://192.168.22.5:8080',
         },
       ]),
     ),

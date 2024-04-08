@@ -8,7 +8,32 @@ export default class HomeService {
       axios
         .get(`${baseApiUrl}/province-counts`)
         .then(res => {
-          console.log("home service" + res.data); 
+          resolve(res.data);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+
+  public retrieveStatisticsByProvince(): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      axios
+        .get(`${baseApiUrl}/province-apstatistics`)
+        .then(res => {
+          resolve(res.data);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+
+  public retrieveStatisticsByPowerPlant(): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      axios
+        .get(`${baseApiUrl}/powerplant-apstatistics`)
+        .then(res => {
           resolve(res.data);
         })
         .catch(err => {
