@@ -1,5 +1,5 @@
 <template>
-  <div class="statistics table row">
+  <div class="statistics table row" v-if='authenticated'>
     <div class="col-md-12">
       <div class="card jh-card">
         <div class="card-header">
@@ -16,7 +16,7 @@
       </div>
     </div>
   </div>
-  <div class="statistics row">
+  <div class="statistics row" v-if='authenticated'>
     <div class="col-md-12">
       <div class="card jh-card">
         <div class="card-body">
