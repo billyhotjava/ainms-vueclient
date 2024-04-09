@@ -122,7 +122,8 @@
             <td>{{ accessPoint.neip }}</td>
             <td>{{ accessPoint.nemac }}</td>
             <td>{{ accessPoint.version }}</td> -->
-            <td>{{ accessPoint.nestate }}</td>
+            <!-- <td>{{ accessPoint.nestate }}</td> -->
+            <td>{{ getStatusText(accessPoint.nestate) }}</td>
             <!-- <td>{{ accessPoint.createtime }}</td>
             <td>{{ accessPoint.neiptype }}</td>
             <td>{{ accessPoint.subnet }}</td>

@@ -205,5 +205,15 @@ export default defineComponent({
       const accessPointGroupOption = this.accessPointGroups.find(option => option.id === id);
       return accessPointGroupOption ? accessPointGroupOption.name: '';
     },
+    getStatusText(nestate) {
+      switch(nestate) {
+        case 11:
+          return '在线';
+        case 4:
+          return '离线';
+        default:
+          return '其他';
+      }
+    },
   },
 });
