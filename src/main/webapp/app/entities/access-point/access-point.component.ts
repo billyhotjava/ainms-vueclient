@@ -206,8 +206,11 @@ export default defineComponent({
       return accessPointGroupOption ? accessPointGroupOption.name: '';
     },
     getStatusText(nestate) {
+      // 11-standby ,7-normal,11和7都是在线状态
       switch(nestate) {
         case 11:
+          return '在线';
+        case 7:
           return '在线';
         case 4:
           return '离线';

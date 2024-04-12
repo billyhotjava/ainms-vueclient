@@ -12,7 +12,10 @@
         "accessPoint": "AP接入点",
         "accessPointGroup": "AP组",
         "powerPlant": "风电场",
-        "province": "省份"
+        "province": "省份",
+        "countryStistics": "Country Stistics",
+        "provinceStistics": "Province Stistics",
+        "powerPlantStistics": "Power Plant Stistics"
       },
       "account": {
         "main": "账号",

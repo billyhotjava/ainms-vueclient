@@ -1,0 +1,32 @@
+{
+  "ainmsVueclientApp": {
+    "provinceStistics": {
+      "home": {
+        "title": "Province Stistics",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Province Stistics",
+        "createOrEditLabel": "Create or edit a Province Stistics",
+        "notFound": "No Province Stistics found"
+      },
+      "created": "A new Province Stistics is created with identifier { param }",
+      "updated": "A Province Stistics is updated with identifier { param }",
+      "deleted": "A Province Stistics is deleted with identifier { param }",
+      "delete": {
+        "question": "Are you sure you want to delete Province Stistics { id }?"
+      },
+      "detail": {
+        "title": "Province Stistics"
+      },
+      "id": "ID",
+      "name": "Name",
+      "totalCount": "Total Count",
+      "onlineCount": "Online Count",
+      "offlineCount": "Offline Count",
+      "otherCount": "Other Count",
+      "statisticDate": "Statistic Date",
+      "statisticTime": "Statistic Time",
+      "station": "Station",
+      "country": "Country"
+    }
+  }
+}

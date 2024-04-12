@@ -2,7 +2,7 @@
   "userManagement": {
     "home": {
       "title": "用户",
-      "refreshListLabel": "刷新",
+      "refreshListLabel": "Refresh list",
       "createLabel": "创建新用户",
       "createOrEditLabel": "创建或编辑用户"
     },
@@ -15,10 +15,9 @@
     "detail": {
       "title": "用户"
     },
-    "login": "工号",
+    "login": "登录",
     "firstName": "名字",
     "lastName": "姓氏",
-    "province": "省份",
     "email": "邮箱",
     "activated": "已激活",
     "deactivated": "失效",

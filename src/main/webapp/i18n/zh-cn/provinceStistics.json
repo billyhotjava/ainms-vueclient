@@ -1,0 +1,32 @@
+{
+  "ainmsVueclientApp": {
+    "provinceStistics": {
+      "home": {
+        "title": "Province Stistics",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Province Stistics",
+        "createOrEditLabel": "创建或编辑 Province Stistics",
+        "notFound": "No Province Stistics found"
+      },
+      "created": "Province Stistics { param } 创建成功",
+      "updated": "Province Stistics { param } 更新成功",
+      "deleted": "Province Stistics { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Province Stistics { id } 吗？"
+      },
+      "detail": {
+        "title": "Province Stistics"
+      },
+      "id": "ID",
+      "name": "Name",
+      "totalCount": "Total Count",
+      "onlineCount": "Online Count",
+      "offlineCount": "Offline Count",
+      "otherCount": "Other Count",
+      "statisticDate": "Statistic Date",
+      "statisticTime": "Statistic Time",
+      "station": "Station",
+      "country": "Country"
+    }
+  }
+}

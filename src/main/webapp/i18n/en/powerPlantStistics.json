@@ -1,0 +1,31 @@
+{
+  "ainmsVueclientApp": {
+    "powerPlantStistics": {
+      "home": {
+        "title": "Power Plant Stistics",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Power Plant Stistics",
+        "createOrEditLabel": "Create or edit a Power Plant Stistics",
+        "notFound": "No Power Plant Stistics found"
+      },
+      "created": "A new Power Plant Stistics is created with identifier { param }",
+      "updated": "A Power Plant Stistics is updated with identifier { param }",
+      "deleted": "A Power Plant Stistics is deleted with identifier { param }",
+      "delete": {
+        "question": "Are you sure you want to delete Power Plant Stistics { id }?"
+      },
+      "detail": {
+        "title": "Power Plant Stistics"
+      },
+      "id": "ID",
+      "name": "Name",
+      "totalCount": "Total Count",
+      "onlineCount": "Online Count",
+      "offlineCount": "Offline Count",
+      "otherCount": "Other Count",
+      "statisticDate": "Statistic Date",
+      "statisticTime": "Statistic Time",
+      "province": "Province"
+    }
+  }
+}

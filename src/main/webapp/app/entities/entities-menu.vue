@@ -1,24 +1,16 @@
 <template>
   <div>
-    <b-dropdown-item to="/access-controller">
+    <b-dropdown-item to="/country-stistics">
       <font-awesome-icon icon="asterisk" />
-      <span v-text="t$('global.menu.entities.accessController')"></span>
+      <span v-text="t$('global.menu.entities.countryStistics')"></span>
     </b-dropdown-item>
-    <b-dropdown-item to="/access-point">
+    <b-dropdown-item to="/province-stistics">
       <font-awesome-icon icon="asterisk" />
-      <span v-text="t$('global.menu.entities.accessPoint')"></span>
+      <span v-text="t$('global.menu.entities.provinceStistics')"></span>
     </b-dropdown-item>
-    <b-dropdown-item to="/access-point-group">
+    <b-dropdown-item to="/power-plant-stistics">
       <font-awesome-icon icon="asterisk" />
-      <span v-text="t$('global.menu.entities.accessPointGroup')"></span>
-    </b-dropdown-item>
-    <b-dropdown-item to="/power-plant">
-      <font-awesome-icon icon="asterisk" />
-      <span v-text="t$('global.menu.entities.powerPlant')"></span>
-    </b-dropdown-item>
-    <b-dropdown-item to="/province">
-      <font-awesome-icon icon="asterisk" />
-      <span v-text="t$('global.menu.entities.province')"></span>
+      <span v-text="t$('global.menu.entities.powerPlantStistics')"></span>
     </b-dropdown-item>
     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
   </div>

@@ -1,0 +1,31 @@
+{
+  "ainmsVueclientApp": {
+    "countryStistics": {
+      "home": {
+        "title": "Country Stistics",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Country Stistics",
+        "createOrEditLabel": "Create or edit a Country Stistics",
+        "notFound": "No Country Stistics found"
+      },
+      "created": "A new Country Stistics is created with identifier { param }",
+      "updated": "A Country Stistics is updated with identifier { param }",
+      "deleted": "A Country Stistics is deleted with identifier { param }",
+      "delete": {
+        "question": "Are you sure you want to delete Country Stistics { id }?"
+      },
+      "detail": {
+        "title": "Country Stistics"
+      },
+      "id": "ID",
+      "name": "Name",
+      "totalCount": "Total Count",
+      "onlineCount": "Online Count",
+      "offlineCount": "Offline Count",
+      "otherCount": "Other Count",
+      "statisticDate": "Statistic Date",
+      "statisticTime": "Statistic Time",
+      "province": "Province"
+    }
+  }
+}

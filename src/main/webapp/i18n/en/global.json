@@ -12,7 +12,10 @@
         "accessPoint": "Access Point",
         "accessPointGroup": "Access Point Group",
         "powerPlant": "Power Plant",
-        "province": "Province"
+        "province": "Province",
+        "countryStistics": "Country Stistics",
+        "provinceStistics": "Province Stistics",
+        "powerPlantStistics": "Power Plant Stistics"
       },
       "account": {
         "main": "Account",
