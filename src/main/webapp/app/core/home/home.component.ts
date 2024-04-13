@@ -6,7 +6,6 @@ import type LoginService from '@/account/login.service';
 import type HomeService from '@/core/home/home.service';
 import type { IAPStatisticsByPowerPlant, IAPStatisticsByProvince } from '@/shared/model/ap-statistics.model';
 import { useAlertService } from '@/shared/alert/alert.service';
-import SockJS from 'sockjs-client';
 import Stomp from 'webstomp-client'; 
 
 export default defineComponent({
@@ -111,6 +110,43 @@ export default defineComponent({
       }
     }
 
+    const connectWebSocket = () => {
+      const socket = new WebSocket('ws://192.168.22.5:8080/websocket');
+      const stompClient = Stomp.over(socket);
+      
+      // 连接WebSocket
+      stompClient.connect({}, frame => {
+          console.log('Connected: ' + frame);
+      
+          // 订阅某个topic，接收来自服务器的消息
+          stompClient.subscribe('/topic/update', message => {
+              console.log('Received message: ', message.body);
+          });
+      
+      }, error => {
+          console.log("----Websocket conneciton error:"+error);
+          console.error('Error: ', error);
+      });
+      
+      // 监听连接关闭事件
+      stompClient.onclose = function(event) {
+          console.log('WebSocket connection closed:', event);
+      };
+      
+      // 监听错误事件
+      stompClient.onerror = function(event) {
+          console.error('WebSocket error:', event);
+      };
+      // 连接WebSocket，并订阅topic
+      // stompClient.connect({}, () => {
+      //   stompClient?.subscribe('/topic/update', (msg: Message) => {
+      //     message.value = msg.body;
+      //   });
+      // }, (error: any) => {
+      //   console.error('Error connecting to WebSocket:', error);
+      // });
+    };
+
     onMounted(()=>{
       if (chartContainer.value) {
         chartInstance.value = echarts.init(chartContainer.value);
@@ -118,19 +154,18 @@ export default defineComponent({
         retrieveAPStatisticsByProvince();
         retrieveStatisticsByPowerPlant();
       } 
+      connectWebSocket();
 
-      const socket = new SockJS('/websocket');
-      const stompClient = Stomp.over(socket);
-      stompClient.connect({}, () => {
-        stompClient.subscribe('/topic/update', message => {
-          const content = message.body;
-          if (content === "updateAPs,successful") {
-            // 当收到成功更新的消息时，刷新数据
-            retrieveAPStatisticsByProvince();
-            retrieveStatisticsByPowerPlant();
-          }
-        });
-      });
+      // stompClient.connect({}, () => {
+      //   stompClient.subscribe('/topic/update', message => {
+      //     const content = message.body;
+      //     if (content === "updateAPs,successful") {
+      //       // 当收到成功更新的消息时，刷新数据
+      //       retrieveAPStatisticsByProvince();
+      //       retrieveStatisticsByPowerPlant();
+      //     }
+      //   });
+      // });
 
       // 监听窗口变化，重新调整图表大小
       window.addEventListener('resize', () => {

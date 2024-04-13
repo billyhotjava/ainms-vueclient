@@ -4,6 +4,7 @@
       "home": {
         "title": "Province Stistics",
         "refreshListLabel": "Refresh list",
+        "downloadascsv": "下载csv格式",
         "createLabel": "创建新 Province Stistics",
         "createOrEditLabel": "创建或编辑 Province Stistics",
         "notFound": "No Province Stistics found"

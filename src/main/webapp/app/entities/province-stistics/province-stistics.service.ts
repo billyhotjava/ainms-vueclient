@@ -82,4 +82,17 @@ export default class ProvinceStisticsService {
         });
     });
   }
+
+  public handleNCEApStatistics(): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      axios
+        .get(`${baseApiUrl}/nce-apstatistics`)
+        .then(res => {
+          resolve(res.data);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
 }

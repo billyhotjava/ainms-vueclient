@@ -7,15 +7,10 @@
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
           <span v-text="t$('ainmsVueclientApp.provinceStistics.home.refreshListLabel')"></span>
         </button>
-          <button
-            @click="navigate"
-            id="jh-create-entity"
-            data-cy="entityCreateButton"
-            class="btn btn-primary jh-create-entity create-province-stistics"
-          >
-            <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('ainmsVueclientApp.provinceStistics.home.createLabel')"></span>
-          </button>
+        <button class="btn btn-info mr-2" v-on:click="downloadascsv" :disabled="isFetching">
+          <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
+          <span v-text="t$('ainmsVueclientApp.provinceStistics.home.downloadascsv')"></span>
+        </button>
       </div>
     </h2>
     <br />
