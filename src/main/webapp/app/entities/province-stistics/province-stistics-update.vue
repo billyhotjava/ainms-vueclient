@@ -4,7 +4,6 @@
       <form name="editForm" role="form" novalidate v-on:submit.prevent="save()">
         <h2
           id="ainmsVueclientApp.provinceStistics.home.createOrEditLabel"
-          data-cy="ProvinceStisticsCreateUpdateHeading"
           v-text="t$('ainmsVueclientApp.provinceStistics.home.createOrEditLabel')"
         ></h2>
         <div>
@@ -142,27 +141,7 @@
                 @change="updateInstantField('statisticTime', $event)"
               />
             </div>
-          </div>
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('ainmsVueclientApp.provinceStistics.country')"
-              for="province-stistics-country"
-            ></label>
-            <select class="form-control" id="province-stistics-country" data-cy="country" name="country" v-model="provinceStistics.country">
-              <option v-bind:value="null"></option>
-              <option
-                v-bind:value="
-                  provinceStistics.country && countryStisticsOption.id === provinceStistics.country.id
-                    ? provinceStistics.country
-                    : countryStisticsOption
-                "
-                v-for="countryStisticsOption in countryStistics"
-                :key="countryStisticsOption.id"
-              >
-                {{ countryStisticsOption.id }}
-              </option>
-            </select>
+
           </div>
         </div>
         <div>

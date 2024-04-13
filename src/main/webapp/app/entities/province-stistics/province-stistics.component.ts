@@ -78,4 +78,24 @@ export default defineComponent({
       t$,
     };
   },
+  methods:{
+    formatTime(timeStr) {
+      if (!timeStr) return '';
+      // 假设时间是以 'HH:mm:ss' 格式传来的
+      const [hours, minutes, seconds] = timeStr.split(':');
+      // 创建一个今天日期但特定时间的Date对象
+      const time = new Date();
+      time.setHours(parseInt(hours));
+      time.setMinutes(parseInt(minutes));
+      time.setSeconds(parseInt(seconds));
+      
+      // 格式化时间显示为 12 小时制，带有 AM/PM
+      return new Intl.DateTimeFormat('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: false
+      }).format(time);
+    }
+  }
 });

@@ -4,7 +4,6 @@
       <form name="editForm" role="form" novalidate v-on:submit.prevent="save()">
         <h2
           id="ainmsVueclientApp.powerPlantStistics.home.createOrEditLabel"
-          data-cy="PowerPlantStisticsCreateUpdateHeading"
           v-text="t$('ainmsVueclientApp.powerPlantStistics.home.createOrEditLabel')"
         ></h2>
         <div>

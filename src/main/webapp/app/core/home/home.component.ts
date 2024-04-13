@@ -6,6 +6,8 @@ import type LoginService from '@/account/login.service';
 import type HomeService from '@/core/home/home.service';
 import type { IAPStatisticsByPowerPlant, IAPStatisticsByProvince } from '@/shared/model/ap-statistics.model';
 import { useAlertService } from '@/shared/alert/alert.service';
+import SockJS from 'sockjs-client';
+import Stomp from 'webstomp-client'; 
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -116,6 +118,19 @@ export default defineComponent({
         retrieveAPStatisticsByProvince();
         retrieveStatisticsByPowerPlant();
       } 
+
+      const socket = new SockJS('/websocket');
+      const stompClient = Stomp.over(socket);
+      stompClient.connect({}, () => {
+        stompClient.subscribe('/topic/update', message => {
+          const content = message.body;
+          if (content === "updateAPs,successful") {
+            // 当收到成功更新的消息时，刷新数据
+            retrieveAPStatisticsByProvince();
+            retrieveStatisticsByPowerPlant();
+          }
+        });
+      });
 
       // 监听窗口变化，重新调整图表大小
       window.addEventListener('resize', () => {
