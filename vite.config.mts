@@ -57,32 +57,17 @@ let config = defineConfig({
   server: {
     host: true,
     port: 9000,
-    // proxy: 
-    //   Object.fromEntries(
-    //   ['/websocket','/api', '/management', '/v3/api-docs', '/oauth2', '/login'].map(res => [
-    //     res,
-    //     {
-    //       target: 'http://192.168.22.5:8080',
-    //     },
-    //   ]),
-    // ),
-    proxy: {
-      // 添加其他 HTTP 代理配置
-      '/api': { target: 'http://192.168.22.5:8080' },
-      '/management': { target: 'http://192.168.22.5:8080' },
-      '/v3/api-docs': { target: 'http://192.168.22.5:8080' },
-      '/oauth2': { target: 'http://192.168.22.5:8080' },
-      '/login': { target: 'http://192.168.22.5:8080' },
-      // 添加 WebSocket 代理配置
-      '/websocket': {
-        target: 'ws://192.168.22.5:8080',
-        ws: true,
-        changeOrigin: true,
-      },
+    proxy: 
+      Object.fromEntries(
+      ['/websocket','/api', '/management', '/v3/api-docs', '/oauth2', '/login'].map(res => [
+        res,
+        {
+          target: 'http://192.168.22.5:8080',
+          ws: true,
+          changOrigin: true,
+        },
+      ])),
     },
-  },
 });
-
-// jhipster-needle-add-vite-config - JHipster will add custom config
 
 export default config;
