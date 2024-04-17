@@ -96,6 +96,42 @@ export default defineComponent({
         second: 'numeric',
         hour12: false
       }).format(time);
-    }
+    },
+    downloadCsvByPowerPlant() {
+      const csvRows = [];
+      // CSV Header
+      // const headers = ""
+      const headers = "Province Name, Total APs, StandBy AP Count, Offline AP Count, Other AP Count, Rate, Date, Time";
+      csvRows.push(headers);
+  
+      // CSV Rows
+      this.powerPlantStistics.forEach(item => {
+        const row = [
+          item.name,
+          item.totalCount,
+          item.onlineCount,
+          item.offlineCount,
+          item.otherCount,
+          `${((item.onlineCount / item.totalCount) * 100).toFixed(1)}%`,
+          item.statisticDate,
+          item.statisticTime
+        ].join(",");
+        csvRows.push(row);
+      });
+  
+      const csvString = csvRows.join("\n");
+      const BOM = "\uFEFF";
+      const blob = new Blob([BOM + csvString], { type: "text/csv;charset=utf-8;" });
+      const link = document.createElement("a");
+      if (link.download !== undefined) {
+        const url = URL.createObjectURL(blob);
+        link.setAttribute("href", url);
+        link.setAttribute("download", "apStatisticsByProvinces.csv");
+        link.style.visibility = "hidden";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    }, 
   }
 });

@@ -28,7 +28,7 @@
             <th scope="row"><span v-text="t$('ainmsVueclientApp.provinceStistics.onlineCount')"></span></th>
             <th scope="row"><span v-text="t$('ainmsVueclientApp.provinceStistics.offlineCount')"></span></th>
             <th scope="row"><span v-text="t$('ainmsVueclientApp.provinceStistics.otherCount')"></span></th>
-            <th scope="row"><span v-text="t$('ainmsVueclientApp.provinceStistics.rate')"></span></th>
+            <th scope="row"><span v-text="t$('ainmsVueclientApp.provinceStistics.onlineRate')"></span></th>
             <th scope="row"><span v-text="t$('ainmsVueclientApp.provinceStistics.statisticDate')"></span></th>
             <th scope="row"><span v-text="t$('ainmsVueclientApp.provinceStistics.statisticTime')"></span></th>
             <th scope="row"></th>

@@ -2,8 +2,10 @@
   "ainmsVueclientApp": {
     "powerPlantStistics": {
       "home": {
-        "title": "Power Plant Stistics",
-        "refreshListLabel": "Refresh list",
+        "title": "场站在线率统计",
+        "refreshListLabel": "刷新",
+        "queryByDate": "按日期查询",
+        "downloadascsv": "下载csv格式",
         "createLabel": "创建新 Power Plant Stistics",
         "createOrEditLabel": "创建或编辑 Power Plant Stistics",
         "notFound": "No Power Plant Stistics found"
@@ -15,17 +17,18 @@
         "question": "你确定要删除 Power Plant Stistics { id } 吗？"
       },
       "detail": {
-        "title": "Power Plant Stistics"
+        "title": "场站在线率统计"
       },
       "id": "ID",
-      "name": "Name",
-      "totalCount": "Total Count",
-      "onlineCount": "Online Count",
-      "offlineCount": "Offline Count",
-      "otherCount": "Other Count",
-      "statisticDate": "Statistic Date",
-      "statisticTime": "Statistic Time",
-      "province": "Province"
+      "name": "场站",
+      "totalCount": "总数",
+      "onlineCount": "在线总数",
+      "offlineCount": "离线总数",
+      "otherCount": "未知状态总数",
+      "onlineRate": "在线率",
+      "statisticDate": "统计日期",
+      "statisticTime": "统计时间",
+      "province": "省份"
     }
   }
 }

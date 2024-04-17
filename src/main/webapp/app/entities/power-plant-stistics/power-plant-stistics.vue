@@ -3,19 +3,16 @@
     <h2 id="page-heading" data-cy="PowerPlantStisticsHeading">
       <span v-text="t$('ainmsVueclientApp.powerPlantStistics.home.title')" id="power-plant-stistics-heading"></span>
       <div class="d-flex justify-content-end">
+        <input type="date" v-model="selectedDate">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('ainmsVueclientApp.powerPlantStistics.home.refreshListLabel')"></span>
+          <span v-text="t$('ainmsVueclientApp.powerPlantStistics.home.queryByDate')"></span>
         </button>
-          <button
-            @click="navigate"
-            id="jh-create-entity"
-            data-cy="entityCreateButton"
-            class="btn btn-primary jh-create-entity create-power-plant-stistics"
-          >
-            <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('ainmsVueclientApp.powerPlantStistics.home.createLabel')"></span>
-          </button>
+
+        <button class="btn btn-info mr-2" v-on:click="downloadCsvByPowerPlant" :disabled="isFetching">
+          <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
+          <span v-text="t$('ainmsVueclientApp.powerPlantStistics.home.downloadascsv')"></span>
+        </button>
       </div>
     </h2>
     <br />
@@ -32,9 +29,10 @@
             <th scope="row"><span v-text="t$('ainmsVueclientApp.powerPlantStistics.onlineCount')"></span></th>
             <th scope="row"><span v-text="t$('ainmsVueclientApp.powerPlantStistics.offlineCount')"></span></th>
             <th scope="row"><span v-text="t$('ainmsVueclientApp.powerPlantStistics.otherCount')"></span></th>
+            <th scope="row"><span v-text="t$('ainmsVueclientApp.powerPlantStistics.onlineRate')"></span></th>
             <th scope="row"><span v-text="t$('ainmsVueclientApp.powerPlantStistics.statisticDate')"></span></th>
             <th scope="row"><span v-text="t$('ainmsVueclientApp.powerPlantStistics.statisticTime')"></span></th>
-            <th scope="row"><span v-text="t$('ainmsVueclientApp.powerPlantStistics.province')"></span></th>
+            <!-- <th scope="row"><span v-text="t$('ainmsVueclientApp.powerPlantStistics.province')"></span></th> -->
             <th scope="row"></th>
           </tr>
         </thead>
@@ -50,6 +48,7 @@
             <td>{{ powerPlantStistics.onlineCount }}</td>
             <td>{{ powerPlantStistics.offlineCount }}</td>
             <td>{{ powerPlantStistics.otherCount }}</td>
+            <td class="custom-font-size"> {{ ((powerPlantStistics.onlineCount / powerPlantStistics.totalCount) * 100).toFixed(1) + '%' }} </td>
             <td>{{ powerPlantStistics.statisticDate }}</td>
             <td>{{ formatTime(powerPlantStistics.statisticTime) || '' }}</td>
           </tr>
