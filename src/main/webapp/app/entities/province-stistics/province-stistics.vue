@@ -3,11 +3,12 @@
     <h2 id="page-heading" data-cy="ProvinceStisticsHeading">
       <span v-text="t$('ainmsVueclientApp.provinceStistics.home.title')" id="province-stistics-heading"></span>
       <div class="d-flex justify-content-end">
+        <input type="date" v-model="selectedDate">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('ainmsVueclientApp.provinceStistics.home.refreshListLabel')"></span>
+          <span v-text="t$('ainmsVueclientApp.provinceStistics.home.queryByDate')"></span>
         </button>
-        <button class="btn btn-info mr-2" v-on:click="downloadascsv" :disabled="isFetching">
+        <button class="btn btn-info mr-2" v-on:click="downloadCsvByProvince" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
           <span v-text="t$('ainmsVueclientApp.provinceStistics.home.downloadascsv')"></span>
         </button>
@@ -27,6 +28,7 @@
             <th scope="row"><span v-text="t$('ainmsVueclientApp.provinceStistics.onlineCount')"></span></th>
             <th scope="row"><span v-text="t$('ainmsVueclientApp.provinceStistics.offlineCount')"></span></th>
             <th scope="row"><span v-text="t$('ainmsVueclientApp.provinceStistics.otherCount')"></span></th>
+            <th scope="row"><span v-text="t$('ainmsVueclientApp.provinceStistics.rate')"></span></th>
             <th scope="row"><span v-text="t$('ainmsVueclientApp.provinceStistics.statisticDate')"></span></th>
             <th scope="row"><span v-text="t$('ainmsVueclientApp.provinceStistics.statisticTime')"></span></th>
             <th scope="row"></th>
@@ -44,6 +46,9 @@
             <td>{{ provinceStistics.onlineCount }}</td>
             <td>{{ provinceStistics.offlineCount }}</td>
             <td>{{ provinceStistics.otherCount }}</td>
+            <td class="custom-font-size">
+                {{ ((provinceStistics.onlineCount / provinceStistics.totalCount) * 100).toFixed(1) + '%' }}
+            </td>
             <td>{{ provinceStistics.statisticDate }}</td>
             <td>{{ formatTime(provinceStistics.statisticTime) || '' }}</td>
           </tr>

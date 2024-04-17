@@ -2,8 +2,9 @@
   "ainmsVueclientApp": {
     "provinceStistics": {
       "home": {
-        "title": "Province Stistics",
+        "title": "省份在线率统计",
         "refreshListLabel": "Refresh list",
+        "queryByDate": "按日期查询",
         "downloadascsv": "下载csv格式",
         "createLabel": "创建新 Province Stistics",
         "createOrEditLabel": "创建或编辑 Province Stistics",
@@ -16,18 +17,19 @@
         "question": "你确定要删除 Province Stistics { id } 吗？"
       },
       "detail": {
-        "title": "Province Stistics"
+        "title": "省份在线率统计"
       },
       "id": "ID",
       "name": "Name",
-      "totalCount": "Total Count",
-      "onlineCount": "Online Count",
-      "offlineCount": "Offline Count",
-      "otherCount": "Other Count",
-      "statisticDate": "Statistic Date",
-      "statisticTime": "Statistic Time",
-      "station": "Station",
-      "country": "Country"
+      "totalCount": "总数",
+      "onlineCount": "在线总数",
+      "offlineCount": "离线总数",
+      "otherCount": "未知状态总数",
+      "rate": "在线率",
+      "statisticDate": "统计日期",
+      "statisticTime": "统计时间",
+      "station": "场站",
+      "country": "国家"
     }
   }
 }

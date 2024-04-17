@@ -92,9 +92,10 @@ export default defineComponent({
       if (!timeStr) return '';
       // 假设时间是以 'HH:mm:ss' 格式传来的
       const [hours, minutes, seconds] = timeStr.split(':');
+      const adjustedHours = parseInt(hours) === 24 ? 0 : parseInt(hours);
       // 创建一个今天日期但特定时间的Date对象
       const time = new Date();
-      time.setHours(parseInt(hours));
+      time.setHours(adjustedHours);
       time.setMinutes(parseInt(minutes));
       time.setSeconds(parseInt(seconds));
       
@@ -105,6 +106,53 @@ export default defineComponent({
         second: 'numeric',
         hour12: false
       }).format(time);
+    },
+    downloadCsvByProvince() {
+      const csvRows = [];
+      // CSV Header
+      // const headers = ""
+      const headers = "Province Name, Total APs, StandBy AP Count, Offline AP Count, Other AP Count, Rate, Date, Time";
+      csvRows.push(headers);
+  
+      // CSV Rows
+      this.provinceStistics.forEach(item => {
+        const row = [
+          item.name,
+          item.totalCount,
+          item.onlineCount,
+          item.offlineCount,
+          item.otherCount,
+          `${((item.onlineCount / item.totalCount) * 100).toFixed(1)}%`,
+          item.statisticDate,
+          item.statisticTime
+        ].join(",");
+        csvRows.push(row);
+      });
+  
+      const csvString = csvRows.join("\n");
+      const BOM = "\uFEFF";
+      const blob = new Blob([BOM + csvString], { type: "text/csv;charset=utf-8;" });
+      const link = document.createElement("a");
+      if (link.download !== undefined) {
+        const url = URL.createObjectURL(blob);
+        link.setAttribute("href", url);
+        link.setAttribute("download", "apStatisticsByProvinces.csv");
+        link.style.visibility = "hidden";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    }, 
+  },
+
+  data() {
+    return {
+      selectedDate: new Date().toISOString().substr(0, 10)
+    };
+  },
+  watch: {
+    selectedDate() {
+      console.log(this.selectedDate);
     }
   }
 });
