@@ -20,7 +20,7 @@ export default defineComponent({
     provide('accessPointGroupService', () => new AccessPointGroupService());
     provide('powerPlantService', () => new PowerPlantService());
     provide('provinceService', () => new ProvinceService());
-	provide('provinceStisticsService', () => new ProvinceStisticsService());
+    provide('provinceStisticsService', () => new ProvinceStisticsService());
     provide('powerPlantStisticsService', () => new PowerPlantStisticsService());
     // jhipster-needle-add-entity-service-to-entities-component - JHipster will import entities services here
   },

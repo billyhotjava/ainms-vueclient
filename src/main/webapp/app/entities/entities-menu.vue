@@ -20,15 +20,14 @@
       <font-awesome-icon icon="asterisk" />
       <span v-text="t$('global.menu.entities.province')"></span>
     </b-dropdown-item>
-        <b-dropdown-item to="/province-stistics">
+    <!-- <b-dropdown-item to="/province-stistics">
       <font-awesome-icon icon="asterisk" />
       <span v-text="t$('global.menu.entities.provinceStistics')"></span>
     </b-dropdown-item>
     <b-dropdown-item to="/power-plant-stistics">
       <font-awesome-icon icon="asterisk" />
       <span v-text="t$('global.menu.entities.powerPlantStistics')"></span>
-    </b-dropdown-item>
-    <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
+    </b-dropdown-item> -->
   </div>
 </template>
 

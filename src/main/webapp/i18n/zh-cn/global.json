@@ -38,6 +38,16 @@
         "database": "数据库",
         "jhipster-needle-menu-add-admin-element": "待定!"
       },
+      "stistics": {
+        "main": "数据分析",
+        "accessPoint": "AP状态",
+        "accessPointGroup": "AP组状态",
+        "powerPlant": "风电场状态",
+        "province": "省份状态",
+        "countryStistics": "全国在线率",
+        "provinceStistics": "省份在线率",
+        "powerPlantStistics": "场站在线率"
+      },
       "language": "语言"
     },
     "form": {
