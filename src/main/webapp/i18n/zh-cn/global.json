@@ -13,9 +13,9 @@
         "accessPointGroup": "AP组",
         "powerPlant": "风电场",
         "province": "省份",
-        "countryStistics": "Country Stistics",
-        "provinceStistics": "Province Stistics",
-        "powerPlantStistics": "Power Plant Stistics"
+        "countryStistics": "全国在线率",
+        "provinceStistics": "省份在线率",
+        "powerPlantStistics": "场站在线率"
       },
       "account": {
         "main": "账号",
