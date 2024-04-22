@@ -147,7 +147,7 @@ export default defineComponent({
     },
 
     downloadCsvByPowerPlant() {
-      window.location.href = 'http://localhost:8080/api/power-plant-stistics/download-csv';
+      window.location.href = 'http://10.170.248.35:8080/api/power-plant-stistics/download-csv';
     },
     // downloadCsvByPowerPlant() {
     //   const csvRows = [];

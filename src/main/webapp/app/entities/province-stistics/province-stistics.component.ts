@@ -136,7 +136,7 @@ export default defineComponent({
     },
 
     downloadCsvByProvince() {
-      window.location.href = 'http://localhost:8080/api/province-stistics/download-csv';
+      window.location.href = 'http://10.170.248.35:8080/api/province-stistics/download-csv';
     },
     // downloadCsvByProvince() {
     //   const csvRows = [];
