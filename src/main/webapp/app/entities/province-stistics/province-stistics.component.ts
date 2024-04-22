@@ -19,6 +19,8 @@ export default defineComponent({
 
     const isFetching = ref(false);
 
+    const selectedDate = inject('selectedDate');
+
     const clear = () => {};
 
     const retrieveProvinceStisticss = async () => {
@@ -33,10 +35,10 @@ export default defineComponent({
       }
     };
 
-    const handleSyncListByDate = async (date: string) => {
+    const handleSyncListByDate = async () => {
       isFetching.value = true;
       try {
-        const res = await provinceStisticsService().retrieveByDate(date);
+        const res = await provinceStisticsService().retrieveByDate(selectedDate.value);
         provinceStistics.value = res.data;
       } catch (err) {
         alertService.showHttpError(err.response);

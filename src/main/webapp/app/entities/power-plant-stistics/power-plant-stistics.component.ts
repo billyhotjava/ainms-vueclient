@@ -16,7 +16,7 @@ export default defineComponent({
     const alertService = inject('alertService', () => useAlertService(), true);
 
     const powerPlantStistics: Ref<IPowerPlantStistics[]> = ref([]);
-
+    const selectedDate = inject('selectedDate');
     const isFetching = ref(false);
 
     const clear = () => {};
@@ -33,10 +33,10 @@ export default defineComponent({
       }
     };
 
-    const handleSyncListByDate = async (date: string) => {
+    const handleSyncListByDate = async () => {
       isFetching.value = true;
       try {
-        const res = await powerPlantStisticsService().retrieveByDate(date);
+        const res = await powerPlantStisticsService().retrieveByDate(selectedDate.value);
         powerPlantStistics.value = res.data;
       } catch (err) {
         alertService.showHttpError(err.response);
