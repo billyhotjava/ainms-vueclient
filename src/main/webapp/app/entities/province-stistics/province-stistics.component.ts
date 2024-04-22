@@ -33,8 +33,16 @@ export default defineComponent({
       }
     };
 
-    const handleSyncList = () => {
-      retrieveProvinceStisticss();
+    const handleSyncListByDate = () => {
+      isFetching.value = true;
+      try {
+        const res = await provinceStisticsService().retrieveByDate();
+        provinceStistics.value = res.data;
+      } catch (err) {
+        alertService.showHttpError(err.response);
+      } finally {
+        isFetching.value = false;
+      }
     };
 
     // const handleNCEApStatistics = async () => {

@@ -5,6 +5,7 @@
         "title": "Province Stistics",
         "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Province Stistics",
+        "downloadascsv": "Download All",
         "createOrEditLabel": "Create or edit a Province Stistics",
         "notFound": "No Province Stistics found"
       },

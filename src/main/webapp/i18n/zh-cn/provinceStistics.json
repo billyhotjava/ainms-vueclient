@@ -5,7 +5,7 @@
         "title": "省份在线率统计",
         "refreshListLabel": "Refresh list",
         "queryByDate": "按日期查询",
-        "downloadascsv": "下载csv格式",
+        "downloadascsv": "下载所有记录",
         "createLabel": "创建新 Province Stistics",
         "createOrEditLabel": "创建或编辑 Province Stistics",
         "notFound": "No Province Stistics found"

@@ -31,10 +31,10 @@ export default class ProvinceStisticsService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public retrieveByDate(): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
-        .delete(`${baseApiUrl}/${id}`)
+        .get(baseApiUrl)
         .then(res => {
           resolve(res);
         })
@@ -43,6 +43,18 @@ export default class ProvinceStisticsService {
         });
     });
   }
+  // public delete(id: number): Promise<any> {
+  //   return new Promise<any>((resolve, reject) => {
+  //     axios
+  //       .delete(`${baseApiUrl}/${id}`)
+  //       .then(res => {
+  //         resolve(res);
+  //       })
+  //       .catch(err => {
+  //         reject(err);
+  //       });
+  //   });
+  // }
 
   // public create(entity: IProvinceStistics): Promise<IProvinceStistics> {
   //   return new Promise<IProvinceStistics>((resolve, reject) => {

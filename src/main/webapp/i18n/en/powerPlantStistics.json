@@ -5,6 +5,7 @@
         "title": "Power Plant Stistics",
         "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Power Plant Stistics",
+        "downloadascsv": "Download All",
         "createOrEditLabel": "Create or edit a Power Plant Stistics",
         "notFound": "No Power Plant Stistics found"
       },
