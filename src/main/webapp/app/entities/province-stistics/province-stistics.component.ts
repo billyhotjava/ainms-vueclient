@@ -37,14 +37,14 @@ export default defineComponent({
       retrieveProvinceStisticss();
     };
 
-    const handleNCEApStatistics = async () => {
-      try{
-        const res = await provinceStisticsService().handleNCEApStatistics();
-      }catch(err){
-        alertService.showHttpError(err.response);
-      }
-      retrieveProvinceStisticss();
-    }
+    // const handleNCEApStatistics = async () => {
+    //   try{
+    //     const res = await provinceStisticsService().handleNCEApStatistics();
+    //   }catch(err){
+    //     alertService.showHttpError(err.response);
+    //   }
+    //   retrieveProvinceStisticss();
+    // }
 
     onMounted(async () => {
       await retrieveProvinceStisticss();

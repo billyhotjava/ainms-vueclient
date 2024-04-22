@@ -44,55 +44,55 @@ export default class ProvinceStisticsService {
     });
   }
 
-  public create(entity: IProvinceStistics): Promise<IProvinceStistics> {
-    return new Promise<IProvinceStistics>((resolve, reject) => {
-      axios
-        .post(`${baseApiUrl}`, entity)
-        .then(res => {
-          resolve(res.data);
-        })
-        .catch(err => {
-          reject(err);
-        });
-    });
-  }
+  // public create(entity: IProvinceStistics): Promise<IProvinceStistics> {
+  //   return new Promise<IProvinceStistics>((resolve, reject) => {
+  //     axios
+  //       .post(`${baseApiUrl}`, entity)
+  //       .then(res => {
+  //         resolve(res.data);
+  //       })
+  //       .catch(err => {
+  //         reject(err);
+  //       });
+  //   });
+  // }
 
-  public update(entity: IProvinceStistics): Promise<IProvinceStistics> {
-    return new Promise<IProvinceStistics>((resolve, reject) => {
-      axios
-        .put(`${baseApiUrl}/${entity.id}`, entity)
-        .then(res => {
-          resolve(res.data);
-        })
-        .catch(err => {
-          reject(err);
-        });
-    });
-  }
+  // public update(entity: IProvinceStistics): Promise<IProvinceStistics> {
+  //   return new Promise<IProvinceStistics>((resolve, reject) => {
+  //     axios
+  //       .put(`${baseApiUrl}/${entity.id}`, entity)
+  //       .then(res => {
+  //         resolve(res.data);
+  //       })
+  //       .catch(err => {
+  //         reject(err);
+  //       });
+  //   });
+  // }
 
-  public partialUpdate(entity: IProvinceStistics): Promise<IProvinceStistics> {
-    return new Promise<IProvinceStistics>((resolve, reject) => {
-      axios
-        .patch(`${baseApiUrl}/${entity.id}`, entity)
-        .then(res => {
-          resolve(res.data);
-        })
-        .catch(err => {
-          reject(err);
-        });
-    });
-  }
+  // public partialUpdate(entity: IProvinceStistics): Promise<IProvinceStistics> {
+  //   return new Promise<IProvinceStistics>((resolve, reject) => {
+  //     axios
+  //       .patch(`${baseApiUrl}/${entity.id}`, entity)
+  //       .then(res => {
+  //         resolve(res.data);
+  //       })
+  //       .catch(err => {
+  //         reject(err);
+  //       });
+  //   });
+  // }
 
-  public handleNCEApStatistics(): Promise<any> {
-    return new Promise<any>((resolve, reject) => {
-      axios
-        .get(`${baseApiUrl}/nce-apstatistics`)
-        .then(res => {
-          resolve(res.data);
-        })
-        .catch(err => {
-          reject(err);
-        });
-    });
-  }
+  // public handleNCEApStatistics(): Promise<any> {
+  //   return new Promise<any>((resolve, reject) => {
+  //     axios
+  //       .get(`${baseApiUrl}/nce-apstatistics`)
+  //       .then(res => {
+  //         resolve(res.data);
+  //       })
+  //       .catch(err => {
+  //         reject(err);
+  //       });
+  //   });
+  // }
 }
