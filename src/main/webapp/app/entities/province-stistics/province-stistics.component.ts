@@ -38,26 +38,24 @@ export default defineComponent({
     const handleSyncListByDate = async () => {
       isFetching.value = true;
       try {
+        console.log("selectedDate.value", selectedDate.value);
         const res = await provinceStisticsService().retrieveByDate(selectedDate.value);
         provinceStistics.value = res.data;
       } catch (err) {
-        alertService.showHttpError(err.response);
+        if(err.response){
+          alertService.showHttpError(err.response);
+        }else{
+          console.error(err);
+          alertService.showError('An error occurred while fetching data');
+        }
       } finally {
         isFetching.value = false;
       }
     };
 
-    // const handleNCEApStatistics = async () => {
-    //   try{
-    //     const res = await provinceStisticsService().handleNCEApStatistics();
-    //   }catch(err){
-    //     alertService.showHttpError(err.response);
-    //   }
-    //   retrieveProvinceStisticss();
-    // }
-
     onMounted(async () => {
       await retrieveProvinceStisticss();
+      await handleSyncListByDate();
     });
 
     const removeId: Ref<number> = ref(null);
@@ -155,11 +153,6 @@ export default defineComponent({
     }, 
   },
 
-  data() {
-    return {
-      selectedDate: new Date().toISOString().substr(0, 10)
-    };
-  },
   watch: {
     selectedDate() {
       console.log(this.selectedDate);

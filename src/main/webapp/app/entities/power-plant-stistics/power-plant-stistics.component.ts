@@ -36,10 +36,16 @@ export default defineComponent({
     const handleSyncListByDate = async () => {
       isFetching.value = true;
       try {
+        console.log("selectedDate.value", selectedDate.value);
         const res = await powerPlantStisticsService().retrieveByDate(selectedDate.value);
         powerPlantStistics.value = res.data;
       } catch (err) {
-        alertService.showHttpError(err.response);
+        if (err.response){
+          alertService.showHttpError(err.response);
+        }else{
+          console.error(err);
+          alertService.showErrorMessage('An error occurred while fetching data');
+        }
       } finally {
         isFetching.value = false;
       }
@@ -58,6 +64,7 @@ export default defineComponent({
     const closeDialog = () => {
       removeEntity.value.hide();
     };
+
     const removePowerPlantStistics = async () => {
       try {
         await powerPlantStisticsService().delete(removeId.value);
