@@ -84,7 +84,7 @@ export default defineComponent({
 
     return {
       provinceStistics,
-      handleSyncList,
+      handleSyncListByDate,
       isFetching,
       retrieveProvinceStisticss,
       clear,
