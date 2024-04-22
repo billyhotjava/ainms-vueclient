@@ -33,8 +33,16 @@ export default defineComponent({
       }
     };
 
-    const handleSyncList = () => {
-      retrievePowerPlantStisticss();
+    const handleSyncListByDate = async (date: string) => {
+      isFetching.value = true;
+      try {
+        const res = await powerPlantStisticsService().retrieveByDate(date);
+        powerPlantStistics.value = res.data;
+      } catch (err) {
+        alertService.showHttpError(err.response);
+      } finally {
+        isFetching.value = false;
+      }
     };
 
     onMounted(async () => {
@@ -65,7 +73,7 @@ export default defineComponent({
 
     return {
       powerPlantStistics,
-      handleSyncList,
+      handleSyncListByDate,
       isFetching,
       retrievePowerPlantStisticss,
       clear,

@@ -33,10 +33,10 @@ export default defineComponent({
       }
     };
 
-    const handleSyncListByDate = async () => {
+    const handleSyncListByDate = async (date: string) => {
       isFetching.value = true;
       try {
-        const res = await provinceStisticsService().retrieveByDate();
+        const res = await provinceStisticsService().retrieveByDate(date);
         provinceStistics.value = res.data;
       } catch (err) {
         alertService.showHttpError(err.response);

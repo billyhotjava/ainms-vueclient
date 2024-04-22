@@ -31,10 +31,10 @@ export default class ProvinceStisticsService {
     });
   }
 
-  public retrieveByDate(): Promise<any> {
+  public retrieveByDate(date: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
-        .get(baseApiUrl)
+        .get(`${baseApiUrl}/byDate`, {params: {date}})
         .then(res => {
           resolve(res);
         })
