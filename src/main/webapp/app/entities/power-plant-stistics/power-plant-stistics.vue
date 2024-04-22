@@ -4,7 +4,7 @@
       <span v-text="t$('ainmsVueclientApp.powerPlantStistics.home.title')" id="power-plant-stistics-heading"></span>
       <div class="d-flex justify-content-end">
         <input type="date" v-model="selectedDate">
-        <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
+        <button class="btn btn-info mr-2" v-on:click="handleSyncListByDate" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
           <span v-text="t$('ainmsVueclientApp.powerPlantStistics.home.queryByDate')"></span>
         </button>
