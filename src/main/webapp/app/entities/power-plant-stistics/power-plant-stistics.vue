@@ -3,7 +3,7 @@
     <h2 id="page-heading" data-cy="PowerPlantStisticsHeading">
       <span v-text="t$('ainmsVueclientApp.powerPlantStistics.home.title')" id="power-plant-stistics-heading"></span>
       <div class="d-flex justify-content-end">
-        <input type="date" v-model="selectedDate">
+        <input type="date" v-model="selectedDate" />
         <button class="btn btn-info mr-2" v-on:click="handleSyncListByDate" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
           <span v-text="t$('ainmsVueclientApp.powerPlantStistics.home.queryByDate')"></span>
@@ -23,7 +23,10 @@
       <table class="table table-striped" aria-describedby="powerPlantStistics">
         <thead>
           <tr>
-            <!-- <th scope="row"><span v-text="t$('global.field.id')"></span></th> -->
+            <th scope="row" v-on:click="changeOrder('id')">
+              <span v-text="t$('global.field.id')"></span>
+              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'id'"></jhi-sort-indicator>
+            </th>
             <th scope="row"><span v-text="t$('ainmsVueclientApp.powerPlantStistics.name')"></span></th>
             <th scope="row"><span v-text="t$('ainmsVueclientApp.powerPlantStistics.totalCount')"></span></th>
             <th scope="row"><span v-text="t$('ainmsVueclientApp.powerPlantStistics.onlineCount')"></span></th>
@@ -32,23 +35,23 @@
             <th scope="row"><span v-text="t$('ainmsVueclientApp.powerPlantStistics.onlineRate')"></span></th>
             <th scope="row"><span v-text="t$('ainmsVueclientApp.powerPlantStistics.statisticDate')"></span></th>
             <th scope="row"><span v-text="t$('ainmsVueclientApp.powerPlantStistics.statisticTime')"></span></th>
-            <!-- <th scope="row"><span v-text="t$('ainmsVueclientApp.powerPlantStistics.province')"></span></th> -->
-            <th scope="row"></th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="powerPlantStistics in powerPlantStistics" :key="powerPlantStistics.id" data-cy="entityTable">
-            <!-- <td>
+            <td>
               <router-link :to="{ name: 'PowerPlantStisticsView', params: { powerPlantStisticsId: powerPlantStistics.id } }">{{
                 powerPlantStistics.id
               }}</router-link>
-            </td> -->
+            </td>
             <td>{{ powerPlantStistics.name }}</td>
             <td>{{ powerPlantStistics.totalCount }}</td>
             <td>{{ powerPlantStistics.onlineCount }}</td>
             <td>{{ powerPlantStistics.offlineCount }}</td>
             <td>{{ powerPlantStistics.otherCount }}</td>
-            <td class="custom-font-size"> {{ ((powerPlantStistics.onlineCount / powerPlantStistics.totalCount) * 100).toFixed(1) + '%' }} </td>
+            <td class="custom-font-size">
+              {{ ((powerPlantStistics.onlineCount / powerPlantStistics.totalCount) * 100).toFixed(1) + '%' }}
+            </td>
             <td>{{ powerPlantStistics.statisticDate }}</td>
             <td>{{ formatTime(powerPlantStistics.statisticTime) || '' }}</td>
           </tr>
@@ -83,6 +86,14 @@
         </div>
       </template>
     </b-modal>
+    <div v-show="powerPlantStistics && powerPlantStistics.length > 0">
+      <div class="row justify-content-center">
+        <jhi-item-count :page="page" :total="queryCount" :itemsPerPage="itemsPerPage"></jhi-item-count>
+      </div>
+      <div class="row justify-content-center">
+        <b-pagination size="md" :total-rows="totalItems" v-model="page" :per-page="itemsPerPage"></b-pagination>
+      </div>
+    </div>
   </div>
 </template>
 

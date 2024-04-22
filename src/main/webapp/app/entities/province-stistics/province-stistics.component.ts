@@ -1,4 +1,4 @@
-import { defineComponent, inject, onMounted, ref, type Ref } from 'vue';
+import { defineComponent, inject, onMounted, ref, type Ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import ProvinceStisticsService from './province-stistics.service';
@@ -18,19 +18,28 @@ export default defineComponent({
     const isFetching = ref(false);
     const selectedDate = ref(new Date().toISOString().slice(0, 10));
 
-    const clear = () => {};
+    const itemsPerPage = ref(30);
+    const queryCount: Ref<number> = ref(null);
+    const page: Ref<number> = ref(1);
+    const propOrder = ref('id');
+    const reverse = ref(false);
+    const totalItems = ref(0);
 
-    const retrieveProvinceStisticss = async () => {
-      isFetching.value = true;
-      try {
-        const res = await provinceStisticsService().retrieve();
-        provinceStistics.value = res.data;
-      } catch (err) {
-        alertService.showHttpError(err.response);
-      } finally {
-        isFetching.value = false;
-      }
+    const clear = () => {
+      page.value = 1;
     };
+
+    // const retrieveProvinceStisticss = async () => {
+    //   isFetching.value = true;
+    //   try {
+    //     const res = await provinceStisticsService().retrieve();
+    //     provinceStistics.value = res.data;
+    //   } catch (err) {
+    //     alertService.showHttpError(err.response);
+    //   } finally {
+    //     isFetching.value = false;
+    //   }
+    // };
 
     const handleSyncListByDate = async () => {
       isFetching.value = true;
@@ -38,8 +47,14 @@ export default defineComponent({
         if (!selectedDate) {
           throw new Error('selectedDate is not provided');
         }
+        const paginationQuery = {
+          page: page.value - 1,
+          size: itemsPerPage.value,
+        };
         console.log('selectedDate.value', selectedDate.value);
-        const res = await provinceStisticsService().retrieveByDate(selectedDate.value);
+        const res = await provinceStisticsService().retrieveByDate(selectedDate.value, paginationQuery);
+        totalItems.value = Number(res.headers['x-total-count']);
+        queryCount.value = totalItems.value;
         provinceStistics.value = res.data;
       } catch (err) {
         if (err.response) {
@@ -54,45 +69,48 @@ export default defineComponent({
     };
 
     onMounted(async () => {
-      await retrieveProvinceStisticss();
       await handleSyncListByDate();
     });
 
-    const removeId: Ref<number> = ref(null);
-    const removeEntity = ref<any>(null);
-    const prepareRemove = (instance: IProvinceStistics) => {
-      removeId.value = instance.id;
-      removeEntity.value.show();
-    };
-    const closeDialog = () => {
-      removeEntity.value.hide();
-    };
-    const removeProvinceStistics = async () => {
-      try {
-        await provinceStisticsService().delete(removeId.value);
-        const message = t$('ainmsVueclientApp.provinceStistics.deleted', { param: removeId.value }).toString();
-        alertService.showInfo(message, { variant: 'danger' });
-        removeId.value = null;
-        retrieveProvinceStisticss();
-        closeDialog();
-      } catch (error) {
-        alertService.showHttpError(error.response);
+    const changeOrder = (newOrder: string) => {
+      if (propOrder.value === newOrder) {
+        reverse.value = !reverse.value;
+      } else {
+        reverse.value = false;
       }
+      propOrder.value = newOrder;
     };
+
+    watch([propOrder, reverse], async () => {
+      if (page.value === 1) {
+        // first page, retrieve new data
+        await handleSyncListByDate();
+      } else {
+        // reset the pagination
+        clear();
+      }
+    });
+
+    // Whenever page changes, switch to the new page.
+    watch(page, async () => {
+      await handleSyncListByDate();
+    });
 
     return {
       provinceStistics,
       selectedDate,
       handleSyncListByDate,
       isFetching,
-      retrieveProvinceStisticss,
+      // retrieveProvinceStisticss,
       clear,
       ...dateFormat,
-      removeId,
-      removeEntity,
-      prepareRemove,
-      closeDialog,
-      removeProvinceStistics,
+      itemsPerPage,
+      queryCount,
+      page,
+      propOrder,
+      reverse,
+      totalItems,
+      changeOrder,
       t$,
     };
   },

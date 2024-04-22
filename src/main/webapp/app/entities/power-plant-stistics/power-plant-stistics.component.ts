@@ -1,4 +1,4 @@
-import { defineComponent, inject, onMounted, ref, type Ref } from 'vue';
+import { defineComponent, inject, onMounted, ref, type Ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import PowerPlantStisticsService from './power-plant-stistics.service';
@@ -19,7 +19,16 @@ export default defineComponent({
     const selectedDate = ref(new Date().toISOString().slice(0, 10));
     const isFetching = ref(false);
 
-    const clear = () => {};
+    const itemsPerPage = ref(30);
+    const queryCount: Ref<number> = ref(null);
+    const page: Ref<number> = ref(1);
+    const propOrder = ref('id');
+    const reverse = ref(false);
+    const totalItems = ref(0);
+
+    const clear = () => {
+      page.value = 1;
+    };
 
     const retrievePowerPlantStisticss = async () => {
       isFetching.value = true;
@@ -39,15 +48,21 @@ export default defineComponent({
         if (!selectedDate) {
           throw new Error('selectedDate is not provided');
         }
+        const paginationQuery = {
+          page: page.value - 1,
+          size: itemsPerPage.value,
+        };
         console.log('selectedDate.value', selectedDate.value);
-        const res = await powerPlantStisticsService().retrieveByDate(selectedDate.value);
+        const res = await powerPlantStisticsService().retrieveByDate(selectedDate.value, paginationQuery);
+        totalItems.value = Number(res.headers['x-total-count']);
+        queryCount.value = totalItems.value;
         powerPlantStistics.value = res.data;
       } catch (err) {
         if (err.response) {
           alertService.showHttpError(err.response);
         } else {
           console.error(err);
-          alertService.showErrorMessage('An error occurred while fetching data');
+          alertService.showError('An error occurred while fetching data');
         }
       } finally {
         isFetching.value = false;
@@ -55,7 +70,8 @@ export default defineComponent({
     };
 
     onMounted(async () => {
-      await retrievePowerPlantStisticss();
+      // await retrievePowerPlantStisticss();
+      await handleSyncListByDate();
     });
 
     const removeId: Ref<number> = ref(null);
@@ -68,32 +84,45 @@ export default defineComponent({
       removeEntity.value.hide();
     };
 
-    const removePowerPlantStistics = async () => {
-      try {
-        await powerPlantStisticsService().delete(removeId.value);
-        const message = t$('ainmsVueclientApp.powerPlantStistics.deleted', { param: removeId.value }).toString();
-        alertService.showInfo(message, { variant: 'danger' });
-        removeId.value = null;
-        retrievePowerPlantStisticss();
-        closeDialog();
-      } catch (error) {
-        alertService.showHttpError(error.response);
+    const changeOrder = (newOrder: string) => {
+      if (propOrder.value === newOrder) {
+        reverse.value = !reverse.value;
+      } else {
+        reverse.value = false;
       }
+      propOrder.value = newOrder;
     };
+
+    watch([propOrder, reverse], async () => {
+      if (page.value === 1) {
+        // first page, retrieve new data
+        await handleSyncListByDate();
+      } else {
+        // reset the pagination
+        clear();
+      }
+    });
+
+    // Whenever page changes, switch to the new page.
+    watch(page, async () => {
+      await handleSyncListByDate();
+    });
 
     return {
       powerPlantStistics,
       selectedDate,
       handleSyncListByDate,
       isFetching,
-      retrievePowerPlantStisticss,
+      // retrievePowerPlantStisticss,
       clear,
       ...dateFormat,
-      removeId,
-      removeEntity,
-      prepareRemove,
-      closeDialog,
-      removePowerPlantStistics,
+      itemsPerPage,
+      queryCount,
+      page,
+      propOrder,
+      reverse,
+      totalItems,
+      changeOrder,
       t$,
     };
   },

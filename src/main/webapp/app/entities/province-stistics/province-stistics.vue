@@ -3,7 +3,7 @@
     <h2 id="page-heading" data-cy="ProvinceStisticsHeading">
       <span v-text="t$('ainmsVueclientApp.provinceStistics.home.title')" id="province-stistics-heading"></span>
       <div class="d-flex justify-content-end">
-        <input type="date" v-model="selectedDate">
+        <input type="date" v-model="selectedDate" />
         <button class="btn btn-info mr-2" v-on:click="handleSyncListByDate" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
           <span v-text="t$('ainmsVueclientApp.provinceStistics.home.queryByDate')"></span>
@@ -22,7 +22,10 @@
       <table class="table table-striped" aria-describedby="provinceStistics">
         <thead>
           <tr>
-            <!-- <th scope="row"><span v-text="t$('global.field.id')"></span></th> -->
+            <th scope="row" v-on:click="changeOrder('id')">
+              <span v-text="t$('global.field.id')"></span>
+              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'id'"></jhi-sort-indicator>
+            </th>
             <th scope="row"><span v-text="t$('ainmsVueclientApp.provinceStistics.name')"></span></th>
             <th scope="row"><span v-text="t$('ainmsVueclientApp.provinceStistics.totalCount')"></span></th>
             <th scope="row"><span v-text="t$('ainmsVueclientApp.provinceStistics.onlineCount')"></span></th>
@@ -31,23 +34,22 @@
             <th scope="row"><span v-text="t$('ainmsVueclientApp.provinceStistics.onlineRate')"></span></th>
             <th scope="row"><span v-text="t$('ainmsVueclientApp.provinceStistics.statisticDate')"></span></th>
             <th scope="row"><span v-text="t$('ainmsVueclientApp.provinceStistics.statisticTime')"></span></th>
-            <th scope="row"></th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="provinceStistics in provinceStistics" :key="provinceStistics.id" data-cy="entityTable">
-            <!-- <td>
+            <td>
               <router-link :to="{ name: 'ProvinceStisticsView', params: { provinceStisticsId: provinceStistics.id } }">{{
                 provinceStistics.id
               }}</router-link>
-            </td> -->
+            </td>
             <td>{{ provinceStistics.name }}</td>
             <td>{{ provinceStistics.totalCount }}</td>
             <td>{{ provinceStistics.onlineCount }}</td>
             <td>{{ provinceStistics.offlineCount }}</td>
             <td>{{ provinceStistics.otherCount }}</td>
             <td class="custom-font-size">
-                {{ ((provinceStistics.onlineCount / provinceStistics.totalCount) * 100).toFixed(1) + '%' }}
+              {{ ((provinceStistics.onlineCount / provinceStistics.totalCount) * 100).toFixed(1) + '%' }}
             </td>
             <td>{{ provinceStistics.statisticDate }}</td>
             <td>{{ formatTime(provinceStistics.statisticTime) || '' }}</td>
@@ -83,6 +85,14 @@
         </div>
       </template>
     </b-modal>
+    <div v-show="provinceStistics && provinceStistics.length > 0">
+      <div class="row justify-content-center">
+        <jhi-item-count :page="page" :total="queryCount" :itemsPerPage="itemsPerPage"></jhi-item-count>
+      </div>
+      <div class="row justify-content-center">
+        <b-pagination size="md" :total-rows="totalItems" v-model="page" :per-page="itemsPerPage"></b-pagination>
+      </div>
+    </div>
   </div>
 </template>
 

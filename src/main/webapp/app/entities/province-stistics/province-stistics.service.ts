@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { type IProvinceStistics } from '@/shared/model/province-stistics.model';
+import buildPaginationQueryOpts from '@/shared/sort/sorts';
 
 const baseApiUrl = 'api/province-stistics';
 
@@ -31,10 +32,13 @@ export default class ProvinceStisticsService {
     });
   }
 
-  public retrieveByDate(date: string): Promise<any> {
+  public retrieveByDate(date: string, paginationQuery?: any): Promise<any> {
     return new Promise<any>((resolve, reject) => {
+      const queryParams = buildPaginationQueryOpts(paginationQuery);
+      const queryString = queryParams ? `?${queryParams}` : '';
+      console.log('queryString', queryString);
       axios
-        .get(`${baseApiUrl}/byDate/${date}`)
+        .get(`${baseApiUrl}/byDate/${date}${queryString}`)
         .then(res => {
           resolve(res);
         })
@@ -43,6 +47,7 @@ export default class ProvinceStisticsService {
         });
     });
   }
+
   // public delete(id: number): Promise<any> {
   //   return new Promise<any>((resolve, reject) => {
   //     axios

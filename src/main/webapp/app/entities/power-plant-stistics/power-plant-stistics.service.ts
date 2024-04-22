@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { type IPowerPlantStistics } from '@/shared/model/power-plant-stistics.model';
+import buildPaginationQueryOpts from '@/shared/sort/sorts';
 
 const baseApiUrl = 'api/power-plant-stistics';
 
@@ -31,10 +32,13 @@ export default class PowerPlantStisticsService {
     });
   }
 
-  public retrieveByDate(date: string): Promise<any> {
+  public retrieveByDate(date: string, paginationQuery?: any): Promise<any> {
     return new Promise<any>((resolve, reject) => {
+      const queryParams = buildPaginationQueryOpts(paginationQuery);
+      const queryString = queryParams ? `?${queryParams}` : '';
+      console.log('queryString', queryString);
       axios
-        .get(`${baseApiUrl}/byDate/${date}`)
+        .get(`${baseApiUrl}/byDate/${date}${queryString}`)
         .then(res => {
           resolve(res);
         })
