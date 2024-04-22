@@ -31,10 +31,10 @@ export default class PowerPlantStisticsService {
     });
   }
 
-    public retrieveByDate(date: string): Promise<any> {
+  public retrieveByDate(date: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
-        .get(`${baseApiUrl}/byDate`, {params: {date}})
+        .get(`${baseApiUrl}/byDate/${date}`)
         .then(res => {
           resolve(res);
         })

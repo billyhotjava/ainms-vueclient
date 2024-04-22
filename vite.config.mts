@@ -62,7 +62,7 @@ let config = defineConfig({
       ['/websocket','/api', '/management', '/v3/api-docs', '/oauth2', '/login'].map(res => [
         res,
         {
-          target: 'http://192.168.22.5:8080',
+          target: 'http://10.170.43.54:8080',
           ws: true,
           changOrigin: true,
         },
