@@ -68,7 +68,7 @@
           <!-- // province -->
           <div class="form-group" v-if="provinces ">
             <label for="province" v-text="t$('userManagement.province')"></label>
-            <select class="form-control" id="provinceId" name="provinceId" v-model="userAccount.provinceId">
+            <select class="form-control" id="provinceId" name="provinceId" v-model="userAccount.provinceId" v-on:change="getPlantsfromProvinceid(userAccount.provinceId)">
 
               <option v-bind:value="null"></option>
               <!-- <option 
@@ -83,6 +83,18 @@
               </option>
             </select>
           </div>
+          <!-- //plantt -->
+          <div class="form-group" >
+            <label for="plantId" v-text="t$('userManagement.plant')"></label>
+            <select class="form-control" id="plantId" name="plantId" v-model="userAccount.plantId">
+
+              <option v-bind:value="0"></option>
+              <option v-bind:value="plantOption.powerPlantId" v-for="plantOption in plants" :key="plantOption.powerPlantId">
+                {{ plantOption.powerPlantName }}
+              </option>
+            </select>
+          </div>
+
           <div class="form-group" v-if="languages && Object.keys(languages).length > 0">
             <label for="langKey" v-text="t$('userManagement.langKey')"></label>
             <select class="form-control" id="langKey" name="langKey" v-model="userAccount.langKey">

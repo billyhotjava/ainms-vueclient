@@ -3,6 +3,7 @@ import { defineStore } from 'pinia';
 // 定义账户信息的类型，替换any为更具体的类型定义
 interface Account {
   provinceId: number;
+  plantId: number;
   roles: string[];
   // 添加其他账户信息属性...
 }
@@ -30,6 +31,7 @@ export const useAccountStore = defineStore('account', {
   getters: {
     account: (state) => state.userIdentity,
     provinceId: (state) => state.userIdentity?.provinceId,
+    plantId: (state) => state.userIdentity?.plantId,
     isAdmin: (state) => state.userIdentity?.roles?.includes('ROLE_ADMIN'),
     // 可以根据需要添加更多getter...
   },

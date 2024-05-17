@@ -60,6 +60,8 @@ export default defineComponent({
         return;
       }
       const provinceId = accountStore.account.provinceId;
+      const plantId = accountStore.account.plantId;
+      const isadmin = accountStore.account.authorities.includes('ROLE_ADMIN');
       console.log('Province ID:', provinceId);
 
       isFetching.value = true;
@@ -69,17 +71,23 @@ export default defineComponent({
           size: itemsPerPage.value,
           sort: sort(),
         };
-        if(provinceId === HEADQUARTERS_PROVINCE_ID) {
+        if(isadmin || (provinceId === HEADQUARTERS_PROVINCE_ID)) {
           // 公司总部，查询所有
           const res = await accessPointService().retrieve(paginationQuery);
           totalItems.value = Number(res.headers['x-total-count']);
           queryCount.value = totalItems.value;
           accessPoints.value = res.data;
 
-        }else{
+        }else if(provinceId && !plantId) {
           // 根据provinceId 来获取AP数据
           console.log("Not headquarter,provinceId: ", provinceId)
           const res = await accessPointService().retrieveByProvinceId(provinceId, paginationQuery);
+          totalItems.value = Number(res.headers['x-total-count']);
+          queryCount.value = totalItems.value;
+          accessPoints.value = res.data;
+        }else{
+          //console.log("Not headquarter,provinceId: ", provinceId)
+          const res = await accessPointService().retrieveByPlantId(plantId, paginationQuery);
           totalItems.value = Number(res.headers['x-total-count']);
           queryCount.value = totalItems.value;
           accessPoints.value = res.data;

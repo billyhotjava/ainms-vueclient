@@ -5,7 +5,9 @@ import { useAlertService } from '@/shared/alert/alert.service';
 
 import { useDateFormat } from '@/shared/composables';
 import ProvinceService from '@/entities/province/province.service';
+import PowerPlantService from '@/entities/power-plant/power-plant.service';
 import type { IProvince } from '@/shared/model/province.model';
+import type { IPowerPlant } from 'shared/model/power-plant.model';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -21,6 +23,9 @@ export default defineComponent({
     // add for join view
     const provinceService = inject('provinceService', () => new ProvinceService() );
     const provinces: Ref<IProvince[]> = ref([]);
+    // end for join view
+    const plantService = inject('plantService', () => new PowerPlantService() );
+    const plants: Ref<IPowerPlant[]> = ref([]);
     // end for join view
 
     const error = ref('');
@@ -42,6 +47,11 @@ export default defineComponent({
         .then(res => {
           provinces.value = res.data;
         });
+
+      plantService().retrieve()
+        .then(res =>{
+          plants.value = res.data;
+        });
     };
     initRelationships();
 
@@ -51,6 +61,7 @@ export default defineComponent({
       alertService,
       provinceService,
       provinces,
+      plants,
       error,
       success,
       itemsPerPage,
@@ -162,6 +173,11 @@ export default defineComponent({
     getProvinceName(provinceId: number): string {
       const provinceOption = this.provinces.find(option => option.id === provinceId);
       return provinceOption ? provinceOption.provinceName : '';
-    }  
+    },
+
+    getplantName(plantId: number): string {
+      const plant = this.plants.find(option => option.id === plantId);
+      return plant ? plant.powerPlantName : '';
+    } 
   },
 });

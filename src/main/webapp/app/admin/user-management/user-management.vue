@@ -30,7 +30,11 @@
             <th scope="col" v-on:click="changeOrder('provinceId')">
               <span v-text="t$('userManagement.province')"></span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'provinceId'"></jhi-sort-indicator>
-            </th>         
+            </th>  
+            <th scope="col" v-on:click="changeOrder('plantId')">
+              <span v-text="t$('userManagement.plant')"></span>
+              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'plantId'"></jhi-sort-indicator>
+            </th>        
             <th scope="col"><span v-text="t$('userManagement.profiles')"></span></th>
             <th scope="col"></th>
           </tr>
@@ -43,6 +47,9 @@
             <td>{{ user.login }}</td>
             <td>
               {{ getProvinceName(user.provinceId) }}
+            </td>
+            <td>
+              {{ getplantName(user.plantId) }}
             </td>
             <td>
               <div v-for="authority of user.authorities" :key="authority">

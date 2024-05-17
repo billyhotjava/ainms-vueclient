@@ -36,7 +36,7 @@ export default class PowerPlantService {
   public retrieveByProvinceId(provinceId: number): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
-        .get(`${baseApiUrl}?provinceId=${provinceId}`)
+        .get(`${baseApiUrl}/provinceid?id=${provinceId}`)
         .then(res => {
           resolve(res);
         })

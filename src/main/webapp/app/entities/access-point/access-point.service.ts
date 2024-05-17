@@ -51,6 +51,25 @@ export default class AccessPointService {
     });
   }
 
+    public retrieveByPlantId(plantId: any, paginationQuery?: any): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      const queryParams = buildPaginationQueryOpts(paginationQuery);
+      // 确保第一个查询参数前使用 '?'，之后的参数使用 '&'
+      const queryString = queryParams ? `?${queryParams}` : '';
+      // 修改此处，以正确地构造URL
+      const fullUrl = `${baseApiUrl}/powerplant/${plantId}${queryString}`;
+      console.log('Sending request to URL: ', fullUrl);
+      axios
+        .get(`${fullUrl}`)
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+
   public delete(id: number): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
