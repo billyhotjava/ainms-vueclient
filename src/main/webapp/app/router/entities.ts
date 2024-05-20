@@ -23,11 +23,11 @@ const Province = () => import('@/entities/province/province.vue');
 const ProvinceUpdate = () => import('@/entities/province/province-update.vue');
 const ProvinceDetails = () => import('@/entities/province/province-details.vue');
 const ProvinceStistics = () => import('@/entities/province-stistics/province-stistics.vue');
-const ProvinceStisticsUpdate = () => import('@/entities/province-stistics/province-stistics-update.vue');
+//const ProvinceStisticsUpdate = () => import('@/entities/province-stistics/province-stistics-update.vue');
 const ProvinceStisticsDetails = () => import('@/entities/province-stistics/province-stistics-details.vue');
 
 const PowerPlantStistics = () => import('@/entities/power-plant-stistics/power-plant-stistics.vue');
-const PowerPlantStisticsUpdate = () => import('@/entities/power-plant-stistics/power-plant-stistics-update.vue');
+//const PowerPlantStisticsUpdate = () => import('@/entities/power-plant-stistics/power-plant-stistics-update.vue');
 const PowerPlantStisticsDetails = () => import('@/entities/power-plant-stistics/power-plant-stistics-details.vue');
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 
