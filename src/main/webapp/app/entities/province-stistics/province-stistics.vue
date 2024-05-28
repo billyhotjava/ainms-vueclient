@@ -3,7 +3,8 @@
     <h2 id="page-heading" data-cy="ProvinceStisticsHeading">
       <span v-text="t$('ainmsVueclientApp.provinceStistics.home.title')" id="province-stistics-heading"></span>
       <div class="d-flex justify-content-end">
-        <input type="date" v-model="selectedDate" />
+        <input type="date" v-model="startDate" /> ~ 
+        <input type="date" v-model="endDate" />
         <button class="btn btn-info mr-2" v-on:click="handleSyncListByDate" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
           <span v-text="t$('ainmsVueclientApp.provinceStistics.home.queryByDate')"></span>

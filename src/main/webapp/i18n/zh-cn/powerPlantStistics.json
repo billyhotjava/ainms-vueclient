@@ -5,7 +5,7 @@
         "title": "场站在线率统计",
         "refreshListLabel": "刷新",
         "queryByDate": "按日期查询",
-        "downloadascsv": "下载所有记录",
+        "downloadascsv": "下载记录",
         "createLabel": "创建新 Power Plant Stistics",
         "createOrEditLabel": "创建或编辑 Power Plant Stistics",
         "notFound": "No Power Plant Stistics found"

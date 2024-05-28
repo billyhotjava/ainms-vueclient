@@ -32,13 +32,14 @@ export default class PowerPlantStisticsService {
     });
   }
 
-  public retrieveByDate(date: string, paginationQuery?: any): Promise<any> {
+  public retrieveByDate(startdate: string, enddate:string, paginationQuery?: any): Promise<any> {
     return new Promise<any>((resolve, reject) => {
+      const querydatastr = 'startdate='+startdate+'&enddate='+enddate;
       const queryParams = buildPaginationQueryOpts(paginationQuery);
-      const queryString = queryParams ? `?${queryParams}` : '';
+      const queryString = queryParams ? `?${queryParams}`+'&'+querydatastr : '?'+ querydatastr;
       console.log('queryString', queryString);
       axios
-        .get(`${baseApiUrl}/byDate/${date}${queryString}`)
+        .get(`${baseApiUrl}/byDate${queryString}`)
         .then(res => {
           resolve(res);
         })

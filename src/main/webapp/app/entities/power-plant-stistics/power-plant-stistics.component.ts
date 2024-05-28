@@ -16,7 +16,13 @@ export default defineComponent({
     const alertService = inject('alertService', () => useAlertService(), true);
 
     const powerPlantStistics: Ref<IPowerPlantStistics[]> = ref([]);
-    const selectedDate = ref(new Date().toISOString().slice(0, 10));
+    //const selectedDate = ref(new Date().toISOString().slice(0, 10));
+    const dendDate = new Date();
+    const dstartDate = new Date();
+    dstartDate.setDate(dendDate.getDate()-7);
+    const startDate = dstartDate.toISOString().split('T')[0];
+    const endDate = dendDate.toISOString().split('T')[0];
+
     const isFetching = ref(false);
 
     const itemsPerPage = ref(30);
@@ -45,15 +51,15 @@ export default defineComponent({
     const handleSyncListByDate = async () => {
       isFetching.value = true;
       try {
-        if (!selectedDate) {
-          throw new Error('selectedDate is not provided');
+        if (!startDate || !endDate) {
+          throw new Error('Date is not provided');
         }
         const paginationQuery = {
           page: page.value - 1,
           size: itemsPerPage.value,
         };
-        console.log('selectedDate.value', selectedDate.value);
-        const res = await powerPlantStisticsService().retrieveByDate(selectedDate.value, paginationQuery);
+        //console.log(startDate, endDate);
+        const res = await powerPlantStisticsService().retrieveByDate(startDate, endDate, paginationQuery);
         totalItems.value = Number(res.headers['x-total-count']);
         queryCount.value = totalItems.value;
         powerPlantStistics.value = res.data;
@@ -110,7 +116,9 @@ export default defineComponent({
 
     return {
       powerPlantStistics,
-      selectedDate,
+      //selectedDate,
+      startDate,
+      endDate,
       handleSyncListByDate,
       isFetching,
       // retrievePowerPlantStisticss,

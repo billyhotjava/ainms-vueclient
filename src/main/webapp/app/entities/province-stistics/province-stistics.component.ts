@@ -16,8 +16,15 @@ export default defineComponent({
     const alertService = inject('alertService', () => useAlertService(), true);
     const provinceStistics: Ref<IProvinceStistics[]> = ref([]);
     const isFetching = ref(false);
-    const selectedDate = ref(new Date().toISOString().slice(0, 10));
+    
+    const dendDate = new Date();
+    const dstartDate = new Date();
+    dstartDate.setDate(dendDate.getDate()-7);
+    const startDate = dstartDate.toISOString().split('T')[0];
+    const endDate = dendDate.toISOString().split('T')[0];
 
+
+    console.log(startDate);console.log(endDate);
     const itemsPerPage = ref(30);
     const queryCount: Ref<number> = ref(null);
     const page: Ref<number> = ref(1);
@@ -44,15 +51,15 @@ export default defineComponent({
     const handleSyncListByDate = async () => {
       isFetching.value = true;
       try {
-        if (!selectedDate) {
-          throw new Error('selectedDate is not provided');
+        if (!startDate || !endDate) { 
+          throw new Error('date is not provided');
         }
         const paginationQuery = {
           page: page.value - 1,
           size: itemsPerPage.value,
         };
-        console.log('selectedDate.value', selectedDate.value);
-        const res = await provinceStisticsService().retrieveByDate(selectedDate.value, paginationQuery);
+        //console.log('selectedDate.value', selectedDate.value);
+        const res = await provinceStisticsService().retrieveByDate(startDate, endDate, paginationQuery);
         totalItems.value = Number(res.headers['x-total-count']);
         queryCount.value = totalItems.value;
         provinceStistics.value = res.data;
@@ -98,7 +105,9 @@ export default defineComponent({
 
     return {
       provinceStistics,
-      selectedDate,
+      //selectedDate,
+      startDate,
+      endDate,
       handleSyncListByDate,
       isFetching,
       // retrieveProvinceStisticss,
