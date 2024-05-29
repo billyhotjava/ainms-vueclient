@@ -3,6 +3,11 @@
     <h2 id="page-heading" data-cy="AccessPointHeading">
       <span v-text="t$('ainmsVueclientApp.accessPoint.home.title')" id="access-point-heading"></span>
       <div class="d-flex justify-content-end">
+        <input type="text" v-model="keyword" placeholder="场站关键字" />
+        <button class="btn btn-info mr-2" v-on:click="handleSyncList" >
+          <font-awesome-icon icon="search" ></font-awesome-icon>
+          <span v-text="t$('ainmsVueclientApp.accessPoint.home.searchbyplant')"></span>
+        </button>
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
           <span v-text="t$('ainmsVueclientApp.accessPoint.home.refreshListLabel')"></span>

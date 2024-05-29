@@ -40,6 +40,8 @@ export default defineComponent({
     const accessPoints: Ref<IAccessPoint[]> = ref([]);
 
     const isFetching = ref(false);
+    const keyword = ref("");
+    
 
     const clear = () => {
       page.value = 1;
@@ -70,7 +72,9 @@ export default defineComponent({
           page: page.value - 1,
           size: itemsPerPage.value,
           sort: sort(),
+          key: keyword.value,
         };
+        console.log(paginationQuery);
         if(isadmin || (provinceId === HEADQUARTERS_PROVINCE_ID)) {
           // 公司总部，查询所有
           const res = await accessPointService().retrieve(paginationQuery);
@@ -183,6 +187,7 @@ export default defineComponent({
       powerPlantService,
       handleSyncList,
       isFetching,
+      keyword,
       retrieveAccessPoints,
       clear,
       removeId,
@@ -201,6 +206,7 @@ export default defineComponent({
     };
   },
   methods: {
+
     getPowerPlantName(id) {
       const powerPlantOption = this.powerPlants.find(option => option.id === id);
       return powerPlantOption ? powerPlantOption.powerPlantName : '';

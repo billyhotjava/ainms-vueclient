@@ -4,6 +4,7 @@
       "home": {
         "title": "无线AP",
         "refreshListLabel": "刷新",
+        "searchbyplant": "按场站查询",
         "createLabel": "创建新AP",
         "createOrEditLabel": "创建或编辑 Access Point",
         "notFound": "AP找不到"
