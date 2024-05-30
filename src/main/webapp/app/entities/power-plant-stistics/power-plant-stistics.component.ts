@@ -20,8 +20,8 @@ export default defineComponent({
     const dendDate = new Date();
     const dstartDate = new Date();
     dstartDate.setDate(dendDate.getDate()-7);
-    const startDate = dstartDate.toISOString().split('T')[0];
-    const endDate = dendDate.toISOString().split('T')[0];
+    const startDate = ref(dstartDate.toISOString().split('T')[0]);
+    const endDate = ref(dendDate.toISOString().split('T')[0]);
 
     const isFetching = ref(false);
 
@@ -59,7 +59,7 @@ export default defineComponent({
           size: itemsPerPage.value,
         };
         //console.log(startDate, endDate);
-        const res = await powerPlantStisticsService().retrieveByDate(startDate, endDate, paginationQuery);
+        const res = await powerPlantStisticsService().retrieveByDate(startDate.value, endDate.value, paginationQuery);
         totalItems.value = Number(res.headers['x-total-count']);
         queryCount.value = totalItems.value;
         powerPlantStistics.value = res.data;

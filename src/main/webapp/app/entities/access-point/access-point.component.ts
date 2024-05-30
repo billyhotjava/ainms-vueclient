@@ -12,6 +12,7 @@ import type { IAccessPointGroup } from '@/shared/model/access-point-group.model'
 import type { IPowerPlant } from '@/shared/model/power-plant.model';
 import { useAccountStore } from '@/shared/config/store/account-store';
 import { HEADQUARTERS_PROVINCE_ID} from '../../constants';
+//import AlertService from '@/shared/alert/alert.service';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -178,6 +179,7 @@ export default defineComponent({
     });
 
     return {
+      alertService,
       accessPoints,
       powerPlants,
       accessControllers,
@@ -206,6 +208,13 @@ export default defineComponent({
     };
   },
   methods: {
+    downloadCsv() {
+      if(this.keyword !== ""){
+        window.location.href = 'http://10.170.248.35:8080/api/access-points/download-csv?key='+this.keyword;
+      }else{
+        this.alertService.showError('请输入场站关键字后再导出！');
+      }
+    },
 
     getPowerPlantName(id) {
       const powerPlantOption = this.powerPlants.find(option => option.id === id);

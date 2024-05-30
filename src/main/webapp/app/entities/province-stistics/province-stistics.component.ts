@@ -20,11 +20,11 @@ export default defineComponent({
     const dendDate = new Date();
     const dstartDate = new Date();
     dstartDate.setDate(dendDate.getDate()-7);
-    const startDate = dstartDate.toISOString().split('T')[0];
-    const endDate = dendDate.toISOString().split('T')[0];
+    const startDate = ref(dstartDate.toISOString().split('T')[0]);
+    const endDate = ref(dendDate.toISOString().split('T')[0]);
 
 
-    console.log(startDate);console.log(endDate);
+    //console.log(startDate);console.log(endDate);
     const itemsPerPage = ref(30);
     const queryCount: Ref<number> = ref(null);
     const page: Ref<number> = ref(1);
@@ -58,8 +58,8 @@ export default defineComponent({
           page: page.value - 1,
           size: itemsPerPage.value,
         };
-        //console.log('selectedDate.value', selectedDate.value);
-        const res = await provinceStisticsService().retrieveByDate(startDate, endDate, paginationQuery);
+        console.log('selectedDate.value', startDate.value, endDate.value);
+        const res = await provinceStisticsService().retrieveByDate(startDate.value, endDate.value, paginationQuery);
         totalItems.value = Number(res.headers['x-total-count']);
         queryCount.value = totalItems.value;
         provinceStistics.value = res.data;

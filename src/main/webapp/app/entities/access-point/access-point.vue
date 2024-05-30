@@ -12,6 +12,10 @@
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
           <span v-text="t$('ainmsVueclientApp.accessPoint.home.refreshListLabel')"></span>
         </button>
+        <button class="btn btn-info mr-2" v-on:click="downloadCsv" :disabled="isFetching">
+          <font-awesome-icon icon="download" :spin="isFetching"></font-awesome-icon>
+          <span v-text="t$('ainmsVueclientApp.accessPoint.home.downloadascsv')"></span>
+        </button>
         <router-link :to="{ name: 'AccessPointCreate' }" custom v-slot="{ navigate }">
           <button
             @click="navigate"
