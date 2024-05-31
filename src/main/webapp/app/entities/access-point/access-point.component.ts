@@ -210,7 +210,7 @@ export default defineComponent({
   methods: {
     downloadCsv() {
       if(this.keyword !== ""){
-        window.location.href = 'http://10.170.248.35:8080/api/access-points/download-csv?key='+this.keyword;
+        window.location.href = 'http://localhost:8080/api/access-points/download-csv?key='+this.keyword;
       }else{
         this.alertService.showError('请输入场站关键字后再导出！');
       }
