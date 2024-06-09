@@ -94,49 +94,49 @@ export default defineComponent({
     }
 
     const retrieveAPStatisticsByProvince = async () => {
-      try {
-        const responseData = await homeService.retrieveStatisticsByProvince();
-        apStatisticsByProvinces.value = responseData;
-      }catch(error){
-        alertService.showHttpError(err.response);
-      }
+      // try {
+      //   const responseData = await homeService.retrieveStatisticsByProvince();
+      //   apStatisticsByProvinces.value = responseData;
+      // }catch(error){
+      //   alertService.showHttpError(err.response);
+      // }
     }
     const retrieveStatisticsByPowerPlant = async () => {
-      try {
-        const responseData = await homeService.retrieveStatisticsByPowerPlant();
-        apStatisticsByPowerPlants.value = responseData;
-      }catch(error){
-        alertService.showHttpError(err.response);
-      }
+      // try {
+      //   const responseData = await homeService.retrieveStatisticsByPowerPlant();
+      //   apStatisticsByPowerPlants.value = responseData;
+      // }catch(error){
+      //   alertService.showHttpError(err.response);
+      // }
     }
 
     const connectWebSocket = () => {
-      const socket = new WebSocket('ws://192.168.22.5:8080/websocket');
-      const stompClient = Stomp.over(socket);
+      // const socket = new WebSocket('ws://192.168.22.5:8080/websocket');
+      // const stompClient = Stomp.over(socket);
       
-      // 连接WebSocket
-      stompClient.connect({}, frame => {
-          console.log('Connected: ' + frame);
+      // // 连接WebSocket
+      // stompClient.connect({}, frame => {
+      //     console.log('Connected: ' + frame);
       
-          // 订阅某个topic，接收来自服务器的消息
-          stompClient.subscribe('/topic/update', message => {
-              console.log('Received message: ', message.body);
-          });
+      //     // 订阅某个topic，接收来自服务器的消息
+      //     stompClient.subscribe('/topic/update', message => {
+      //         console.log('Received message: ', message.body);
+      //     });
       
-      }, error => {
-          console.log("----Websocket conneciton error:"+error);
-          console.error('Error: ', error);
-      });
+      // }, error => {
+      //     console.log("----Websocket conneciton error:"+error);
+      //     console.error('Error: ', error);
+      // });
       
-      // 监听连接关闭事件
-      stompClient.onclose = function(event) {
-          console.log('WebSocket connection closed:', event);
-      };
+      // // 监听连接关闭事件
+      // stompClient.onclose = function(event) {
+      //     console.log('WebSocket connection closed:', event);
+      // };
       
-      // 监听错误事件
-      stompClient.onerror = function(event) {
-          console.error('WebSocket error:', event);
-      };
+      // // 监听错误事件
+      // stompClient.onerror = function(event) {
+      //     console.error('WebSocket error:', event);
+      // };
       // 连接WebSocket，并订阅topic
       // stompClient.connect({}, () => {
       //   stompClient?.subscribe('/topic/update', (msg: Message) => {

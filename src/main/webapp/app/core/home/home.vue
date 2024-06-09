@@ -16,6 +16,9 @@
       </div>
     </div>
   </div>
+
+  <!--  disable statis part -->
+  <!--
   <div class="statistics row" v-if='authenticated'>
     <div class="col-md-12">
       <div class="card jh-card">
@@ -104,6 +107,7 @@
       </div>
     </div>
   </div>
+-->
 
 </template>
 
